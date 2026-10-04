@@ -51,8 +51,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const updateData: any = {};
     if (status !== undefined) {
       updateData.status = status;
-      if (status === "SUBMITTED" && !application.submittedAt) {
+      // SUBMITTED (legacy) and APPLIED both mean "the candidate applied".
+      if ((status === "SUBMITTED" || status === "APPLIED") && !application.submittedAt) {
         updateData.submittedAt = new Date().toISOString();
+      }
+      if ((status === "SUBMITTED" || status === "APPLIED") && !application.appliedAt) {
+        updateData.appliedAt = new Date().toISOString();
       }
     }
     if (notes !== undefined) updateData.notes = notes;

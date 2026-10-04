@@ -55,6 +55,10 @@ export default function ApplicationsPage() {
 
     if (!matchesSearch) return false;
     if (filterStatus === "ALL") return true;
+    if (filterStatus === "APPLIED") return app.status === "APPLIED" || app.status === "SUBMITTED";
+    if (filterStatus === "READY")
+      return ["READY", "READY_FOR_REVIEW", "PREPARING", "SAVED"].includes(app.status);
+    if (filterStatus === "SUBMITTED") return app.status === "SUBMITTED" || app.status === "APPLIED";
     return app.status === filterStatus;
   });
 
@@ -128,7 +132,7 @@ export default function ApplicationsPage() {
         </div>
 
         <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 text-xs">
-          {["ALL", "READY_FOR_REVIEW", "SUBMITTED", "INTERVIEW", "OFFER"].map((status) => (
+          {["ALL", "READY", "READY_FOR_REVIEW", "APPLIED", "SUBMITTED", "INTERVIEW", "OFFER"].map((status) => (
             <button
               key={status}
               onClick={() => setFilterStatus(status)}
@@ -167,7 +171,10 @@ export default function ApplicationsPage() {
           {kanbanColumns.map((col) => {
             const colApps = filteredApps.filter((a) => {
               if (col.key === "READY_FOR_REVIEW") {
-                return a.status === "READY_FOR_REVIEW" || a.status === "PREPARING";
+                return ["READY", "READY_FOR_REVIEW", "PREPARING", "SAVED"].includes(a.status);
+              }
+              if (col.key === "SUBMITTED") {
+                return a.status === "SUBMITTED" || a.status === "APPLIED";
               }
               if (col.key === "REJECTED") {
                 return a.status === "REJECTED" || a.status === "WITHDRAWN";
@@ -272,11 +279,11 @@ export default function ApplicationsPage() {
                     <td className="p-4">
                       <Badge
                         variant={
-                          app.status === "SUBMITTED"
+                          app.status === "SUBMITTED" || app.status === "APPLIED"
                             ? "primary"
                             : app.status === "INTERVIEW" || app.status === "OFFER"
                             ? "accent"
-                            : app.status === "READY_FOR_REVIEW" || app.status === "PREPARING"
+                            : app.status === "READY_FOR_REVIEW" || app.status === "READY" || app.status === "PREPARING"
                             ? "warning"
                             : "outline"
                         }

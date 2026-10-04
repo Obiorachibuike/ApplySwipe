@@ -1,13 +1,48 @@
 export type Role = "USER" | "ADMIN";
 
-export type InteractionType = "VIEWED" | "PASSED" | "SAVED" | "APPLIED";
+export type InteractionType =
+  | "VIEWED"
+  | "PASSED"
+  | "SAVED"
+  | "APPLIED"
+  | "LIKE"
+  | "SUPER_LIKE";
+
+/**
+ * Swipe decisions supported by the discovery interface.
+ * PASS = left, LIKE = right, SUPER_LIKE = strongest positive signal.
+ */
+export type SwipeAction = "LIKE" | "PASS" | "SUPER_LIKE";
+
+/** Canonical provider identifiers. New providers are added here + in the registry. */
+export type JobProviderName =
+  | "ADZUNA"
+  | "GREENHOUSE"
+  | "LEVER"
+  | "LEGACY";
+
+export type WorkplaceType = "REMOTE" | "HYBRID" | "ONSITE" | "UNKNOWN";
+
+export type SalaryInterval = "YEAR" | "MONTH" | "WEEK" | "DAY" | "HOUR";
+
+export type ProviderHealthStatus =
+  | "IDLE"
+  | "SYNCING"
+  | "HEALTHY"
+  | "WARNING"
+  | "UNHEALTHY"
+  | "DISABLED";
+
+export type SyncRunStatus = "RUNNING" | "SUCCESS" | "FAILED" | "PARTIAL" | "SKIPPED";
 
 export type ApplicationStatus =
   | "SAVED"
   | "PREPARING"
+  | "READY"
   | "READY_FOR_REVIEW"
   | "SUBMITTING"
   | "SUBMITTED"
+  | "APPLIED"
   | "INTERVIEW"
   | "OFFER"
   | "REJECTED"
@@ -190,31 +225,72 @@ export interface ResumeVersion {
   updatedAt: string;
 }
 
+export interface JobSourceRef {
+  provider: string;
+  externalId: string;
+  sourceUrl?: string | null;
+  applicationUrl?: string | null;
+  firstSeenAt?: string | null;
+  lastSeenAt?: string | null;
+}
+
 export interface Job {
   id: string;
   externalId?: string | null;
+  /** Provider that produced the record: ADZUNA | GREENHOUSE | LEVER | LEGACY. */
+  provider: string;
+  /** Human readable source label kept for backwards compatibility. */
   source: string;
   title: string;
   company: string;
   companyLogo?: string | null;
   description: string;
+  /** Canonical, human friendly location string (originals live in originalLocation/rawData). */
   location: string;
+  originalLocation?: string | null;
   remote: boolean;
+  workplaceType: WorkplaceType;
   employmentType: string;
+  /** Canonical seniority (legacy alias: experienceLevel, kept in sync). */
+  seniority?: string | null;
   experienceLevel?: string | null;
   salaryMin?: number | null;
   salaryMax?: number | null;
   salaryCurrency: string;
+  salaryInterval?: SalaryInterval | string | null;
+  /** Provider published an estimated (not exact) salary range. */
+  salaryIsPredicted?: boolean | null;
   skills: string[];
+  /** Denormalized lowercase blob used by database-side search. */
+  searchText?: string | null;
+  sourceUrl: string;
   applicationUrl: string;
   applicationType: AutomationCapability;
   atsProvider: AtsProvider;
   isReported: boolean;
   isActive: boolean;
+  /** Cross-provider duplicate resolution. */
+  fingerprint?: string | null;
+  canonicalJobId?: string | null;
+  /** Other providers/sources that advertised this same opening. */
+  sources?: JobSourceRef[] | null;
   postedAt: string;
   expiresAt?: string | null;
+  firstSeenAt?: string | null;
+  lastSeenAt?: string | null;
+  seenCount?: number;
+  rawData?: any;
   createdAt: string;
   updatedAt: string;
+  matchScore?: number;
+  matchAnalysis?: MatchAnalysis | null;
+  matchReason?: string | null;
+  recommendation?: string | null;
+  isSaved?: boolean;
+  isApplied?: boolean;
+  isPassed?: boolean;
+  isSuperLiked?: boolean;
+  isSwiped?: boolean;
 }
 
 export interface JobSource {
@@ -226,8 +302,95 @@ export interface JobSource {
   lastSyncAt?: string | null;
   jobCount: number;
   config?: any;
+  /** Provider this source belongs to (GREENHOUSE | LEVER | ADZUNA). */
+  provider?: JobProviderName | string | null;
+  companyName?: string | null;
+  /**
+   * Provider source token: the Greenhouse board token or the Lever company slug.
+   * Stored generically so new providers can reuse the same configuration model.
+   */
+  boardToken?: string | null;
+  active?: boolean;
+  lastSuccessAt?: string | null;
+  lastErrorAt?: string | null;
+  lastError?: string | null;
+  jobsImported?: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ProviderState {
+  id: string;
+  provider: JobProviderName | string;
+  isEnabled: boolean;
+  status: ProviderHealthStatus;
+  lastSyncAt?: string | null;
+  lastSuccessAt?: string | null;
+  lastErrorAt?: string | null;
+  lastError?: string | null;
+  consecutiveFailures: number;
+  jobsImported: number;
+  activeJobs: number;
+  syncIntervalMinutes: number;
+  freshnessHours: number;
+  lockOwner?: string | null;
+  lockExpiresAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProviderSyncRun {
+  id: string;
+  provider: JobProviderName | string;
+  status: SyncRunStatus;
+  triggeredBy: string;
+  startedAt: string;
+  finishedAt?: string | null;
+  stats?: any;
+  error?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface JobMatchScoreRecord {
+  id: string;
+  userId: string;
+  jobId: string;
+  score: number;
+  stage: "DETERMINISTIC" | "AI_RERANK";
+  reason?: string | null;
+  matchedSkills?: string[] | null;
+  missingSkills?: string[] | null;
+  recommendation?: string | null;
+  breakdown?: any;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FeedJob extends Job {
+  matchScore: number;
+  matchReason?: string | null;
+  matchedSkills: string[];
+  missingSkills: string[];
+  recommendation?: string | null;
+  /** Full deterministic breakdown for the swipe card details. */
+  matchAnalysis?: MatchAnalysis;
+  /** Human readable provider label ("Adzuna", "Company Career Page"). */
+  sourceLabel?: string;
+  /** The employer's own application page (never an aggregator redirect). */
+  officialApplicationUrl?: string | null;
+  /** Other providers that advertised the same opening. */
+  alternativeSources?: { provider: string; sourceUrl?: string | null; applicationUrl?: string | null }[];
+  isSaved?: boolean;
+  isApplied?: boolean;
+  isSwiped?: boolean;
+}
+
+export interface DedupeSourceRef {
+  provider: string;
+  externalId: string;
+  sourceUrl?: string | null;
+  applicationUrl?: string | null;
 }
 
 export interface JobInteraction {
@@ -261,6 +424,10 @@ export interface Application {
   externalApplicationId?: string | null;
   notes?: string | null;
   submittedAt?: string | null;
+  /** Timestamp the candidate confirmed the external application was sent. */
+  appliedAt?: string | null;
+  resumeId?: string | null;
+  coverLetterId?: string | null;
   interviewDate?: string | null;
   createdAt: string;
   updatedAt: string;
@@ -380,8 +547,30 @@ export interface MatchAnalysis {
   experienceMatch: number;
   educationMatch: number;
   locationMatch: number;
+  /** Component scores from the deterministic engine (all optional for compatibility). */
+  employmentMatch?: number;
+  salaryMatch?: number;
+  seniorityMatch?: number;
   explanation: string;
   matchingSkills: string[];
   missingSkills: string[];
   concerns: string[];
+  /** Optional weighted breakdown produced by the deterministic matching engine. */
+  breakdown?: Record<string, number>;
+  recommendation?: MatchRecommendation;
+}
+
+export type MatchRecommendation =
+  | "strong_match"
+  | "good_match"
+  | "possible_match"
+  | "weak_match";
+
+export interface RankedJobMatch {
+  score: number;
+  reason: string;
+  matchedSkills: string[];
+  missingSkills: string[];
+  recommendation: MatchRecommendation;
+  stage: "DETERMINISTIC" | "AI_RERANK";
 }

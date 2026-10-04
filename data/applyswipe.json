@@ -422,7 +422,28 @@
       "postedAt": "2026-09-28T14:30:00.000Z",
       "expiresAt": "2026-11-28T00:00:00.000Z",
       "createdAt": "2026-09-28T14:30:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.428Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://linear.app/careers/senior-full-stack",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-28T14:30:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "ba2101418773754ba5be7443999bef217711e129",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "lin-eng-4091",
+          "sourceUrl": "https://linear.app/careers/senior-full-stack",
+          "applicationUrl": "https://linear.app/careers/senior-full-stack",
+          "firstSeenAt": "2026-09-28T14:30:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior full stack engineer linear san francisco, ca / remote react typescript node.js graphql postgresql tailwind css full-time remote"
     },
     {
       "id": "job-vercel-02",
@@ -455,7 +476,28 @@
       "postedAt": "2026-09-29T10:00:00.000Z",
       "expiresAt": "2026-12-01T00:00:00.000Z",
       "createdAt": "2026-09-29T10:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.432Z",
+      "provider": "LEVER",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://vercel.com/careers/staff-frontend-architect",
+      "seniority": "Staff / Lead",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-29T10:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "d70eb00e66cf92779a174de6e92aa62d5208b9be",
+      "sources": [
+        {
+          "provider": "LEVER",
+          "externalId": "vcl-arch-8812",
+          "sourceUrl": "https://vercel.com/careers/staff-frontend-architect",
+          "applicationUrl": "https://vercel.com/careers/staff-frontend-architect",
+          "firstSeenAt": "2026-09-29T10:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "staff frontend architect vercel remote (global) next.js react typescript web performance edge computing tailwind css full-time remote"
     },
     {
       "id": "job-stripe-03",
@@ -488,7 +530,28 @@
       "postedAt": "2026-09-27T16:00:00.000Z",
       "expiresAt": "2026-11-20T00:00:00.000Z",
       "createdAt": "2026-09-27T16:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.434Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://stripe.com/jobs/senior-platform-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-27T16:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "7b5b3c13348987679820103b89a66d55ea0cb449",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "strp-plat-1029",
+          "sourceUrl": "https://stripe.com/jobs/senior-platform-engineer",
+          "applicationUrl": "https://stripe.com/jobs/senior-platform-engineer",
+          "firstSeenAt": "2026-09-27T16:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior platform & infrastructure engineer stripe san francisco, ca / seattle, wa / remote node.js typescript docker aws postgresql go full-time remote"
     },
     {
       "id": "job-acme-04",
@@ -521,7 +584,28 @@
       "postedAt": "2026-09-30T09:15:00.000Z",
       "expiresAt": "2026-11-30T00:00:00.000Z",
       "createdAt": "2026-09-30T09:15:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.436Z",
+      "provider": "LEVER",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://acme.corp/careers/fullstack-eng",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-30T09:15:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "1bcf461b0e480917e3b5137cd3c86d430149ef4c",
+      "sources": [
+        {
+          "provider": "LEVER",
+          "externalId": "acme-eng-552",
+          "sourceUrl": "https://acme.corp/careers/fullstack-eng",
+          "applicationUrl": "https://acme.corp/careers/fullstack-eng",
+          "firstSeenAt": "2026-09-30T09:15:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior full stack product engineer acme corp remote (us / canada) react typescript node.js postgresql docker aws full-time remote"
     },
     {
       "id": "job-supabase-05",
@@ -554,7 +638,28 @@
       "postedAt": "2026-09-25T11:00:00.000Z",
       "expiresAt": "2026-11-15T00:00:00.000Z",
       "createdAt": "2026-09-25T11:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.438Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://supabase.com/careers/senior-backend-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-25T11:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "8d2398b265b0c2ba4f4e8f3e159b93c7986a0605",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "supa-be-394",
+          "sourceUrl": "https://supabase.com/careers/senior-backend-engineer",
+          "applicationUrl": "https://supabase.com/careers/senior-backend-engineer",
+          "firstSeenAt": "2026-09-25T11:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior backend engineer (postgres & realtime) supabase remote (global) postgresql node.js docker typescript go aws full-time remote"
     },
     {
       "id": "job-datadog-06",
@@ -586,7 +691,28 @@
       "postedAt": "2026-09-26T15:00:00.000Z",
       "expiresAt": "2026-11-25T00:00:00.000Z",
       "createdAt": "2026-09-26T15:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.440Z",
+      "provider": "LEGACY",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://datadoghq.com/careers/fullstack-observability",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-26T15:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "1fab4b9907abbbbd2a4874acacbc6cf0e95a1f09",
+      "sources": [
+        {
+          "provider": "LEGACY",
+          "externalId": "dd-eng-9011",
+          "sourceUrl": "https://datadoghq.com/careers/fullstack-observability",
+          "applicationUrl": "https://datadoghq.com/careers/fullstack-observability",
+          "firstSeenAt": "2026-09-26T15:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior full stack engineer - observability ui datadog new york, ny / remote react typescript node.js python docker full-time remote"
     },
     {
       "id": "job-retool-07",
@@ -619,7 +745,28 @@
       "postedAt": "2026-09-28T18:00:00.000Z",
       "expiresAt": "2026-12-05T00:00:00.000Z",
       "createdAt": "2026-09-28T18:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.442Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://retool.com/careers/senior-ai-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-28T18:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "f22a7302fecf968882a9ca1127e908c4ec1468c0",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "ret-ai-104",
+          "sourceUrl": "https://retool.com/careers/senior-ai-engineer",
+          "applicationUrl": "https://retool.com/careers/senior-ai-engineer",
+          "firstSeenAt": "2026-09-28T18:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior ai application engineer retool san francisco, ca / remote typescript python langchain react postgresql fastapi full-time remote"
     },
     {
       "id": "job-figma-08",
@@ -651,7 +798,28 @@
       "postedAt": "2026-09-24T13:20:00.000Z",
       "expiresAt": "2026-11-18T00:00:00.000Z",
       "createdAt": "2026-09-24T13:20:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.444Z",
+      "provider": "LEVER",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://figma.com/careers/senior-web-systems",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-24T13:20:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "4cbda4008d96b6052669b837e3a7151f43fe9f05",
+      "sources": [
+        {
+          "provider": "LEVER",
+          "externalId": "fig-web-771",
+          "sourceUrl": "https://figma.com/careers/senior-web-systems",
+          "applicationUrl": "https://figma.com/careers/senior-web-systems",
+          "firstSeenAt": "2026-09-24T13:20:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior web systems engineer figma san francisco, ca / remote react typescript node.js web performance tailwind css full-time remote"
     },
     {
       "id": "job-resend-09",
@@ -683,7 +851,28 @@
       "postedAt": "2026-09-29T12:00:00.000Z",
       "expiresAt": "2026-11-29T00:00:00.000Z",
       "createdAt": "2026-09-29T12:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.447Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://resend.com/careers/lead-typescript-engineer",
+      "seniority": "Lead",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-29T12:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "324ea55f4e5ddbf034dcb65a9d12ec10760429df",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "rsd-lead-302",
+          "sourceUrl": "https://resend.com/careers/lead-typescript-engineer",
+          "applicationUrl": "https://resend.com/careers/lead-typescript-engineer",
+          "firstSeenAt": "2026-09-29T12:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "lead typescript & developer experience engineer resend remote (global) typescript next.js react node.js rest apis full-time remote"
     },
     {
       "id": "job-github-10",
@@ -715,7 +904,28 @@
       "postedAt": "2026-09-27T08:00:00.000Z",
       "expiresAt": "2026-11-20T00:00:00.000Z",
       "createdAt": "2026-09-27T08:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.450Z",
+      "provider": "LEGACY",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://github.com/careers/principal-ux-engineer",
+      "seniority": "Principal",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-27T08:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "845e673aa461257ee03f1981982e247e797d01f3",
+      "sources": [
+        {
+          "provider": "LEGACY",
+          "externalId": "gh-ux-8041",
+          "sourceUrl": "https://github.com/careers/principal-ux-engineer",
+          "applicationUrl": "https://github.com/careers/principal-ux-engineer",
+          "firstSeenAt": "2026-09-27T08:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "principal design technologist / ux engineer github remote (us) react typescript tailwind css accessibility design systems full-time remote"
     },
     {
       "id": "job-hashicorp-11",
@@ -747,7 +957,28 @@
       "postedAt": "2026-09-23T14:00:00.000Z",
       "expiresAt": "2026-11-10T00:00:00.000Z",
       "createdAt": "2026-09-23T14:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.452Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://hashicorp.com/careers/cloud-infra-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-23T14:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "0dff4bde4c8103649eff7326f0858b4da30a0ae4",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "hashi-cld-210",
+          "sourceUrl": "https://hashicorp.com/careers/cloud-infra-engineer",
+          "applicationUrl": "https://hashicorp.com/careers/cloud-infra-engineer",
+          "firstSeenAt": "2026-09-23T14:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior cloud infrastructure engineer hashicorp austin, tx / remote docker aws go kubernetes postgresql full-time remote"
     },
     {
       "id": "job-anthropic-12",
@@ -780,7 +1011,28 @@
       "postedAt": "2026-09-29T15:45:00.000Z",
       "expiresAt": "2026-12-15T00:00:00.000Z",
       "createdAt": "2026-09-29T15:45:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.454Z",
+      "provider": "LEVER",
+      "workplaceType": "HYBRID",
+      "originalLocation": null,
+      "sourceUrl": "https://anthropic.com/careers/ai-systems-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-29T15:45:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "4023d7d0f8f306b00187a30d814562f3ea30e2f2",
+      "sources": [
+        {
+          "provider": "LEVER",
+          "externalId": "anth-sys-992",
+          "sourceUrl": "https://anthropic.com/careers/ai-systems-engineer",
+          "applicationUrl": "https://anthropic.com/careers/ai-systems-engineer",
+          "firstSeenAt": "2026-09-29T15:45:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "ai systems full stack engineer anthropic san francisco, ca (hybrid) python typescript react fastapi docker langchain full-time hybrid"
     },
     {
       "id": "job-warp-13",
@@ -812,7 +1064,28 @@
       "postedAt": "2026-09-26T17:00:00.000Z",
       "expiresAt": "2026-11-26T00:00:00.000Z",
       "createdAt": "2026-09-26T17:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.456Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://warp.dev/careers/senior-full-stack",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-26T17:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "8bd238335c651e7ecba5ce33748be0f44baf6a21",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "warp-eng-102",
+          "sourceUrl": "https://warp.dev/careers/senior-full-stack",
+          "applicationUrl": "https://warp.dev/careers/senior-full-stack",
+          "firstSeenAt": "2026-09-26T17:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior full stack engineer - warp cloud warp new york, ny / remote typescript react rust node.js graphql full-time remote"
     },
     {
       "id": "job-scaleai-14",
@@ -844,7 +1117,28 @@
       "postedAt": "2026-09-25T14:00:00.000Z",
       "expiresAt": "2026-11-19T00:00:00.000Z",
       "createdAt": "2026-09-25T14:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.458Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://scale.com/careers/backend-data-engineer",
+      "seniority": "Mid-Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-25T14:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "e1a3004f15b067b0cd4e5276e6e009471cb1b7c2",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "scale-be-401",
+          "sourceUrl": "https://scale.com/careers/backend-data-engineer",
+          "applicationUrl": "https://scale.com/careers/backend-data-engineer",
+          "firstSeenAt": "2026-09-25T14:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "backend engineer (python & data systems) scale ai san francisco, ca / remote python fastapi postgresql docker aws full-time remote"
     },
     {
       "id": "job-browserco-15",
@@ -876,7 +1170,28 @@
       "postedAt": "2026-09-28T12:00:00.000Z",
       "expiresAt": "2026-11-28T00:00:00.000Z",
       "createdAt": "2026-09-28T12:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.460Z",
+      "provider": "LEVER",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://thebrowser.company/careers/design-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-28T12:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "f7ebdae15b7c8f89bb41d38224875cb981ac3b74",
+      "sources": [
+        {
+          "provider": "LEVER",
+          "externalId": "arc-dsn-294",
+          "sourceUrl": "https://thebrowser.company/careers/design-engineer",
+          "applicationUrl": "https://thebrowser.company/careers/design-engineer",
+          "firstSeenAt": "2026-09-28T12:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "design engineer (arc browser web platform) the browser company new york, ny / remote react typescript tailwind css framer motion ui design full-time remote"
     },
     {
       "id": "job-discord-16",
@@ -908,7 +1223,28 @@
       "postedAt": "2026-09-22T09:00:00.000Z",
       "expiresAt": "2026-11-12T00:00:00.000Z",
       "createdAt": "2026-09-22T09:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.462Z",
+      "provider": "LEGACY",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://discord.com/careers/senior-react-native",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-22T09:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "c3e07e4320c957c3d82b5577bfe4c225794a03fe",
+      "sources": [
+        {
+          "provider": "LEGACY",
+          "externalId": "disc-rn-883",
+          "sourceUrl": "https://discord.com/careers/senior-react-native",
+          "applicationUrl": "https://discord.com/careers/senior-react-native",
+          "firstSeenAt": "2026-09-22T09:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior react native engineer discord san francisco, ca / remote react typescript react native mobile performance node.js full-time remote"
     },
     {
       "id": "job-prisma-17",
@@ -940,7 +1276,28 @@
       "postedAt": "2026-09-25T16:00:00.000Z",
       "expiresAt": "2026-11-18T00:00:00.000Z",
       "createdAt": "2026-09-25T16:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.464Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://prisma.io/careers/developer-experience",
+      "seniority": "Mid-Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-25T16:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "ac97ce88b7bb5efa4e9f5129229c3f3c1e8c7dbf",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "prs-dev-110",
+          "sourceUrl": "https://prisma.io/careers/developer-experience",
+          "applicationUrl": "https://prisma.io/careers/developer-experience",
+          "firstSeenAt": "2026-09-25T16:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "developer experience & full stack engineer prisma remote (global) typescript postgresql next.js node.js docker full-time remote"
     },
     {
       "id": "job-cloudflare-18",
@@ -972,7 +1329,28 @@
       "postedAt": "2026-09-27T10:00:00.000Z",
       "expiresAt": "2026-11-20T00:00:00.000Z",
       "createdAt": "2026-09-27T10:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.467Z",
+      "provider": "GREENHOUSE",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://cloudflare.com/careers/senior-security-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-27T10:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "1f5939aba3812055514bc43e6173568420801ab5",
+      "sources": [
+        {
+          "provider": "GREENHOUSE",
+          "externalId": "cf-sec-712",
+          "sourceUrl": "https://cloudflare.com/careers/senior-security-engineer",
+          "applicationUrl": "https://cloudflare.com/careers/senior-security-engineer",
+          "firstSeenAt": "2026-09-27T10:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior security software engineer cloudflare austin, tx / san francisco / remote go node.js docker aws security full-time remote"
     },
     {
       "id": "job-snowflake-19",
@@ -1004,7 +1382,28 @@
       "postedAt": "2026-09-24T18:00:00.000Z",
       "expiresAt": "2026-11-15T00:00:00.000Z",
       "createdAt": "2026-09-24T18:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.469Z",
+      "provider": "LEGACY",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://snowflake.com/careers/data-infrastructure-engineer",
+      "seniority": "Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-24T18:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "5815ce1fbaa2a58a142c6ea1649c099251921b0e",
+      "sources": [
+        {
+          "provider": "LEGACY",
+          "externalId": "snow-dt-501",
+          "sourceUrl": "https://snowflake.com/careers/data-infrastructure-engineer",
+          "applicationUrl": "https://snowflake.com/careers/data-infrastructure-engineer",
+          "firstSeenAt": "2026-09-24T18:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "senior cloud data infrastructure engineer snowflake san mateo, ca / remote python postgresql aws docker go full-time remote"
     },
     {
       "id": "job-loom-20",
@@ -1036,7 +1435,28 @@
       "postedAt": "2026-09-26T12:00:00.000Z",
       "expiresAt": "2026-11-26T00:00:00.000Z",
       "createdAt": "2026-09-26T12:00:00.000Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:19:39.471Z",
+      "provider": "LEVER",
+      "workplaceType": "REMOTE",
+      "originalLocation": null,
+      "sourceUrl": "https://loom.com/careers/growth-product-engineer",
+      "seniority": "Mid-Senior",
+      "salaryInterval": "YEAR",
+      "firstSeenAt": "2026-09-26T12:00:00.000Z",
+      "lastSeenAt": "2026-10-01T21:51:58.944Z",
+      "seenCount": 1,
+      "fingerprint": "eee0c1b4b265b59bef29e9fc701d669f2fb4e37a",
+      "sources": [
+        {
+          "provider": "LEVER",
+          "externalId": "loom-gro-219",
+          "sourceUrl": "https://loom.com/careers/growth-product-engineer",
+          "applicationUrl": "https://loom.com/careers/growth-product-engineer",
+          "firstSeenAt": "2026-09-26T12:00:00.000Z",
+          "lastSeenAt": "2026-10-01T21:51:58.944Z"
+        }
+      ],
+      "searchText": "growth & product engineer loom remote (us) react typescript next.js node.js postgresql full-time remote"
     }
   ],
   "jobSources": [
@@ -1046,14 +1466,22 @@
       "type": "ATS",
       "url": "https://boards-api.greenhouse.io",
       "isActive": true,
-      "lastSyncAt": "2026-10-01T21:51:58.944Z",
-      "jobCount": 8,
+      "lastSyncAt": null,
+      "jobCount": 0,
       "config": {
         "apiVersion": "v1",
         "rateLimitPerMinute": 60
       },
       "createdAt": "2026-09-17T21:51:58.944Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:25:43.858Z",
+      "provider": "GREENHOUSE",
+      "companyName": "Greenhouse Direct ATS",
+      "boardToken": null,
+      "active": true,
+      "jobsImported": 0,
+      "lastSuccessAt": null,
+      "lastError": null,
+      "lastErrorAt": null
     },
     {
       "id": "src-02",
@@ -1061,13 +1489,21 @@
       "type": "ATS",
       "url": "https://api.lever.co/v0",
       "isActive": true,
-      "lastSyncAt": "2026-10-01T21:51:58.944Z",
-      "jobCount": 6,
+      "lastSyncAt": null,
+      "jobCount": 0,
       "config": {
         "apiVersion": "v0"
       },
       "createdAt": "2026-09-17T21:51:58.944Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:25:43.861Z",
+      "provider": "LEVER",
+      "companyName": "Lever Postings API",
+      "boardToken": null,
+      "active": true,
+      "jobsImported": 0,
+      "lastSuccessAt": null,
+      "lastError": null,
+      "lastErrorAt": null
     },
     {
       "id": "src-03",
@@ -1075,13 +1511,109 @@
       "type": "FEED",
       "url": "https://remoteok.com/api",
       "isActive": true,
-      "lastSyncAt": "2026-10-01T21:51:58.944Z",
-      "jobCount": 6,
+      "lastSyncAt": null,
+      "jobCount": 0,
       "config": {
         "pollIntervalMinutes": 30
       },
       "createdAt": "2026-09-17T21:51:58.944Z",
-      "updatedAt": "2026-10-01T21:51:58.944Z"
+      "updatedAt": "2026-10-04T20:25:43.863Z",
+      "provider": null,
+      "companyName": "RemoteOK & Web3 Licensed Feeds",
+      "boardToken": null,
+      "active": true,
+      "jobsImported": 0,
+      "lastSuccessAt": null,
+      "lastError": null,
+      "lastErrorAt": null
+    },
+    {
+      "name": "Linear (GREENHOUSE)",
+      "type": "ATS",
+      "url": null,
+      "provider": "GREENHOUSE",
+      "companyName": "Linear",
+      "boardToken": "linear",
+      "active": true,
+      "isActive": true,
+      "config": {
+        "demo": true
+      },
+      "lastSyncAt": null,
+      "lastSuccessAt": null,
+      "lastErrorAt": null,
+      "lastError": null,
+      "jobsImported": 0,
+      "jobCount": 0,
+      "id": "2c191745-be89-4551-8fde-e4ef03e09ac3",
+      "createdAt": "2026-10-04T20:19:41.910Z",
+      "updatedAt": "2026-10-04T20:25:43.865Z"
+    },
+    {
+      "name": "Figma (GREENHOUSE)",
+      "type": "ATS",
+      "url": null,
+      "provider": "GREENHOUSE",
+      "companyName": "Figma",
+      "boardToken": "figma",
+      "active": true,
+      "isActive": true,
+      "config": {
+        "demo": true
+      },
+      "lastSyncAt": null,
+      "lastSuccessAt": null,
+      "lastErrorAt": null,
+      "lastError": null,
+      "jobsImported": 0,
+      "jobCount": 0,
+      "id": "40a29e68-30d1-4274-9551-2f89e39a14af",
+      "createdAt": "2026-10-04T20:19:41.914Z",
+      "updatedAt": "2026-10-04T20:25:43.867Z"
+    },
+    {
+      "name": "Mistral AI (LEVER)",
+      "type": "ATS",
+      "url": null,
+      "provider": "LEVER",
+      "companyName": "Mistral AI",
+      "boardToken": "mistral",
+      "active": true,
+      "isActive": true,
+      "config": {
+        "demo": true
+      },
+      "lastSyncAt": null,
+      "lastSuccessAt": null,
+      "lastErrorAt": null,
+      "lastError": null,
+      "jobsImported": 0,
+      "jobCount": 0,
+      "id": "f5d9f0e9-9e1f-4224-9fbc-22e9e0788f8a",
+      "createdAt": "2026-10-04T20:19:41.916Z",
+      "updatedAt": "2026-10-04T20:25:43.869Z"
+    },
+    {
+      "name": "Netflix (LEVER)",
+      "type": "ATS",
+      "url": null,
+      "provider": "LEVER",
+      "companyName": "Netflix",
+      "boardToken": "netflix",
+      "active": true,
+      "isActive": true,
+      "config": {
+        "demo": true
+      },
+      "lastSyncAt": null,
+      "lastSuccessAt": null,
+      "lastErrorAt": null,
+      "lastError": null,
+      "jobsImported": 0,
+      "jobCount": 0,
+      "id": "0240625a-ba91-4dd6-9c03-08e913be30eb",
+      "createdAt": "2026-10-04T20:19:41.919Z",
+      "updatedAt": "2026-10-04T20:25:43.871Z"
     }
   ],
   "jobInteractions": [
@@ -1314,6 +1846,30 @@
       "id": "66b773aa-db39-439d-b783-5b4cd50603b4",
       "createdAt": "2026-10-04T08:22:59.269Z",
       "updatedAt": "2026-10-04T08:22:59.269Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-linear-01",
+      "interactionType": "APPLIED",
+      "metadata": {
+        "status": "READY_FOR_REVIEW",
+        "matchScore": 98
+      },
+      "id": "fa9f26c8-9923-4911-9891-3fa7665cd540",
+      "createdAt": "2026-10-04T20:02:33.655Z",
+      "updatedAt": "2026-10-04T20:02:33.655Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-linear-01",
+      "interactionType": "APPLIED",
+      "metadata": {
+        "status": "READY_FOR_REVIEW",
+        "matchScore": 98
+      },
+      "id": "9e93b368-0faa-45a6-84d8-2f67a2088ad3",
+      "createdAt": "2026-10-04T20:11:59.644Z",
+      "updatedAt": "2026-10-04T20:11:59.644Z"
     }
   ],
   "savedJobs": [
@@ -1348,7 +1904,7 @@
       "submittedAt": null,
       "interviewDate": "2026-10-06T21:00:00.000Z",
       "createdAt": "2026-09-28T21:51:58.944Z",
-      "updatedAt": "2026-10-04T08:22:59.246Z"
+      "updatedAt": "2026-10-04T20:11:59.628Z"
     },
     {
       "id": "app-vercel-02",
@@ -1994,6 +2550,66 @@
       "id": "79f2ca04-0b96-4193-96f7-229f163bea04",
       "createdAt": "2026-10-04T08:22:59.260Z",
       "updatedAt": "2026-10-04T08:22:59.260Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Why are you interested in joining Linear?",
+      "answer": "I admire Linear's engineering focus and commitment to product quality. The Senior Full Stack Engineer role aligns directly with my background in React, Next.js, TypeScript. I am excited to apply my experience in building high-performance architectures to solve Linear's hardest technical challenges.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "f0c4d41e-23ef-4fe6-bad4-0452e50dda38",
+      "createdAt": "2026-10-04T20:02:33.635Z",
+      "updatedAt": "2026-10-04T20:02:33.635Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Describe your relevant experience with React and TypeScript.",
+      "answer": "I have 6 years of professional experience using React at an advanced level. I have leveraged it at TechVanguard Inc. to build core production features with clean architectural patterns, comprehensive tests, and high availability.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "0b270921-3324-41e9-8132-28523f59f2f3",
+      "createdAt": "2026-10-04T20:02:33.636Z",
+      "updatedAt": "2026-10-04T20:02:33.636Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "What is your target compensation and availability?",
+      "answer": "My target base compensation for this role is in the $160,000+ range, but I am open to discussing total compensation including equity and performance incentives based on the full scope of responsibilities.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "c56b4e79-9fc0-4654-8637-7fc2bb34ad2a",
+      "createdAt": "2026-10-04T20:02:33.638Z",
+      "updatedAt": "2026-10-04T20:02:33.638Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Why are you interested in joining Linear?",
+      "answer": "I admire Linear's engineering focus and commitment to product quality. The Senior Full Stack Engineer role aligns directly with my background in React, Next.js, TypeScript. I am excited to apply my experience in building high-performance architectures to solve Linear's hardest technical challenges.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "91690652-6da5-466a-b1f5-3a276d38ab17",
+      "createdAt": "2026-10-04T20:11:59.634Z",
+      "updatedAt": "2026-10-04T20:11:59.634Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Describe your relevant experience with React and TypeScript.",
+      "answer": "I have 6 years of professional experience using React at an advanced level. I have leveraged it at TechVanguard Inc. to build core production features with clean architectural patterns, comprehensive tests, and high availability.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "f3c30b31-f0b3-428d-a173-bdb9ad8592a3",
+      "createdAt": "2026-10-04T20:11:59.636Z",
+      "updatedAt": "2026-10-04T20:11:59.636Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "What is your target compensation and availability?",
+      "answer": "My target base compensation for this role is in the $160,000+ range, but I am open to discussing total compensation including equity and performance incentives based on the full scope of responsibilities.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "7d8c001d-73b1-42fe-888a-1740bc66b54a",
+      "createdAt": "2026-10-04T20:11:59.637Z",
+      "updatedAt": "2026-10-04T20:11:59.637Z"
     }
   ],
   "applicationDocuments": [
@@ -2316,6 +2932,46 @@
       "id": "efa4e494-ba68-48a3-b9c9-c423256a24d0",
       "createdAt": "2026-10-04T08:22:59.249Z",
       "updatedAt": "2026-10-04T08:22:59.249Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "TAILORED_RESUME",
+      "title": "Alex Chen - Linear Tailored Resume",
+      "content": "# ALEX CHEN\n**Senior Full Stack Engineer** | San Francisco, CA, United States | alex@applyswipe.io | +1 (555) 234-5678\n\n### PROFESSIONAL SUMMARY\nSenior Full Stack Engineer with verified background building modern, scalable web solutions. Proven track record across React, TypeScript, Node.js, PostgreSQL directly applied to solve high-impact product goals at Linear. Grounded in rigorous engineering, clean code architecture, and iterative delivery.\n\n### CORE COMPETENCIES\nReact • TypeScript • Node.js • PostgreSQL • Tailwind CSS • GraphQL • Next.js • Python • Docker • FastAPI • AWS • LangChain\n\n### PROFESSIONAL EXPERIENCE\n\n**TechVanguard Inc.** — *Senior Full Stack Engineer* (2022 – Present)\n*Spearheaded core web architecture for customer-facing SaaS product serving 250,000 monthly active users.*\n- Architected Next.js App Router migration reducing LCP load times by 42%\n- Designed and implemented high-throughput REST & GraphQL microservices handling 12,000 req/sec\n- Integrated OpenAI function calling to automate 35% of manual support triage workflows\n- Mentored a distributed team of 5 junior and mid-level software engineers\n*Technologies: React, Next.js, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Docker, AWS*\n\n**NextGen Labs** — *Full Stack Software Engineer* (2019 – 2022)\n*Built collaborative developer productivity tools and scalable real-time dashboards.*\n- Implemented real-time WebSocket state synchronization supporting 5,000 concurrent canvas editors\n- Built automated CI/CD pipeline using GitHub Actions and Docker reducing deployment time from 40m to 8m\n- Created custom UI component library adopting accessible WAI-ARIA standards\n*Technologies: TypeScript, React, Node.js, Redis, PostgreSQL, Docker, Jest*\n\n### EDUCATION\n**University of California, Berkeley** — Bachelor of Science in Computer Science (2015 – 2019)\n\n### SELECTED PROJECTS\n**JobPulse**: Autonomous real-time developer job market analytics scraper and visualization platform. (Next.js, TypeScript, Python, FastAPI, PostgreSQL, Tailwind CSS)\n- Scrapes and indexes over 50,000 tech postings daily with automated deduplication\n- Built responsive interactive charts using Recharts and Tailwind CSS\n**PromptCraft Engine**: Developer testing playground for comparing LLM prompts, token consumption, and latency across providers. (React, Node.js, LangChain, OpenAI API, Tailwind CSS)\n- Supports side-by-side evaluation of Claude, GPT-4, and Gemini with cost breakdowns\n- Earned 1,200+ GitHub stars from the open-source community\n",
+      "fileUrl": null,
+      "id": "dc1d7d9a-c5af-4841-b603-cfdef35aa740",
+      "createdAt": "2026-10-04T20:02:33.618Z",
+      "updatedAt": "2026-10-04T20:02:33.618Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "COVER_LETTER",
+      "title": "Cover Letter - Linear",
+      "content": "Dear Linear Hiring Team,\n\nI am writing to express my strong enthusiasm for the Senior Full Stack Engineer position at Linear. Having followed Linear's growth and product impact, I am drawn to your dedication to engineering excellence and user-centric craftsmanship.\n\nWith extensive hands-on experience in React, Next.js, TypeScript, Node.js, I have consistently focused on building scalable, performant systems. At TechVanguard Inc., I spearheaded key engineering initiatives, including Architected Next.js App Router migration reducing LCP load times by 42%. My approach balances rapid iteration with robust system design, ensuring both immediate delivery and long-term maintainability.\n\nYour posting for Senior Full Stack Engineer emphasizes React, TypeScript, Node.js, which directly aligns with the technical challenges I excel at solving. I am eager to contribute my experience to Linear's roadmap and help scale your next generation of features.\n\nThank you for your time and consideration. I look forward to the possibility of discussing how my background aligns with your team's objectives.\n\nWarm regards,\n\nAlex Chen\nalex@applyswipe.io\n+1 (555) 234-5678",
+      "fileUrl": null,
+      "id": "29813f6d-6e8f-4d56-ba9d-8aa82ac81456",
+      "createdAt": "2026-10-04T20:02:33.623Z",
+      "updatedAt": "2026-10-04T20:02:33.623Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "TAILORED_RESUME",
+      "title": "Alex Chen - Linear Tailored Resume",
+      "content": "# ALEX CHEN\n**Senior Full Stack Engineer** | San Francisco, CA, United States | alex@applyswipe.io | +1 (555) 234-5678\n\n### PROFESSIONAL SUMMARY\nSenior Full Stack Engineer with verified background building modern, scalable web solutions. Proven track record across React, TypeScript, Node.js, PostgreSQL directly applied to solve high-impact product goals at Linear. Grounded in rigorous engineering, clean code architecture, and iterative delivery.\n\n### CORE COMPETENCIES\nReact • TypeScript • Node.js • PostgreSQL • Tailwind CSS • GraphQL • Next.js • Python • Docker • FastAPI • AWS • LangChain\n\n### PROFESSIONAL EXPERIENCE\n\n**TechVanguard Inc.** — *Senior Full Stack Engineer* (2022 – Present)\n*Spearheaded core web architecture for customer-facing SaaS product serving 250,000 monthly active users.*\n- Architected Next.js App Router migration reducing LCP load times by 42%\n- Designed and implemented high-throughput REST & GraphQL microservices handling 12,000 req/sec\n- Integrated OpenAI function calling to automate 35% of manual support triage workflows\n- Mentored a distributed team of 5 junior and mid-level software engineers\n*Technologies: React, Next.js, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Docker, AWS*\n\n**NextGen Labs** — *Full Stack Software Engineer* (2019 – 2022)\n*Built collaborative developer productivity tools and scalable real-time dashboards.*\n- Implemented real-time WebSocket state synchronization supporting 5,000 concurrent canvas editors\n- Built automated CI/CD pipeline using GitHub Actions and Docker reducing deployment time from 40m to 8m\n- Created custom UI component library adopting accessible WAI-ARIA standards\n*Technologies: TypeScript, React, Node.js, Redis, PostgreSQL, Docker, Jest*\n\n### EDUCATION\n**University of California, Berkeley** — Bachelor of Science in Computer Science (2015 – 2019)\n\n### SELECTED PROJECTS\n**JobPulse**: Autonomous real-time developer job market analytics scraper and visualization platform. (Next.js, TypeScript, Python, FastAPI, PostgreSQL, Tailwind CSS)\n- Scrapes and indexes over 50,000 tech postings daily with automated deduplication\n- Built responsive interactive charts using Recharts and Tailwind CSS\n**PromptCraft Engine**: Developer testing playground for comparing LLM prompts, token consumption, and latency across providers. (React, Node.js, LangChain, OpenAI API, Tailwind CSS)\n- Supports side-by-side evaluation of Claude, GPT-4, and Gemini with cost breakdowns\n- Earned 1,200+ GitHub stars from the open-source community\n",
+      "fileUrl": null,
+      "id": "fa00f115-a434-4536-bea0-f5da450075cc",
+      "createdAt": "2026-10-04T20:11:59.629Z",
+      "updatedAt": "2026-10-04T20:11:59.629Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "COVER_LETTER",
+      "title": "Cover Letter - Linear",
+      "content": "Dear Linear Hiring Team,\n\nI am writing to express my strong enthusiasm for the Senior Full Stack Engineer position at Linear. Having followed Linear's growth and product impact, I am drawn to your dedication to engineering excellence and user-centric craftsmanship.\n\nWith extensive hands-on experience in React, Next.js, TypeScript, Node.js, I have consistently focused on building scalable, performant systems. At TechVanguard Inc., I spearheaded key engineering initiatives, including Architected Next.js App Router migration reducing LCP load times by 42%. My approach balances rapid iteration with robust system design, ensuring both immediate delivery and long-term maintainability.\n\nYour posting for Senior Full Stack Engineer emphasizes React, TypeScript, Node.js, which directly aligns with the technical challenges I excel at solving. I am eager to contribute my experience to Linear's roadmap and help scale your next generation of features.\n\nThank you for your time and consideration. I look forward to the possibility of discussing how my background aligns with your team's objectives.\n\nWarm regards,\n\nAlex Chen\nalex@applyswipe.io\n+1 (555) 234-5678",
+      "fileUrl": null,
+      "id": "c5743835-7210-4a6c-be32-42bfdc0da8ad",
+      "createdAt": "2026-10-04T20:11:59.631Z",
+      "updatedAt": "2026-10-04T20:11:59.631Z"
     }
   ],
   "applicationEvents": [
@@ -2593,6 +3249,38 @@
       "id": "f2231226-9b59-496f-9ec8-629b2545217b",
       "createdAt": "2026-10-04T08:22:59.264Z",
       "updatedAt": "2026-10-04T08:22:59.264Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "PREPARING",
+      "notes": "AI compiled tailored resume, customized cover letter, and preliminary answers.",
+      "id": "300776f8-cb83-46c1-a53b-44b60fc48bfb",
+      "createdAt": "2026-10-04T20:02:33.640Z",
+      "updatedAt": "2026-10-04T20:02:33.640Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "READY_FOR_REVIEW",
+      "notes": "Application materials assembled. Awaiting user review before external submission.",
+      "id": "808ac725-1a58-4125-aacd-3f9ba2d92956",
+      "createdAt": "2026-10-04T20:02:33.642Z",
+      "updatedAt": "2026-10-04T20:02:33.642Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "PREPARING",
+      "notes": "AI compiled tailored resume, customized cover letter, and preliminary answers.",
+      "id": "2cfdc2ac-549e-4939-8835-f33874c3a758",
+      "createdAt": "2026-10-04T20:11:59.639Z",
+      "updatedAt": "2026-10-04T20:11:59.639Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "READY_FOR_REVIEW",
+      "notes": "Application materials assembled. Awaiting user review before external submission.",
+      "id": "c3120c6a-0f04-4751-ae17-25f84247d34c",
+      "createdAt": "2026-10-04T20:11:59.641Z",
+      "updatedAt": "2026-10-04T20:11:59.641Z"
     }
   ],
   "userPreferences": [
@@ -2848,6 +3536,26 @@
       "id": "2d961004-390c-4989-8714-2fcd1a6f1bc6",
       "createdAt": "2026-10-04T08:22:59.266Z",
       "updatedAt": "2026-10-04T08:22:59.266Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "title": "Application Ready for Review ✨",
+      "message": "Tailored materials for Senior Full Stack Engineer at Linear are ready. Review before submitting.",
+      "type": "NEEDS_REVIEW",
+      "link": "/dashboard/applications/app-linear-01",
+      "id": "89b6ba07-13b2-4c54-9cc1-5cf1d4becfc8",
+      "createdAt": "2026-10-04T20:02:33.644Z",
+      "updatedAt": "2026-10-04T20:02:33.644Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "title": "Application Ready for Review ✨",
+      "message": "Tailored materials for Senior Full Stack Engineer at Linear are ready. Review before submitting.",
+      "type": "NEEDS_REVIEW",
+      "link": "/dashboard/applications/app-linear-01",
+      "id": "a6f5d574-9817-465d-8ad2-fb4adf13213d",
+      "createdAt": "2026-10-04T20:11:59.642Z",
+      "updatedAt": "2026-10-04T20:11:59.642Z"
     }
   ],
   "subscriptions": [
@@ -4086,7 +4794,443 @@
       "id": "d84da642-2561-4ad0-988c-559d490040a1",
       "createdAt": "2026-10-04T08:22:59.244Z",
       "updatedAt": "2026-10-04T08:22:59.244Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "MATCH_SCORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-match-v1",
+      "inputTokens": 420,
+      "outputTokens": 180,
+      "estimatedCost": 0.0024,
+      "id": "206c0ae1-57a8-4fdf-b189-fefcb288857d",
+      "createdAt": "2026-10-04T20:02:33.512Z",
+      "updatedAt": "2026-10-04T20:02:33.512Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "RESUME_TAILORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-tailor-v1",
+      "inputTokens": 850,
+      "outputTokens": 450,
+      "estimatedCost": 0.0078,
+      "id": "e4e74c2a-d729-4630-a4af-6715bae8b418",
+      "createdAt": "2026-10-04T20:02:33.514Z",
+      "updatedAt": "2026-10-04T20:02:33.514Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "COVER_LETTER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-writer-v1",
+      "inputTokens": 620,
+      "outputTokens": 260,
+      "estimatedCost": 0.0042,
+      "id": "4793f2b9-6591-4e37-8c22-89d7a4bd751c",
+      "createdAt": "2026-10-04T20:02:33.516Z",
+      "updatedAt": "2026-10-04T20:02:33.516Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "063c569a-cc10-450e-a553-9a8cc6c62eb8",
+      "createdAt": "2026-10-04T20:02:33.519Z",
+      "updatedAt": "2026-10-04T20:02:33.519Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "cc8f04ce-1795-4c86-b1b7-2267b52cbec6",
+      "createdAt": "2026-10-04T20:02:33.520Z",
+      "updatedAt": "2026-10-04T20:02:33.520Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "753e2582-5c89-4021-b068-79f8934f90ad",
+      "createdAt": "2026-10-04T20:02:33.612Z",
+      "updatedAt": "2026-10-04T20:02:33.612Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "MATCH_SCORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-match-v1",
+      "inputTokens": 420,
+      "outputTokens": 180,
+      "estimatedCost": 0.0024,
+      "id": "cf9360bb-4e0d-40d5-a4be-e76cd5d90093",
+      "createdAt": "2026-10-04T20:11:59.602Z",
+      "updatedAt": "2026-10-04T20:11:59.602Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "RESUME_TAILORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-tailor-v1",
+      "inputTokens": 850,
+      "outputTokens": 450,
+      "estimatedCost": 0.0078,
+      "id": "e3c69250-9d8f-4d59-b030-f36bf9dc6fa0",
+      "createdAt": "2026-10-04T20:11:59.604Z",
+      "updatedAt": "2026-10-04T20:11:59.604Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "COVER_LETTER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-writer-v1",
+      "inputTokens": 620,
+      "outputTokens": 260,
+      "estimatedCost": 0.0042,
+      "id": "21d8654d-763f-49a0-a062-16ef33571ef5",
+      "createdAt": "2026-10-04T20:11:59.606Z",
+      "updatedAt": "2026-10-04T20:11:59.606Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "21c1e79f-a173-477f-a9e0-8601b4d4b0cf",
+      "createdAt": "2026-10-04T20:11:59.608Z",
+      "updatedAt": "2026-10-04T20:11:59.608Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "4e6393d8-bc77-4e2b-8a3b-7d7b426e58d2",
+      "createdAt": "2026-10-04T20:11:59.609Z",
+      "updatedAt": "2026-10-04T20:11:59.609Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "875d0aa7-cf7d-4b2b-976c-4df9cecc0716",
+      "createdAt": "2026-10-04T20:11:59.626Z",
+      "updatedAt": "2026-10-04T20:11:59.626Z"
     }
   ],
-  "auditLogs": []
+  "auditLogs": [],
+  "providerStates": [
+    {
+      "provider": "ADZUNA",
+      "isEnabled": false,
+      "status": "IDLE",
+      "consecutiveFailures": 0,
+      "jobsImported": 0,
+      "activeJobs": 0,
+      "syncIntervalMinutes": 120,
+      "freshnessHours": 48,
+      "id": "2b0b24ce-11cb-406a-80c4-7a758c9bd3f4",
+      "createdAt": "2026-10-04T20:19:39.480Z",
+      "updatedAt": "2026-10-04T20:25:43.851Z",
+      "lastError": null,
+      "lastErrorAt": null,
+      "lastSyncAt": null,
+      "lastSuccessAt": null,
+      "lockOwner": null,
+      "lockExpiresAt": null
+    },
+    {
+      "provider": "GREENHOUSE",
+      "isEnabled": true,
+      "status": "IDLE",
+      "consecutiveFailures": 0,
+      "jobsImported": 0,
+      "activeJobs": 0,
+      "syncIntervalMinutes": 360,
+      "freshnessHours": 72,
+      "id": "ef3081e6-634a-4e90-8fef-93d6396494c9",
+      "createdAt": "2026-10-04T20:19:39.482Z",
+      "updatedAt": "2026-10-04T20:25:43.854Z",
+      "lockOwner": null,
+      "lockExpiresAt": null,
+      "lastSyncAt": null,
+      "lastErrorAt": null,
+      "lastError": null,
+      "lastSuccessAt": null
+    },
+    {
+      "provider": "LEVER",
+      "isEnabled": true,
+      "status": "IDLE",
+      "consecutiveFailures": 0,
+      "jobsImported": 0,
+      "activeJobs": 0,
+      "syncIntervalMinutes": 360,
+      "freshnessHours": 72,
+      "id": "19591323-fb32-46ec-ae34-aaa203331c35",
+      "createdAt": "2026-10-04T20:19:39.485Z",
+      "updatedAt": "2026-10-04T20:25:43.856Z",
+      "lockOwner": null,
+      "lockExpiresAt": null,
+      "lastSyncAt": null,
+      "lastErrorAt": null,
+      "lastError": null,
+      "lastSuccessAt": null
+    }
+  ],
+  "providerSyncRuns": [],
+  "jobMatchScores": [
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-loom-20",
+      "score": 99,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers React, TypeScript, Next.js with 7.3 years of experience for Growth & Product Engineer.",
+      "matchedSkills": [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "missingSkills": [],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 100,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 90,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "590a1b09-dcfe-42d0-83f9-3dc9a2768c3d",
+      "createdAt": "2026-10-04T20:25:14.658Z",
+      "updatedAt": "2026-10-04T20:25:14.658Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-prisma-17",
+      "score": 99,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers TypeScript, PostgreSQL, Next.js with 7.3 years of experience for Developer Experience & Full Stack Engineer.",
+      "matchedSkills": [
+        "TypeScript",
+        "PostgreSQL",
+        "Next.js",
+        "Node.js",
+        "Docker"
+      ],
+      "missingSkills": [],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 100,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 90,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "fdab4005-4689-4140-94ff-b4f40cbd92cf",
+      "createdAt": "2026-10-04T20:25:14.660Z",
+      "updatedAt": "2026-10-04T20:25:14.660Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-snowflake-19",
+      "score": 93,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers Python, PostgreSQL, AWS with 7.3 years of experience for Senior Cloud Data Infrastructure Engineer. Watch: Go.",
+      "matchedSkills": [
+        "Python",
+        "PostgreSQL",
+        "AWS",
+        "Docker"
+      ],
+      "missingSkills": [
+        "Go"
+      ],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 80,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 100,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "b3d2b186-1565-48c8-807f-6727dc59ba3c",
+      "createdAt": "2026-10-04T20:25:14.662Z",
+      "updatedAt": "2026-10-04T20:25:14.662Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-discord-16",
+      "score": 93,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers React, TypeScript, React Native with 7.3 years of experience for Senior React Native Engineer. Watch: Mobile Performance.",
+      "matchedSkills": [
+        "React",
+        "TypeScript",
+        "React Native",
+        "Node.js"
+      ],
+      "missingSkills": [
+        "Mobile Performance"
+      ],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 80,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 100,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "c1e8b801-a260-47e7-945f-979772762a1b",
+      "createdAt": "2026-10-04T20:25:14.663Z",
+      "updatedAt": "2026-10-04T20:25:14.663Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-browserco-15",
+      "score": 86,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers React, TypeScript, Tailwind CSS with 7.3 years of experience for Design Engineer (Arc Browser Web Platform). Watch: Framer Motion, UI Design.",
+      "matchedSkills": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "missingSkills": [
+        "Framer Motion",
+        "UI Design"
+      ],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 60,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 100,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "c1f088ac-db43-43d6-8c7d-9e008351750c",
+      "createdAt": "2026-10-04T20:25:14.665Z",
+      "updatedAt": "2026-10-04T20:25:14.665Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-cloudflare-18",
+      "score": 86,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers Node.js, Docker, AWS with 7.3 years of experience for Senior Security Software Engineer. Watch: Go, Security.",
+      "matchedSkills": [
+        "Node.js",
+        "Docker",
+        "AWS"
+      ],
+      "missingSkills": [
+        "Go",
+        "Security"
+      ],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 60,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 100,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "57363b23-170e-4ec7-b549-0f2ed33ba78e",
+      "createdAt": "2026-10-04T20:25:14.667Z",
+      "updatedAt": "2026-10-04T20:25:14.667Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-hashicorp-11",
+      "score": 86,
+      "stage": "AI_RERANK",
+      "reason": "Strong match: your verified background covers Docker, AWS, PostgreSQL with 7.3 years of experience for Senior Cloud Infrastructure Engineer. Watch: Go, Kubernetes.",
+      "matchedSkills": [
+        "Docker",
+        "AWS",
+        "PostgreSQL"
+      ],
+      "missingSkills": [
+        "Go",
+        "Kubernetes"
+      ],
+      "recommendation": "strong_match",
+      "breakdown": {
+        "skills": 60,
+        "experience": 100,
+        "location": 100,
+        "employment": 100,
+        "salary": 100,
+        "seniority": 100,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "ec16d1d6-153e-422a-921f-82a50d80d584",
+      "createdAt": "2026-10-04T20:25:14.669Z",
+      "updatedAt": "2026-10-04T20:25:14.669Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-github-10",
+      "score": 79,
+      "stage": "AI_RERANK",
+      "reason": "Good match for Principal Design Technologist / UX Engineer: you bring React, TypeScript, Tailwind CSS, while Accessibility, Design Systems would need ramp-up. Not on your profile yet: Accessibility, Design Systems.",
+      "matchedSkills": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "missingSkills": [
+        "Accessibility",
+        "Design Systems"
+      ],
+      "recommendation": "good_match",
+      "breakdown": {
+        "skills": 60,
+        "experience": 91,
+        "location": 100,
+        "employment": 100,
+        "salary": 100,
+        "seniority": 45,
+        "signature": "cf8f02127f8e339959b307c556d91deab4a322ed"
+      },
+      "id": "b167a502-ad16-4ff6-85c1-0f5bff8011ac",
+      "createdAt": "2026-10-04T20:25:14.671Z",
+      "updatedAt": "2026-10-04T20:25:14.671Z"
+    }
+  ]
 }

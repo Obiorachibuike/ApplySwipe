@@ -98,6 +98,51 @@ export default function ApplicationDetailPage() {
     }
   };
 
+  const officialApplicationUrl: string | null = (() => {
+    const job = application?.job as any;
+    if (!job) return null;
+    const aggregators = ["adzuna.", "indeed.", "linkedin.", "glassdoor.", "ziprecruiter.", "remoteok.", "remotive."];
+    const isAggregator = (url: string) => aggregators.some((host) => url.includes(host));
+    const refs: string[] = (job.sources || [])
+      .map((ref: any) => ref?.applicationUrl)
+      .filter(Boolean);
+    const direct = refs.find((url: string) => !isAggregator(url));
+    return direct || job.applicationUrl || job.sourceUrl || refs[0] || null;
+  })();
+
+  const sourceLabel =
+    application?.job?.provider === "ADZUNA"
+      ? "Adzuna"
+      : application?.job?.provider === "GREENHOUSE"
+      ? "Company Career Page (Greenhouse)"
+      : application?.job?.provider === "LEVER"
+      ? "Company Career Page (Lever)"
+      : application?.job?.source || "ApplySwipe";
+
+  const handleOpenOfficialPage = () => {
+    if (!officialApplicationUrl) {
+      toastError("No application URL", "This job did not provide an official application link.");
+      return;
+    }
+    window.open(officialApplicationUrl, "_blank", "noopener,noreferrer");
+    info("Employer site opened", "Submit there, then mark this application as applied.");
+  };
+
+  const handleConfirmApplied = async () => {
+    try {
+      const res = await fetch(`/api/applications/${appId}/apply-confirmation`, { method: "POST" });
+      if (res.ok) {
+        success("Marked as applied ✅", "Your application is tracked in ApplySwipe.");
+        fetchApplication();
+      } else {
+        const data = await res.json();
+        toastError("Could not confirm", data.error);
+      }
+    } catch (e) {
+      toastError("Failed to confirm application");
+    }
+  };
+
   const handleSaveNotes = async () => {
     try {
       const res = await fetch(`/api/applications/${appId}`, {
@@ -171,7 +216,7 @@ export default function ApplicationDetailPage() {
       date: application.submittedAt
         ? new Date(application.submittedAt).toLocaleDateString()
         : "Awaiting Confirmation",
-      done: ["SUBMITTED", "INTERVIEW", "OFFER", "REJECTED"].includes(status),
+      done: ["SUBMITTED", "APPLIED", "INTERVIEW", "OFFER", "REJECTED"].includes(status),
     },
     {
       label: "Interview",
@@ -198,11 +243,25 @@ export default function ApplicationDetailPage() {
             </h1>
             <Badge variant="primary">{application.matchScore || 85}% AI Match</Badge>
           </div>
-          <div className="flex items-center gap-2 text-xs text-muted">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
             <Building className="h-3.5 w-3.5" />
             <span className="font-semibold text-slate-200">{application.job?.company}</span>
             <span>•</span>
             <span>{application.job?.location}</span>
+            <span>•</span>
+            <span>
+              Source: <span className="text-slate-200 font-semibold">{sourceLabel}</span>
+            </span>
+            {officialApplicationUrl && (
+              <a
+                href={officialApplicationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-primary hover:text-primary-hover font-semibold"
+              >
+                Official posting <ExternalLink className="h-3 w-3" />
+              </a>
+            )}
           </div>
         </div>
 
@@ -213,22 +272,31 @@ export default function ApplicationDetailPage() {
             onChange={(e) => handleStatusChange(e.target.value)}
             className="h-9 px-3 rounded-lg border border-border bg-surface-elevated text-xs font-semibold text-foreground focus:outline-none"
           >
+            <option value="READY">Ready to apply</option>
             <option value="READY_FOR_REVIEW">Ready for Review</option>
-            <option value="SUBMITTED">Submitted</option>
+            <option value="APPLIED">Applied</option>
+            <option value="SUBMITTED">Submitted (legacy)</option>
             <option value="INTERVIEW">Interview Scheduled</option>
             <option value="OFFER">Offer Received 🎉</option>
             <option value="REJECTED">Archived / Rejected</option>
           </select>
 
-          {status === "READY_FOR_REVIEW" && (
+          {officialApplicationUrl && (
+            <Button variant="outline" size="sm" onClick={handleOpenOfficialPage} className="gap-1.5">
+              <ExternalLink className="h-4 w-4" />
+              <span>Open application page</span>
+            </Button>
+          )}
+
+          {["READY", "READY_FOR_REVIEW", "PREPARING"].includes(status) && (
             <Button
               variant="accent"
               size="sm"
-              onClick={() => handleStatusChange("SUBMITTED")}
+              onClick={handleConfirmApplied}
               className="gap-1.5 shadow-glow-accent"
             >
               <Send className="h-4 w-4" />
-              <span>Confirm & Submit</span>
+              <span>I&apos;ve applied — track it</span>
             </Button>
           )}
         </div>

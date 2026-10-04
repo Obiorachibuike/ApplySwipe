@@ -176,7 +176,9 @@ export class AutopilotService {
       data: {
         userId,
         title: "Autopilot Cycle Complete ⚡",
-        message: `Scanned ${scannedCount} jobs, matched ${matchedCount}. Submitted: ${submittedCount}, Prepared: ${preparedCount}.`,
+        message: `Scanned ${scannedCount} jobs, matched ${matchedCount}. Prepared: ${preparedCount}${
+          submittedCount ? `, confirmed submissions: ${submittedCount}` : ""
+        }. Submit the prepared applications on the employer sites to complete them.`,
         type: "AUTOPILOT_SUMMARY",
         link: "/dashboard/autopilot",
       },

@@ -3,7 +3,16 @@ import path from "path";
 import crypto from "crypto";
 
 const DB_DIR = path.join(process.cwd(), "data");
-const DB_FILE = path.join(DB_DIR, "applyswipe.json");
+/**
+ * Persistent store location. Defaults to data/applyswipe.json; tests and
+ * deployments can point APPLYSWIPE_DB_FILE at another file (the Prisma/
+ * PostgreSQL schema mirrors this repository for production deployments).
+ */
+const DB_FILE = process.env.APPLYSWIPE_DB_FILE
+  ? path.isAbsolute(process.env.APPLYSWIPE_DB_FILE)
+    ? process.env.APPLYSWIPE_DB_FILE
+    : path.join(process.cwd(), process.env.APPLYSWIPE_DB_FILE)
+  : path.join(DB_DIR, "applyswipe.json");
 
 interface DatabaseSchema {
   users: any[];
@@ -30,6 +39,9 @@ interface DatabaseSchema {
   payments: any[];
   aiUsages: any[];
   auditLogs: any[];
+  providerStates: any[];
+  providerSyncRuns: any[];
+  jobMatchScores: any[];
 }
 
 const emptyDb: DatabaseSchema = {
@@ -57,6 +69,9 @@ const emptyDb: DatabaseSchema = {
   payments: [],
   aiUsages: [],
   auditLogs: [],
+  providerStates: [],
+  providerSyncRuns: [],
+  jobMatchScores: [],
 };
 
 class PersistentDb {
@@ -69,8 +84,9 @@ class PersistentDb {
 
   private load(): DatabaseSchema {
     try {
-      if (!fs.existsSync(DB_DIR)) {
-        fs.mkdirSync(DB_DIR, { recursive: true });
+      const dir = path.dirname(DB_FILE);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
       }
       if (fs.existsSync(DB_FILE)) {
         const raw = fs.readFileSync(DB_FILE, "utf-8");
@@ -85,8 +101,9 @@ class PersistentDb {
 
   public save(): void {
     try {
-      if (!fs.existsSync(DB_DIR)) {
-        fs.mkdirSync(DB_DIR, { recursive: true });
+      const dir = path.dirname(DB_FILE);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
       }
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), "utf-8");
     } catch (e) {
@@ -493,7 +510,12 @@ export const db = {
   payment: globalDb.table("payments"),
   aiUsage: globalDb.table("aiUsages"),
   auditLog: globalDb.table("auditLogs"),
+  providerState: globalDb.table("providerStates"),
+  providerSyncRun: globalDb.table("providerSyncRuns"),
+  jobMatchScore: globalDb.table("jobMatchScores"),
   $raw: globalDb,
 };
+
+export { DB_FILE };
 
 export default db;

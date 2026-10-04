@@ -25,7 +25,7 @@ export default function VerifyEmailPage() {
           </div>
           <h2 className="text-xl font-bold text-white">Email Verified!</h2>
           <p className="text-xs sm:text-sm text-muted">
-            Your email has been successfully confirmed. You're ready to proceed to your career profile and job discovery queue.
+            Your email has been successfully confirmed. You&apos;re ready to proceed to your career profile and job discovery queue.
           </p>
           <div className="pt-4">
             <Link href="/dashboard/discover">
