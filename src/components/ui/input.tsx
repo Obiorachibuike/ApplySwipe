@@ -11,7 +11,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={id} className="block text-xs font-medium text-slate-300">
+          <label htmlFor={id} className="block text-xs font-medium text-foreground">
             {label}
           </label>
         )}
@@ -20,7 +20,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
           className={clsx(
-            "flex h-10 w-full rounded-xl border border-white/10 bg-surface-elevated px-3 py-2 text-sm text-foreground placeholder:text-muted transition-all duration-180 ease-applyswipe hover:border-white/20 focus:border-primary focus:ring-4 focus:ring-primary/15 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+            "flex h-10 w-full rounded-xl border border-border bg-surface-elevated px-3 py-2 text-sm text-foreground placeholder:text-muted transition-all duration-180 ease-applyswipe hover:border-border-bright focus:border-primary focus:ring-4 focus:ring-primary/15 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             error && "border-danger focus:border-danger focus:ring-danger/20",
             className
           )}
@@ -44,7 +44,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full space-y-1.5">
         {label && (
-          <label htmlFor={id} className="block text-xs font-medium text-slate-300">
+          <label htmlFor={id} className="block text-xs font-medium text-foreground">
             {label}
           </label>
         )}
@@ -52,7 +52,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={id}
           ref={ref}
           className={clsx(
-            "flex min-h-[90px] w-full rounded-xl border border-white/10 bg-surface-elevated px-3 py-2 text-sm text-foreground placeholder:text-muted transition-all duration-180 ease-applyswipe hover:border-white/20 focus:border-primary focus:ring-4 focus:ring-primary/15 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+            "flex min-h-[90px] w-full rounded-xl border border-border bg-surface-elevated px-3 py-2 text-sm text-foreground placeholder:text-muted transition-all duration-180 ease-applyswipe hover:border-border-bright focus:border-primary focus:ring-4 focus:ring-primary/15 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             error && "border-danger focus:border-danger focus:ring-danger/20",
             className
           )}

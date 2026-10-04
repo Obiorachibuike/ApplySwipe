@@ -18,6 +18,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function DashboardLayout({
   children,
@@ -87,14 +88,14 @@ export default function DashboardLayout({
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 border-r border-border bg-surface shrink-0 p-4 justify-between h-screen sticky top-0">
         <div className="space-y-6">
-          {/* Brand: scale(1.05) on hover with subtle glow */}
+          {/* Brand: scale(1.05) on hover with subtle glow & Brand Gradient */}
           <Link href="/dashboard/discover" className="flex items-center gap-2.5 px-2 group">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
+            <div className="h-9 w-9 rounded-xl brand-gradient-premium flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
               <Sparkles className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-12" />
             </div>
             <div>
-              <span className="text-lg font-bold tracking-tight text-white block leading-none transition-colors group-hover:brightness-110">
-                Apply<span className="text-primary group-hover:text-indigo-400">Swipe</span>
+              <span className="text-lg font-bold tracking-tight text-foreground block leading-none transition-colors group-hover:brightness-110">
+                Apply<span className="brand-gradient-text ml-0.5">Swipe</span>
               </span>
               <span className="text-[10px] text-muted block mt-0.5">AI Application Suite</span>
             </div>
@@ -111,13 +112,13 @@ export default function DashboardLayout({
                   href={item.href}
                   className={`nav-item-interactive flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${
                     isActive
-                      ? "bg-[#6366F1]/15 text-[#818CF8] border border-[#6366F1]/25 font-semibold shadow-sm"
-                      : "text-muted hover:text-foreground"
+                      ? "bg-primary/15 text-primary border border-primary/25 font-semibold shadow-sm"
+                      : "text-muted hover:text-foreground hover:bg-surface-hover"
                   }`}
                 >
                   <Icon
                     className={`h-4 w-4 transition-colors ${
-                      isActive ? "text-[#818CF8]" : "text-muted group-hover:text-foreground"
+                      isActive ? "text-primary" : "text-muted group-hover:text-foreground"
                     }`}
                   />
                   <span>{item.label}</span>
@@ -128,11 +129,11 @@ export default function DashboardLayout({
         </div>
 
         {/* Bottom User Profile Section */}
-        <div className="pt-4 border-t border-border/80 space-y-2">
+        <div className="pt-4 border-t border-border space-y-2">
           {user?.role === "ADMIN" && (
             <Link
               href="/admin"
-              className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:-translate-y-[1px] transition-all"
+              className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-amber-500 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:-translate-y-[1px] transition-all"
             >
               <Shield className="h-3.5 w-3.5" />
               <span>Admin Console</span>
@@ -141,7 +142,7 @@ export default function DashboardLayout({
 
           <div className="flex items-center justify-between p-2 rounded-xl bg-surface-elevated border border-border">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-xs font-bold text-white shrink-0 shadow-sm">
+              <div className="h-8 w-8 rounded-full brand-gradient flex items-center justify-center text-xs font-bold text-white shrink-0 shadow-sm">
                 {user?.name?.[0]?.toUpperCase() || "A"}
               </div>
               <div className="min-w-0">
@@ -150,13 +151,16 @@ export default function DashboardLayout({
               </div>
             </div>
 
-            <button
-              onClick={handleLogout}
-              title="Log out"
-              className="text-muted hover:text-danger hover:scale-110 active:scale-95 p-1.5 rounded-lg transition-transform"
-            >
-              <LogOut className="h-4 w-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <ThemeToggle className="p-1.5" />
+              <button
+                onClick={handleLogout}
+                title="Log out"
+                className="text-muted hover:text-danger hover:scale-110 active:scale-95 p-1.5 rounded-lg transition-transform"
+              >
+                <LogOut className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </aside>
@@ -166,10 +170,10 @@ export default function DashboardLayout({
         {/* Top Navbar */}
         <header className="h-16 border-b border-border bg-surface/80 backdrop-blur-md px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
           <div className="md:hidden flex items-center gap-2">
-            <div className="h-7 w-7 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center">
+            <div className="h-7 w-7 rounded-lg brand-gradient-premium flex items-center justify-center shadow-sm">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
-            <span className="font-bold text-base text-white">ApplySwipe</span>
+            <span className="font-bold text-base text-foreground">ApplySwipe</span>
           </div>
 
           <div className="hidden md:block">
@@ -178,15 +182,17 @@ export default function DashboardLayout({
             </span>
           </div>
 
-          {/* Right actions: notifications with scale icon hover */}
-          <div className="flex items-center gap-3 relative">
+          {/* Right actions: theme toggle + notifications */}
+          <div className="flex items-center gap-2 relative">
+            <ThemeToggle />
+
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 rounded-xl text-muted hover:text-foreground hover:bg-white/5 hover:scale-105 active:scale-95 transition-all"
+              className="relative p-2 rounded-xl text-muted hover:text-foreground hover:bg-surface-hover hover:scale-105 active:scale-95 transition-all"
             >
               <Bell className="h-5 w-5" />
               {unreadCount > 0 && (
-                <span className="absolute top-1 right-1 h-4 w-4 rounded-full bg-accent text-[10px] font-bold text-black flex items-center justify-center shadow-glow-accent">
+                <span className="absolute top-1 right-1 h-4 w-4 rounded-full bg-like text-[10px] font-bold text-white flex items-center justify-center shadow-glow-accent">
                   {unreadCount}
                 </span>
               )}
@@ -194,9 +200,9 @@ export default function DashboardLayout({
 
             {/* Notifications Dropdown */}
             {showNotifications && (
-              <div className="absolute right-0 top-12 w-80 sm:w-96 rounded-2xl border border-white/10 bg-surface-card shadow-2xl p-4 z-50 animate-in fade-in slide-in-from-top-2">
+              <div className="absolute right-0 top-12 w-80 sm:w-96 rounded-2xl border border-border bg-surface-card shadow-2xl p-4 z-50 animate-in fade-in slide-in-from-top-2">
                 <div className="flex items-center justify-between pb-3 border-b border-border">
-                  <span className="text-xs font-bold uppercase tracking-wider text-white">
+                  <span className="text-xs font-bold uppercase tracking-wider text-foreground">
                     Notifications
                   </span>
                   <div className="flex items-center gap-2">
@@ -210,7 +216,7 @@ export default function DashboardLayout({
                     )}
                     <button
                       onClick={() => setShowNotifications(false)}
-                      className="text-muted hover:text-white hover:scale-110 active:scale-95 p-1 transition-transform"
+                      className="text-muted hover:text-foreground hover:scale-110 active:scale-95 p-1 transition-transform"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -226,12 +232,12 @@ export default function DashboardLayout({
                     notifications.map((notif: any) => (
                       <div
                         key={notif.id}
-                        className={`p-3 space-y-1 text-xs hover:bg-white/5 rounded-xl transition-colors ${
+                        className={`p-3 space-y-1 text-xs hover:bg-surface-hover rounded-xl transition-colors ${
                           !notif.isRead ? "bg-primary/5" : ""
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold text-white">{notif.title}</span>
+                          <span className="font-semibold text-foreground">{notif.title}</span>
                           <span className="text-[10px] text-muted">
                             {new Date(notif.createdAt).toLocaleDateString()}
                           </span>
@@ -262,7 +268,7 @@ export default function DashboardLayout({
         </main>
       </div>
 
-      {/* Mobile Bottom Navigation (Rule 32) */}
+      {/* Mobile Bottom Navigation */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-border flex items-center justify-around py-2 px-1">
         <Link
           href="/dashboard/discover"

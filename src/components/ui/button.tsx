@@ -35,23 +35,23 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-[#6366F1] text-white hover:bg-[#5558E6] hover:-translate-y-[1px] hover:shadow-[0_8px_24px_rgba(99,102,241,0.25)] focus-visible:ring-[#6366F1] active:translate-y-0",
+        "bg-primary text-white hover:bg-primary-hover hover:-translate-y-[1px] hover:shadow-[0_8px_24px_rgba(99,102,241,0.28)] focus-visible:ring-primary active:translate-y-0 shadow-sm",
       apply:
-        "btn-sweep-container bg-[#22C55E] text-white hover:bg-[#1eb354] hover:-translate-y-[2px] hover:shadow-[0_8px_28px_rgba(34,197,94,0.28)] focus-visible:ring-[#22C55E] active:translate-y-0 font-semibold",
+        "btn-sweep-container btn-like-apply focus-visible:ring-like font-semibold",
       pass:
-        "bg-[#FB7185]/15 border border-[#FB7185]/30 text-[#FB7185] hover:bg-[#FB7185]/25 hover:border-[#FB7185]/60 hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(251,113,133,0.25)] focus-visible:ring-[#FB7185] active:translate-y-0 font-semibold",
+        "btn-pass focus-visible:ring-pass font-semibold",
       secondary:
-        "bg-surface-elevated text-foreground hover:bg-[#1E293B] hover:text-white border border-border hover:border-white/20 hover:-translate-y-[1px] hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] focus-visible:ring-secondary active:translate-y-0",
+        "bg-surface-elevated text-foreground hover:bg-surface-hover hover:text-foreground border border-border hover:border-border-bright hover:-translate-y-[1px] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] focus-visible:ring-secondary active:translate-y-0",
       outline:
-        "border border-border text-foreground hover:bg-white/5 hover:border-white/20 hover:-translate-y-[1px] focus-visible:ring-primary active:translate-y-0",
+        "border border-border text-foreground hover:bg-surface-hover hover:border-border-bright hover:-translate-y-[1px] focus-visible:ring-primary active:translate-y-0",
       ghost:
-        "text-muted hover:text-foreground hover:bg-white/5 hover:scale-[1.02] active:scale-[0.97] focus-visible:ring-white/10",
+        "text-muted hover:text-foreground hover:bg-surface-hover hover:scale-[1.02] active:scale-[0.97] focus-visible:ring-primary/20",
       danger:
         "bg-danger text-white hover:bg-danger-hover hover:-translate-y-[1px] hover:shadow-[0_6px_20px_rgba(239,68,68,0.3)] focus-visible:ring-danger active:translate-y-0",
       accent:
         "bg-accent text-white hover:bg-accent-hover hover:-translate-y-[1px] hover:shadow-[0_8px_24px_rgba(34,197,94,0.25)] focus-visible:ring-accent active:translate-y-0",
       icon:
-        "p-2 text-muted hover:text-foreground hover:bg-white/10 hover:scale-[1.05] active:scale-[0.95] rounded-lg transition-transform",
+        "p-2 text-muted hover:text-foreground hover:bg-surface-hover hover:scale-[1.05] active:scale-[0.95] rounded-lg transition-transform",
     };
 
     const sizes = {

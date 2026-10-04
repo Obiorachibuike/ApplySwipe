@@ -354,3 +354,44 @@ npm start
 - **Password Protection:** Salted Bcrypt hashing with cost factor 10.
 - **Strict User Privacy:** Candidate resumes and career records are never shared with external model trainers.
 - **GDPR / CCPA Ready:** Full JSON export and immediate account deletion supported via Settings.
+
+---
+
+## 15. ApplySwipe Color System & Visual Identity
+
+ApplySwipe utilizes a modern **Indigo + Violet** brand identity rather than the typical generic blue/green job-board look, reflecting a high-tier AI product aesthetic.
+
+### Color Tokens
+
+| Purpose | Light Mode | Dark Mode |
+|---|---|---|
+| **Background** | `#F7F8FC` | `#05070D` |
+| **Card** | `#FFFFFF` | `#0D1322` |
+| **Card Hover** | `#F1F3F9` | `#131C31` |
+| **Primary** | `#5B5CE2` | `#6366F1` |
+| **Primary Hover** | `#4F46E5` | `#818CF8` |
+| **Secondary** | `#7C3AED` | `#8B5CF6` |
+| **Like / Apply** | `#16A34A` | `#22C55E` |
+| **Like Hover** | `#15803D` | `#4ADE80` |
+| **Pass** | `#E11D48` | `#FB7185` |
+| **Text** | `#111827` | `#F8FAFC` |
+| **Secondary Text** | `#64748B` | `#94A3B8` |
+| **Border** | `#E2E8F0` | `rgba(255, 255, 255, 0.08)` |
+
+### Brand Gradients
+- **Standard Brand Gradient:** `linear-gradient(135deg, #6366F1, #8B5CF6)`
+- **Premium Brand Gradient:** `linear-gradient(135deg, #6366F1 0%, #7C3AED 50%, #A855F7 100%)` (used for logo, key headings, AI badges, and selected states).
+
+### Action Buttons
+- **Like / Apply Button:**
+  - *Light Mode:* Background `#16A34A`, Text `#FFFFFF`, Hover `#15803D`, Box Shadow `0 8px 25px rgba(22, 163, 74, 0.25)`.
+  - *Dark Mode:* Background `#22C55E`, Text `#052E16`, Hover `#4ADE80`, Box Shadow `0 8px 30px rgba(34, 197, 94, 0.25)`.
+  - Subtle light sweep highlight animation on hover.
+- **Pass Button:**
+  - *Light Mode:* Background `#FFF1F2`, Text `#E11D48`, subtle rose glow `0 8px 24px rgba(225, 29, 72, 0.20)`.
+  - *Dark Mode:* Background `rgba(244, 63, 94, 0.12)`, Text `#FB7185`, subtle rose glow `0 8px 24px rgba(251, 113, 133, 0.25)`.
+
+### Job Cards
+- *Light Mode:* Background `#FFFFFF`, Border `1px solid #E2E8F0`, Shadow `0 10px 30px rgba(15, 23, 42, 0.06)`.
+- *Dark Mode:* Background `#0D1322`, Border `1px solid rgba(255, 255, 255, 0.08)`, Shadow `0 15px 45px rgba(0, 0, 0, 0.35)`.
+- *Hover:* Card shifts smoothly toward `#131C31` (Dark Mode) or `#F1F3F9` (Light Mode) with a subtle indigo border (`rgba(99, 102, 241, 0.35)` / `rgba(91, 92, 226, 0.35)`).

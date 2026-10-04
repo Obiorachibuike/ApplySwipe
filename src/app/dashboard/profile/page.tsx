@@ -130,7 +130,7 @@ export default function ProfilePage() {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-2">
             <User className="h-6 w-6 text-primary" />
             <span>AI Career Profile</span>
           </h1>
@@ -164,7 +164,7 @@ export default function ProfilePage() {
         <button
           onClick={() => setActiveTab("personal")}
           className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === "personal" ? "bg-primary text-white" : "text-muted hover:text-white"
+            activeTab === "personal" ? "bg-primary text-white" : "text-muted hover:text-foreground"
           }`}
         >
           Personal Info
@@ -172,7 +172,7 @@ export default function ProfilePage() {
         <button
           onClick={() => setActiveTab("skills")}
           className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === "skills" ? "bg-primary text-white" : "text-muted hover:text-white"
+            activeTab === "skills" ? "bg-primary text-white" : "text-muted hover:text-foreground"
           }`}
         >
           Skills ({profile.skills.length})
@@ -180,7 +180,7 @@ export default function ProfilePage() {
         <button
           onClick={() => setActiveTab("experience")}
           className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === "experience" ? "bg-primary text-white" : "text-muted hover:text-white"
+            activeTab === "experience" ? "bg-primary text-white" : "text-muted hover:text-foreground"
           }`}
         >
           Experience ({profile.experiences.length})
@@ -188,7 +188,7 @@ export default function ProfilePage() {
         <button
           onClick={() => setActiveTab("education")}
           className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === "education" ? "bg-primary text-white" : "text-muted hover:text-white"
+            activeTab === "education" ? "bg-primary text-white" : "text-muted hover:text-foreground"
           }`}
         >
           Education ({profile.educations.length})
@@ -196,7 +196,7 @@ export default function ProfilePage() {
         <button
           onClick={() => setActiveTab("projects")}
           className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === "projects" ? "bg-primary text-white" : "text-muted hover:text-white"
+            activeTab === "projects" ? "bg-primary text-white" : "text-muted hover:text-foreground"
           }`}
         >
           Projects ({profile.projects.length})
@@ -204,7 +204,7 @@ export default function ProfilePage() {
         <button
           onClick={() => setActiveTab("preferences")}
           className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
-            activeTab === "preferences" ? "bg-primary text-white" : "text-muted hover:text-white"
+            activeTab === "preferences" ? "bg-primary text-white" : "text-muted hover:text-foreground"
           }`}
         >
           Preferences
@@ -214,7 +214,7 @@ export default function ProfilePage() {
       {/* PERSONAL INFO TAB */}
       {activeTab === "personal" && (
         <Card className="p-6 border-border bg-surface-card space-y-4">
-          <h3 className="text-sm font-bold text-white mb-2">Personal & Contact Details</h3>
+          <h3 className="text-sm font-bold text-foreground mb-2">Personal & Contact Details</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="Professional Headline"
@@ -252,7 +252,7 @@ export default function ProfilePage() {
       {activeTab === "skills" && (
         <Card className="p-6 border-border bg-surface-card space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white">Verified Skill Registry</h3>
+            <h3 className="text-sm font-bold text-foreground">Verified Skill Registry</h3>
             <span className="text-xs text-muted">{profile.skills.length} skills listed</span>
           </div>
 
@@ -445,7 +445,7 @@ export default function ProfilePage() {
       {/* PREFERENCES TAB */}
       {activeTab === "preferences" && (
         <Card className="p-6 border-border bg-surface-card space-y-4">
-          <h3 className="text-sm font-bold text-white mb-2">Job & Search Preferences</h3>
+          <h3 className="text-sm font-bold text-foreground mb-2">Job & Search Preferences</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-medium text-slate-300 block mb-1">

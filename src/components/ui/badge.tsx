@@ -2,7 +2,16 @@ import React from "react";
 import clsx from "clsx";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "primary" | "secondary" | "accent" | "danger" | "warning" | "outline" | "muted";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "like"
+    | "pass"
+    | "danger"
+    | "warning"
+    | "outline"
+    | "muted";
   size?: "sm" | "md";
 }
 
@@ -16,11 +25,13 @@ export function Badge({
   const variants = {
     primary: "bg-primary/15 text-primary border border-primary/30",
     secondary: "bg-secondary/15 text-secondary border border-secondary/30",
-    accent: "bg-accent/15 text-accent border border-accent/30",
+    accent: "bg-like/15 text-like border border-like/30",
+    like: "bg-like/15 text-like border border-like/30",
+    pass: "bg-pass-bg text-pass border border-pass/30",
     danger: "bg-danger/15 text-danger border border-danger/30",
-    warning: "bg-warning/15 text-amber-400 border border-amber-400/30",
-    outline: "border border-border text-foreground bg-white/5",
-    muted: "bg-white/5 text-muted border border-white/10",
+    warning: "bg-amber-500/15 text-amber-500 border border-amber-500/30",
+    outline: "border border-border text-foreground bg-surface-elevated",
+    muted: "bg-surface-elevated text-muted border border-border",
   };
 
   const sizes = {

@@ -26,7 +26,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={clsx(
           "rounded-2xl border border-border bg-surface-card text-foreground shadow-card transition-all duration-200",
-          glass && "backdrop-blur-md bg-surface-card/85 border-white/10",
+          glass && "backdrop-blur-md bg-surface-card/85 border-border-bright",
           interactive && "job-card-interactive cursor-pointer",
           ai && "ai-card-glow",
           stat && "stat-card-hover",
@@ -83,7 +83,7 @@ export const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={clsx("flex items-center p-6 pt-0 border-t border-border/50 mt-4", className)}
+    className={clsx("flex items-center p-6 pt-0 border-t border-border mt-4", className)}
     {...props}
   />
 ));

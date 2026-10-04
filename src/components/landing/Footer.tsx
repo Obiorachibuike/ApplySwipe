@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles, Shield, Heart, Github, Twitter, Linkedin } from "lucide-react";
+import { Sparkles, Shield } from "lucide-react";
 
 export function Footer() {
   return (
@@ -10,17 +10,17 @@ export function Footer() {
           {/* Brand Col */}
           <div className="col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2.5 group inline-flex">
-              <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
+              <div className="h-8 w-8 rounded-xl brand-gradient-premium flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
                 <Sparkles className="h-4 w-4 text-white transition-transform group-hover:rotate-12" />
               </div>
-              <span className="text-lg font-bold text-white tracking-tight transition-colors group-hover:brightness-110">
-                Apply<span className="text-primary group-hover:text-indigo-400">Swipe</span>
+              <span className="text-lg font-bold text-foreground tracking-tight transition-colors group-hover:brightness-110">
+                Apply<span className="brand-gradient-text ml-0.5">Swipe</span>
               </span>
             </Link>
             <p className="text-xs text-muted max-w-sm leading-relaxed">
               The modern AI-powered job application engine. Swipe jobs, tailor resumes without hallucinations, and track every application with zero manual repetition.
             </p>
-            <div className="flex items-center gap-2 text-xs text-accent">
+            <div className="flex items-center gap-2 text-xs text-like font-medium">
               <Shield className="h-3.5 w-3.5" />
               <span>Grounded Fact Guarantee • Anti-hallucination Engine</span>
             </div>

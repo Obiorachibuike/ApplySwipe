@@ -128,7 +128,7 @@ export default function AutopilotPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-2">
             <Sliders className="h-6 w-6 text-primary" />
             <span>AI Autopilot Control Center</span>
           </h1>
@@ -172,7 +172,7 @@ export default function AutopilotPage() {
                 setting.isEnabled ? "bg-accent animate-pulse shadow-glow-accent" : "bg-muted"
               }`}
             />
-            <h3 className="text-sm font-bold text-white">
+            <h3 className="text-sm font-bold text-foreground">
               Status: {setting.isEnabled ? "AUTOPILOT ON" : "AUTOPILOT OFF"}
             </h3>
           </div>
@@ -222,7 +222,7 @@ export default function AutopilotPage() {
       {/* Autopilot Configuration Form */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="p-6 border-border bg-surface-card space-y-4">
-          <h3 className="text-sm font-bold text-white mb-2">Targeting & Matching Thresholds</h3>
+          <h3 className="text-sm font-bold text-foreground mb-2">Targeting & Matching Thresholds</h3>
 
           <div>
             <div className="flex items-center justify-between mb-1">
@@ -274,7 +274,7 @@ export default function AutopilotPage() {
         </Card>
 
         <Card className="p-6 border-border bg-surface-card space-y-4">
-          <h3 className="text-sm font-bold text-white mb-2">Execution Rules & Exclusions</h3>
+          <h3 className="text-sm font-bold text-foreground mb-2">Execution Rules & Exclusions</h3>
 
           <div>
             <label className="text-xs font-medium text-slate-300 block mb-1">
@@ -322,7 +322,7 @@ export default function AutopilotPage() {
       {runSummary && (
         <Card className="p-6 border-primary/40 bg-surface-card shadow-glow space-y-4 animate-in fade-in">
           <div className="flex items-center justify-between pb-3 border-b border-border">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-primary" />
               <span>Autopilot Run Results</span>
             </h3>
@@ -338,7 +338,7 @@ export default function AutopilotPage() {
                 className="p-3 rounded-lg bg-surface-elevated border border-border flex items-center justify-between text-xs"
               >
                 <div>
-                  <span className="font-bold text-white">{pj.jobTitle}</span>
+                  <span className="font-bold text-foreground">{pj.jobTitle}</span>
                   <span className="text-muted ml-2">@ {pj.company}</span>
                 </div>
                 <div className="flex items-center gap-3">

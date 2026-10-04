@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight, Menu, X, Shield, Zap } from "lucide-react";
+import { Sparkles, ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,18 +29,18 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border py-3 shadow-md"
+          ? "bg-background/85 backdrop-blur-md border-b border-border py-3 shadow-sm"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Logo: scale(1.05) on hover with subtle glow */}
+        {/* Logo: scale(1.05) on hover with subtle glow & Brand Gradient */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(99,102,241,0.45)]">
+          <div className="h-9 w-9 rounded-xl brand-gradient-premium flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(99,102,241,0.45)]">
             <Sparkles className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-12" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:brightness-110 flex items-center">
-            Apply<span className="text-primary transition-colors group-hover:text-indigo-400">Swipe</span>
+          <span className="text-xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:brightness-110 flex items-center">
+            Apply<span className="brand-gradient-text ml-0.5">Swipe</span>
           </span>
         </Link>
 
@@ -65,8 +66,10 @@ export function Header() {
           </Link>
         </nav>
 
-        {/* Action CTAs */}
+        {/* Action CTAs & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+
           {user ? (
             <Link href="/dashboard/discover">
               <Button size="sm" variant="primary" className="gap-2 shadow-glow">
@@ -92,12 +95,15 @@ export function Header() {
         </div>
 
         {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-muted hover:text-foreground hover:scale-105 active:scale-95 transition-all rounded-lg"
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-muted hover:text-foreground hover:scale-105 active:scale-95 transition-all rounded-lg"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}

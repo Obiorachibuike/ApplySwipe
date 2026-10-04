@@ -43,7 +43,7 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-2">
           <BarChart3 className="h-6 w-6 text-primary" />
           <span>Application Analytics</span>
         </h1>
@@ -52,14 +52,14 @@ export default function AnalyticsPage() {
         </p>
       </div>
 
-      {/* Top Metric Stat Cards (Rule 11) */}
+      {/* Top Metric Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Card stat className="p-5 border-border bg-surface-card group">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-muted uppercase">Jobs Viewed</span>
             <Eye className="h-4 w-4 text-primary transition-transform duration-200 group-hover:scale-110" />
           </div>
-          <div className="text-3xl font-extrabold text-white mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
+          <div className="text-3xl font-extrabold text-foreground mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
             {stats.jobsViewed}
           </div>
           <span className="text-[11px] text-muted mt-1 block">In discovery feed</span>
@@ -68,9 +68,9 @@ export default function AnalyticsPage() {
         <Card stat className="p-5 border-border bg-surface-card group">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-muted uppercase">Jobs Saved</span>
-            <Bookmark className="h-4 w-4 text-amber-400 transition-transform duration-200 group-hover:scale-110" />
+            <Bookmark className="h-4 w-4 text-amber-500 transition-transform duration-200 group-hover:scale-110" />
           </div>
-          <div className="text-3xl font-extrabold text-white mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
+          <div className="text-3xl font-extrabold text-foreground mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
             {stats.jobsSaved}
           </div>
           <span className="text-[11px] text-muted mt-1 block">Bookmarked roles</span>
@@ -79,9 +79,9 @@ export default function AnalyticsPage() {
         <Card stat className="p-5 border-border bg-surface-card group">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-muted uppercase">Applications</span>
-            <Send className="h-4 w-4 text-accent transition-transform duration-200 group-hover:scale-110" />
+            <Send className="h-4 w-4 text-like transition-transform duration-200 group-hover:scale-110" />
           </div>
-          <div className="text-3xl font-extrabold text-accent mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
+          <div className="text-3xl font-extrabold text-like mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
             {stats.totalApplications}
           </div>
           <span className="text-[11px] text-muted mt-1 block">{stats.submittedCount} officially submitted</span>
@@ -92,7 +92,7 @@ export default function AnalyticsPage() {
             <span className="text-xs font-semibold text-muted uppercase">Interview Rate</span>
             <Award className="h-4 w-4 text-secondary transition-transform duration-200 group-hover:scale-110" />
           </div>
-          <div className="text-3xl font-extrabold text-indigo-400 mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
+          <div className="text-3xl font-extrabold text-primary-light mt-2 transition-transform duration-200 group-hover:scale-[1.02]">
             {stats.interviewRate}%
           </div>
           <span className="text-[11px] text-muted mt-1 block">Verified recruiter responses</span>
@@ -102,20 +102,20 @@ export default function AnalyticsPage() {
       {/* Weekly & Monthly Volumes */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card interactive className="p-6 border-border bg-surface-card space-y-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
+          <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
             <Calendar className="h-4 w-4 text-primary" />
             <span>Volume Breakdown</span>
           </h3>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-surface-elevated border border-border hover:border-white/20 transition-all hover:-translate-y-0.5">
+            <div className="p-4 rounded-xl bg-surface-elevated border border-border hover:border-border-bright transition-all hover:-translate-y-0.5">
               <span className="text-xs text-muted block">Applications This Week</span>
               <span className="text-2xl font-extrabold text-foreground mt-1 block">
                 {stats.appsThisWeek}
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-elevated border border-border hover:border-white/20 transition-all hover:-translate-y-0.5">
+            <div className="p-4 rounded-xl bg-surface-elevated border border-border hover:border-border-bright transition-all hover:-translate-y-0.5">
               <span className="text-xs text-muted block">Applications This Month</span>
               <span className="text-2xl font-extrabold text-foreground mt-1 block">
                 {stats.appsThisMonth}
@@ -124,26 +124,26 @@ export default function AnalyticsPage() {
           </div>
 
           <div className="p-4 rounded-xl bg-surface-elevated border border-border text-xs space-y-2">
-            <span className="font-semibold text-slate-300 block">Response Metrics</span>
+            <span className="font-semibold text-foreground block">Response Metrics</span>
             <div className="flex justify-between text-muted">
               <span>Overall Employer Response Rate</span>
               <span className="font-bold text-foreground">{stats.responseRate}%</span>
             </div>
             <div className="flex justify-between text-muted">
               <span>Interviews Scheduled</span>
-              <span className="font-bold text-accent">{stats.interviewCount}</span>
+              <span className="font-bold text-like">{stats.interviewCount}</span>
             </div>
             <div className="flex justify-between text-muted">
               <span>Offers Extended</span>
-              <span className="font-bold text-indigo-300">{stats.offerCount || 0}</span>
+              <span className="font-bold text-primary">{stats.offerCount || 0}</span>
             </div>
           </div>
         </Card>
 
         {/* Top Matching Roles */}
         <Card interactive className="p-6 border-border bg-surface-card space-y-4">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <Target className="h-4 w-4 text-accent" />
+          <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+            <Target className="h-4 w-4 text-primary" />
             <span>Top Matching Roles</span>
           </h3>
 
@@ -151,9 +151,9 @@ export default function AnalyticsPage() {
             {stats.topMatchingRoles?.map((r: any, idx: number) => (
               <div
                 key={idx}
-                className="p-3 rounded-lg bg-surface-elevated border border-border flex items-center justify-between text-xs hover:border-white/20 transition-all"
+                className="p-3 rounded-lg bg-surface-elevated border border-border flex items-center justify-between text-xs hover:border-border-bright transition-all"
               >
-                <span className="font-semibold text-white">{r.role}</span>
+                <span className="font-semibold text-foreground">{r.role}</span>
                 <Badge variant="outline">{r.count} applications</Badge>
               </div>
             ))}
@@ -163,7 +163,7 @@ export default function AnalyticsPage() {
 
       {/* Top Skills Distribution */}
       <Card interactive className="p-6 border-border bg-surface-card space-y-4">
-        <h3 className="text-sm font-bold text-white flex items-center gap-2">
+        <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-primary" />
           <span>Core Profile Competencies</span>
         </h3>

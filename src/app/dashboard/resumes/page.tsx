@@ -121,7 +121,7 @@ export default function ResumesPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-2">
             <FileText className="h-6 w-6 text-primary" />
             <span>Resume Vault</span>
           </h1>
@@ -148,7 +148,7 @@ export default function ResumesPage() {
       ) : resumes.length === 0 ? (
         <Card className="p-12 text-center max-w-md mx-auto space-y-3 border-dashed">
           <FileText className="h-8 w-8 text-muted mx-auto" />
-          <h3 className="text-base font-bold text-white">No resumes created yet</h3>
+          <h3 className="text-base font-bold text-foreground">No resumes created yet</h3>
           <p className="text-xs text-muted">Create your master resume or variant.</p>
           <Button variant="primary" size="sm" onClick={() => setIsCreatingModal(true)}>
             Create Resume
@@ -185,7 +185,7 @@ export default function ResumesPage() {
                   )}
                 </div>
 
-                <h3 className="text-base font-bold text-white mb-1">{resume.name}</h3>
+                <h3 className="text-base font-bold text-foreground mb-1">{resume.name}</h3>
                 <p className="text-xs text-muted">
                   Updated {new Date(resume.updatedAt).toLocaleDateString()}
                 </p>

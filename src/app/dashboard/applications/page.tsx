@@ -71,7 +71,7 @@ export default function ApplicationsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-2">
             <FileCheck2 className="h-6 w-6 text-primary" />
             <span>Application Pipeline</span>
           </h1>
@@ -135,7 +135,7 @@ export default function ApplicationsPage() {
               className={`px-3 py-1.5 rounded-lg font-medium transition-all whitespace-nowrap ${
                 filterStatus === status
                   ? "bg-primary/20 text-primary border border-primary/30 shadow-sm"
-                  : "bg-surface-elevated text-muted hover:text-foreground hover:border-white/20 border border-border"
+                  : "bg-surface-elevated text-muted hover:text-foreground hover:border-border-bright border border-border"
               }`}
             >
               {status === "ALL" ? "All Applications" : status.replace(/_/g, " ")}
@@ -151,7 +151,7 @@ export default function ApplicationsPage() {
         </div>
       ) : applications.length === 0 ? (
         <Card className="p-12 text-center max-w-md mx-auto space-y-3">
-          <h3 className="text-base font-bold text-white">No applications yet</h3>
+          <h3 className="text-base font-bold text-foreground">No applications yet</h3>
           <p className="text-xs text-muted">
             Swipe right on matching jobs in Discover to generate tailored applications automatically.
           </p>
@@ -162,7 +162,7 @@ export default function ApplicationsPage() {
           </Link>
         </Card>
       ) : viewMode === "kanban" ? (
-        /* KANBAN BOARD (Rule 23) */
+        /* KANBAN BOARD */
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-start">
           {kanbanColumns.map((col) => {
             const colApps = filteredApps.filter((a) => {
@@ -194,8 +194,8 @@ export default function ApplicationsPage() {
                 <div className="space-y-3 flex-1 overflow-y-auto">
                   {colApps.map((app) => (
                     <Link key={app.id} href={`/dashboard/applications/${app.id}`}>
-                      <Card className="p-3.5 border-white/10 bg-surface-card hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] cursor-pointer shadow-sm group relative">
-                        {/* Drag Handle Indicator appears on hover */}
+                      <Card interactive className="p-3.5 cursor-pointer shadow-card group relative">
+                        {/* Drag Handle Indicator */}
                         <div className="absolute top-2.5 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-muted hover:text-foreground">
                           <GripVertical className="h-4 w-4" />
                         </div>
@@ -205,12 +205,12 @@ export default function ApplicationsPage() {
                             {app.job?.company}
                           </span>
                           {app.matchScore && (
-                            <span className="text-[10px] font-bold text-accent">
+                            <span className="text-[10px] font-bold text-like">
                               {app.matchScore}%
                             </span>
                           )}
                         </div>
-                        <h4 className="text-xs font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                        <h4 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
                           {app.job?.title}
                         </h4>
 
@@ -220,7 +220,7 @@ export default function ApplicationsPage() {
                           </p>
                         )}
 
-                        <div className="pt-3 mt-3 border-t border-border/50 flex items-center justify-between text-[10px] text-muted">
+                        <div className="pt-3 mt-3 border-t border-border flex items-center justify-between text-[10px] text-muted">
                           <span>{new Date(app.updatedAt).toLocaleDateString()}</span>
                           <span className="text-primary font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                             <span>Review</span>
@@ -232,7 +232,7 @@ export default function ApplicationsPage() {
                   ))}
 
                   {colApps.length === 0 && (
-                    <div className="text-center py-10 text-[11px] text-muted border border-dashed border-border/60 rounded-xl">
+                    <div className="text-center py-10 text-[11px] text-muted border border-dashed border-border rounded-xl">
                       Empty
                     </div>
                   )}
@@ -242,7 +242,7 @@ export default function ApplicationsPage() {
           })}
         </div>
       ) : (
-        /* LIST VIEW (Rule 14 & 15) */
+        /* LIST VIEW */
         <Card className="border-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
@@ -256,18 +256,18 @@ export default function ApplicationsPage() {
                   <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/50">
+              <tbody className="divide-y divide-border">
                 {filteredApps.map((app) => (
                   <tr
                     key={app.id}
-                    className="table-row-interactive group hover:bg-white/[0.04] transition-colors"
+                    className="table-row-hover group transition-colors"
                   >
-                    <td className="p-4 font-semibold text-white">
+                    <td className="p-4 font-semibold text-foreground">
                       <div className="group-hover:text-primary transition-colors">{app.job?.title}</div>
                       <div className="text-muted text-[11px] font-normal">{app.job?.company}</div>
                     </td>
                     <td className="p-4">
-                      <span className="font-bold text-accent">{app.matchScore || 85}%</span>
+                      <span className="font-bold text-like">{app.matchScore || 85}%</span>
                     </td>
                     <td className="p-4">
                       <Badge

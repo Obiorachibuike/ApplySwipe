@@ -110,7 +110,7 @@ export default function AdminDashboardPage() {
             <div className="h-8 w-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/30">
               <Shield className="h-4 w-4" />
             </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">ApplySwipe Administration</h1>
+            <h1 className="text-2xl font-bold text-foreground tracking-tight">ApplySwipe Administration</h1>
           </div>
           <p className="text-xs text-muted">
             Global system telemetry, job sources, moderation, and AI token consumption.
@@ -210,7 +210,7 @@ export default function AdminDashboardPage() {
       {activeTab === "overview" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="p-6 border-border bg-surface-card space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Activity className="h-4 w-4 text-primary" />
               <span>Core Service Status</span>
             </h3>
@@ -244,7 +244,7 @@ export default function AdminDashboardPage() {
 
           {/* AI Usage Telemetry (Rule 27) */}
           <Card className="p-6 border-border bg-surface-card space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Cpu className="h-4 w-4 text-secondary" />
               <span>AI Token & Cost Telemetry</span>
             </h3>
@@ -252,7 +252,7 @@ export default function AdminDashboardPage() {
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-lg bg-surface-elevated border border-border">
                 <span className="text-muted block text-[10px]">TOTAL TOKENS</span>
-                <span className="text-lg font-bold text-white">
+                <span className="text-lg font-bold text-foreground">
                   {stats?.ai?.totalTokens?.toLocaleString() || 0}
                 </span>
               </div>
@@ -323,7 +323,7 @@ export default function AdminDashboardPage() {
           {sources.map((source) => (
             <Card key={source.id} className="p-5 border-border bg-surface-card space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-white">{source.name}</span>
+                <span className="text-xs font-bold text-foreground">{source.name}</span>
                 <Badge variant="accent">Connected</Badge>
               </div>
               <p className="text-xs text-muted">Type: {source.type}</p>

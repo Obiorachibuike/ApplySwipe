@@ -32,7 +32,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-2">
           <Sliders className="h-6 w-6 text-primary" />
           <span>Account & Privacy Settings</span>
         </h1>
@@ -45,7 +45,7 @@ export default function SettingsPage() {
       <Card className="p-6 border-border bg-surface-card space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-border">
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Cpu className="h-4 w-4 text-primary" />
               <span>AI Provider & Model Abstraction</span>
             </h3>
@@ -115,7 +115,7 @@ export default function SettingsPage() {
 
       {/* Notifications Configuration (Rule 21) */}
       <Card className="p-6 border-border bg-surface-card space-y-4">
-        <h3 className="text-sm font-bold text-white mb-2">Notification Preferences</h3>
+        <h3 className="text-sm font-bold text-foreground mb-2">Notification Preferences</h3>
 
         <div className="space-y-3">
           <label className="flex items-center justify-between p-3 rounded-lg bg-surface-elevated border border-border cursor-pointer">
@@ -154,7 +154,7 @@ export default function SettingsPage() {
       <Card className="p-6 border-border bg-surface-card space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-border">
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
               <Shield className="h-4 w-4 text-accent" />
               <span>Privacy & Data Sovereignty</span>
             </h3>
