@@ -163,7 +163,7 @@ export default function LandingPage() {
                 The ApplySwipe Flow
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 items-center text-xs">
-                <div className="flex flex-col items-center p-3 rounded-xl bg-surface-elevated border border-border">
+                <div className="flex flex-col items-center p-3 rounded-xl bg-surface-elevated border border-border hover:border-white/20 transition-all hover:-translate-y-0.5">
                   <div className="h-8 w-8 rounded-lg bg-primary/20 text-primary flex items-center justify-center mb-2">
                     <FileText className="h-4 w-4" />
                   </div>
@@ -175,7 +175,7 @@ export default function LandingPage() {
                   <ArrowRight className="h-4 w-4" />
                 </div>
 
-                <div className="flex flex-col items-center p-3 rounded-xl bg-surface-elevated border border-border">
+                <div className="flex flex-col items-center p-3 rounded-xl bg-surface-elevated border border-border hover:border-white/20 transition-all hover:-translate-y-0.5">
                   <div className="h-8 w-8 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center mb-2">
                     <Target className="h-4 w-4" />
                   </div>
@@ -187,7 +187,7 @@ export default function LandingPage() {
                   <ArrowRight className="h-4 w-4" />
                 </div>
 
-                <div className="flex flex-col items-center p-3 rounded-xl bg-surface-elevated border border-border">
+                <div className="flex flex-col items-center p-3 rounded-xl bg-surface-elevated border border-border hover:border-white/20 transition-all hover:-translate-y-0.5">
                   <div className="h-8 w-8 rounded-lg bg-accent/20 text-accent flex items-center justify-center mb-2">
                     <Zap className="h-4 w-4" />
                   </div>
@@ -232,7 +232,7 @@ export default function LandingPage() {
                   transition={{ duration: 0.3 }}
                   className="w-full"
                 >
-                  <Card className="p-6 border-white/15 bg-surface-card shadow-2xl relative overflow-hidden">
+                  <Card ai className="p-6 border-white/15 bg-surface-card shadow-2xl relative overflow-hidden">
                     <div className="flex items-start justify-between gap-4 mb-4">
                       <div>
                         <div className="flex items-center gap-2">
@@ -283,10 +283,10 @@ export default function LandingPage() {
 
                     <div className="grid grid-cols-3 gap-2 mt-6 pt-4 border-t border-border/50">
                       <Button
-                        variant="outline"
+                        variant="pass"
                         size="md"
                         onClick={() => handleDemoSwipe("pass")}
-                        className="border-red-500/30 text-red-400 hover:bg-red-500/10 gap-1"
+                        className="gap-1"
                       >
                         <XCircle className="h-4 w-4" />
                         <span>Pass</span>
@@ -296,14 +296,14 @@ export default function LandingPage() {
                         variant="secondary"
                         size="md"
                         onClick={() => handleDemoSwipe("save")}
-                        className="gap-1"
+                        className="gap-1 group"
                       >
-                        <Bookmark className="h-4 w-4 text-amber-400" />
+                        <Bookmark className="h-4 w-4 text-amber-400 transition-transform group-hover:scale-110" />
                         <span>Save</span>
                       </Button>
 
                       <Button
-                        variant="primary"
+                        variant="apply"
                         size="md"
                         onClick={() => handleDemoSwipe("apply")}
                         className="gap-1 shadow-glow"
@@ -340,7 +340,7 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-8 border-white/10 bg-surface-card hover:border-primary/40 transition-colors">
+            <Card interactive className="p-8 border-white/10 bg-surface-card">
               <div className="h-12 w-12 rounded-xl bg-primary/15 text-primary flex items-center justify-center font-bold text-lg mb-6 border border-primary/25">
                 01
               </div>
@@ -350,7 +350,7 @@ export default function LandingPage() {
               </p>
             </Card>
 
-            <Card className="p-8 border-white/10 bg-surface-card hover:border-secondary/40 transition-colors">
+            <Card interactive className="p-8 border-white/10 bg-surface-card">
               <div className="h-12 w-12 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center font-bold text-lg mb-6 border border-secondary/25">
                 02
               </div>
@@ -360,7 +360,7 @@ export default function LandingPage() {
               </p>
             </Card>
 
-            <Card className="p-8 border-white/10 bg-surface-card hover:border-accent/40 transition-colors">
+            <Card interactive className="p-8 border-white/10 bg-surface-card">
               <div className="h-12 w-12 rounded-xl bg-accent/15 text-accent flex items-center justify-center font-bold text-lg mb-6 border border-accent/25">
                 03
               </div>
@@ -390,7 +390,7 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {/* Master Resume */}
-            <Card className="p-6 border-white/10 bg-surface-card flex flex-col justify-between">
+            <Card interactive className="p-6 border-white/10 bg-surface-card flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-border mb-4">
                   <div>
@@ -417,7 +417,7 @@ export default function LandingPage() {
             </Card>
 
             {/* Tailored Resume */}
-            <Card className="p-6 border-primary/30 bg-surface-card shadow-glow flex flex-col justify-between relative overflow-hidden">
+            <Card ai className="p-6 border-primary/30 bg-surface-card shadow-glow flex flex-col justify-between relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-2xl rounded-full pointer-events-none" />
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-border mb-4">
@@ -470,7 +470,7 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-xl border border-border bg-surface-card">
+            <div className="p-4 rounded-xl border border-border bg-surface-card hover:border-white/20 transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-muted uppercase">Ready for Review</span>
                 <span className="text-xs font-mono bg-white/10 px-2 py-0.5 rounded text-foreground">1</span>
@@ -482,7 +482,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl border border-border bg-surface-card">
+            <div className="p-4 rounded-xl border border-border bg-surface-card hover:border-white/20 transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-muted uppercase">Submitted</span>
                 <span className="text-xs font-mono bg-white/10 px-2 py-0.5 rounded text-foreground">1</span>
@@ -494,19 +494,19 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl border border-border bg-surface-card">
+            <div className="p-4 rounded-xl border border-accent/30 bg-surface-card shadow-glow-accent hover:border-accent transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-accent uppercase">Interview Scheduled</span>
                 <span className="text-xs font-mono bg-accent/20 text-accent px-2 py-0.5 rounded">1</span>
               </div>
-              <div className="p-3 rounded-lg bg-accent/10 border border-accent/30 space-y-1 shadow-glow-accent">
+              <div className="p-3 rounded-lg bg-accent/10 border border-accent/30 space-y-1">
                 <div className="text-xs font-semibold text-white">Linear</div>
                 <div className="text-[11px] text-slate-300">Senior Full Stack</div>
                 <div className="text-[10px] text-emerald-400 font-mono">Tech Screen: Tue 2 PM</div>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl border border-border bg-surface-card">
+            <div className="p-4 rounded-xl border border-border bg-surface-card hover:border-white/20 transition-all hover:-translate-y-0.5">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-bold text-muted uppercase">Saved</span>
                 <span className="text-xs font-mono bg-white/10 px-2 py-0.5 rounded text-foreground">2</span>
@@ -555,7 +555,7 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            <Card className="p-6 border-white/15 bg-surface-card shadow-2xl">
+            <Card ai className="p-6 border-white/15 bg-surface-card shadow-2xl">
               <div className="flex items-center justify-between pb-4 border-b border-border">
                 <div className="flex items-center gap-2">
                   <div className="h-3 w-3 rounded-full bg-accent animate-pulse" />
@@ -616,7 +616,7 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
             {/* Free */}
-            <Card className="p-8 border-white/10 bg-surface-card flex flex-col justify-between">
+            <Card interactive className="p-8 border-white/10 bg-surface-card flex flex-col justify-between">
               <div>
                 <h3 className="text-xl font-bold text-white">Starter</h3>
                 <p className="text-xs text-muted mt-1">For exploratory job seekers</p>
@@ -647,7 +647,7 @@ export default function LandingPage() {
             </Card>
 
             {/* Pro */}
-            <Card className="p-8 border-primary/50 bg-surface-card shadow-glow relative flex flex-col justify-between">
+            <Card ai className="p-8 border-primary/50 bg-surface-card shadow-glow relative flex flex-col justify-between">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary text-[10px] font-bold text-white uppercase tracking-wider">
                 Most Popular
               </div>
@@ -689,7 +689,7 @@ export default function LandingPage() {
             </Card>
 
             {/* Enterprise */}
-            <Card className="p-8 border-white/10 bg-surface-card flex flex-col justify-between">
+            <Card interactive className="p-8 border-white/10 bg-surface-card flex flex-col justify-between">
               <div>
                 <h3 className="text-xl font-bold text-white">Executive</h3>
                 <p className="text-xs text-muted mt-1">For high-tier leadership & bespoke search</p>
@@ -742,7 +742,7 @@ export default function LandingPage() {
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-border bg-surface-card overflow-hidden transition-colors"
+                className="rounded-xl border border-border bg-surface-card overflow-hidden hover:border-white/20 transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
@@ -756,7 +756,7 @@ export default function LandingPage() {
                   />
                 </button>
                 {openFaq === idx && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-muted leading-relaxed border-t border-border/40 pt-4">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-muted leading-relaxed border-t border-border/40 pt-4 animate-in fade-in">
                     {faq.a}
                   </div>
                 )}

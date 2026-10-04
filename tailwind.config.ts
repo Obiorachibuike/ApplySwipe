@@ -9,6 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      transitionTimingFunction: {
+        applyswipe: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
+      transitionDuration: {
+        "180": "180ms",
+      },
       colors: {
         background: "#05070D",
         surface: {

@@ -14,13 +14,10 @@ import {
   Bell,
   LogOut,
   Shield,
-  Bookmark,
-  CheckCircle2,
   X,
   ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 export default function DashboardLayout({
   children,
@@ -35,7 +32,6 @@ export default function DashboardLayout({
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
-    // Fetch current user
     fetch("/api/auth/me")
       .then((res) => res.json())
       .then((data) => {
@@ -47,7 +43,6 @@ export default function DashboardLayout({
       })
       .catch(() => router.push("/login"));
 
-    // Fetch notifications
     loadNotifications();
   }, [router]);
 
@@ -92,20 +87,20 @@ export default function DashboardLayout({
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 border-r border-border bg-surface shrink-0 p-4 justify-between h-screen sticky top-0">
         <div className="space-y-6">
-          {/* Brand */}
+          {/* Brand: scale(1.05) on hover with subtle glow */}
           <Link href="/dashboard/discover" className="flex items-center gap-2.5 px-2 group">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-transform group-hover:scale-105">
-              <Sparkles className="h-5 w-5 text-white" />
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
+              <Sparkles className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-12" />
             </div>
             <div>
-              <span className="text-lg font-bold tracking-tight text-white block leading-none">
-                Apply<span className="text-primary">Swipe</span>
+              <span className="text-lg font-bold tracking-tight text-white block leading-none transition-colors group-hover:brightness-110">
+                Apply<span className="text-primary group-hover:text-indigo-400">Swipe</span>
               </span>
               <span className="text-[10px] text-muted block mt-0.5">AI Application Suite</span>
             </div>
           </Link>
 
-          {/* Navigation Links */}
+          {/* Navigation Links: nav-item-interactive with subtle translateX(2px) */}
           <nav className="space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -114,13 +109,17 @@ export default function DashboardLayout({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  className={`nav-item-interactive flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${
                     isActive
-                      ? "bg-primary/15 text-primary border border-primary/20 font-semibold shadow-sm"
-                      : "text-muted hover:text-foreground hover:bg-white/5"
+                      ? "bg-[#6366F1]/15 text-[#818CF8] border border-[#6366F1]/25 font-semibold shadow-sm"
+                      : "text-muted hover:text-foreground"
                   }`}
                 >
-                  <Icon className={`h-4 w-4 ${isActive ? "text-primary" : "text-muted"}`} />
+                  <Icon
+                    className={`h-4 w-4 transition-colors ${
+                      isActive ? "text-[#818CF8]" : "text-muted group-hover:text-foreground"
+                    }`}
+                  />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -133,7 +132,7 @@ export default function DashboardLayout({
           {user?.role === "ADMIN" && (
             <Link
               href="/admin"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:-translate-y-[1px] transition-all"
             >
               <Shield className="h-3.5 w-3.5" />
               <span>Admin Console</span>
@@ -142,7 +141,7 @@ export default function DashboardLayout({
 
           <div className="flex items-center justify-between p-2 rounded-xl bg-surface-elevated border border-border">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-xs font-bold text-white shrink-0">
+              <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-xs font-bold text-white shrink-0 shadow-sm">
                 {user?.name?.[0]?.toUpperCase() || "A"}
               </div>
               <div className="min-w-0">
@@ -154,7 +153,7 @@ export default function DashboardLayout({
             <button
               onClick={handleLogout}
               title="Log out"
-              className="text-muted hover:text-danger p-1 rounded transition-colors"
+              className="text-muted hover:text-danger hover:scale-110 active:scale-95 p-1.5 rounded-lg transition-transform"
             >
               <LogOut className="h-4 w-4" />
             </button>
@@ -179,11 +178,11 @@ export default function DashboardLayout({
             </span>
           </div>
 
-          {/* Right actions: notifications */}
+          {/* Right actions: notifications with scale icon hover */}
           <div className="flex items-center gap-3 relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 rounded-lg text-muted hover:text-foreground hover:bg-white/5 transition-colors"
+              className="relative p-2 rounded-xl text-muted hover:text-foreground hover:bg-white/5 hover:scale-105 active:scale-95 transition-all"
             >
               <Bell className="h-5 w-5" />
               {unreadCount > 0 && (
@@ -211,7 +210,7 @@ export default function DashboardLayout({
                     )}
                     <button
                       onClick={() => setShowNotifications(false)}
-                      className="text-muted hover:text-white"
+                      className="text-muted hover:text-white hover:scale-110 active:scale-95 p-1 transition-transform"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -227,7 +226,7 @@ export default function DashboardLayout({
                     notifications.map((notif: any) => (
                       <div
                         key={notif.id}
-                        className={`p-3 space-y-1 text-xs hover:bg-white/5 rounded-lg transition-colors ${
+                        className={`p-3 space-y-1 text-xs hover:bg-white/5 rounded-xl transition-colors ${
                           !notif.isRead ? "bg-primary/5" : ""
                         }`}
                       >
@@ -267,7 +266,7 @@ export default function DashboardLayout({
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-border flex items-center justify-around py-2 px-1">
         <Link
           href="/dashboard/discover"
-          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium transition-colors ${
+          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium active:scale-95 transition-all ${
             pathname === "/dashboard/discover" ? "text-primary font-bold" : "text-muted"
           }`}
         >
@@ -277,7 +276,7 @@ export default function DashboardLayout({
 
         <Link
           href="/dashboard/applications"
-          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium transition-colors ${
+          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium active:scale-95 transition-all ${
             pathname === "/dashboard/applications" ? "text-primary font-bold" : "text-muted"
           }`}
         >
@@ -287,7 +286,7 @@ export default function DashboardLayout({
 
         <Link
           href="/dashboard/autopilot"
-          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium transition-colors ${
+          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium active:scale-95 transition-all ${
             pathname === "/dashboard/autopilot" ? "text-primary font-bold" : "text-muted"
           }`}
         >
@@ -297,7 +296,7 @@ export default function DashboardLayout({
 
         <Link
           href="/dashboard/profile"
-          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium transition-colors ${
+          className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium active:scale-95 transition-all ${
             pathname === "/dashboard/profile" ? "text-primary font-bold" : "text-muted"
           }`}
         >

@@ -3,16 +3,33 @@ import clsx from "clsx";
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   glass?: boolean;
+  interactive?: boolean;
+  ai?: boolean;
+  stat?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, glass = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      glass = false,
+      interactive = false,
+      ai = false,
+      stat = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <div
         ref={ref}
         className={clsx(
-          "rounded-xl border border-border bg-surface text-foreground shadow-card transition-all duration-200",
-          glass && "backdrop-blur-md bg-surface/80 border-white/10",
+          "rounded-2xl border border-border bg-surface-card text-foreground shadow-card transition-all duration-200",
+          glass && "backdrop-blur-md bg-surface-card/85 border-white/10",
+          interactive && "job-card-interactive cursor-pointer",
+          ai && "ai-card-glow",
+          stat && "stat-card-hover",
           className
         )}
         {...props}

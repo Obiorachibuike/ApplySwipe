@@ -4,13 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 -H 0.0.0.0",
-    "build": "PRISMA_QUERY_ENGINE_LIBRARY=/tmp/dummy-engine PRISMA_SCHEMA_ENGINE_BINARY=/tmp/dummy-engine prisma generate && next build",
+    "build": "next build",
     "start": "next start -p 3000 -H 0.0.0.0",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "prisma:generate": "PRISMA_QUERY_ENGINE_LIBRARY=/tmp/dummy-engine PRISMA_SCHEMA_ENGINE_BINARY=/tmp/dummy-engine prisma generate",
-    "prisma:push": "prisma db push",
     "prisma:seed": "node prisma/seed.js",
     "seed": "node prisma/seed.js"
   },

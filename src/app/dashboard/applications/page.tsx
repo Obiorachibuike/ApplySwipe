@@ -14,6 +14,8 @@ import {
   Clock,
   ArrowRight,
   Plus,
+  GripVertical,
+  Eye,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -130,10 +132,10 @@ export default function ApplicationsPage() {
             <button
               key={status}
               onClick={() => setFilterStatus(status)}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-lg font-medium transition-all whitespace-nowrap ${
                 filterStatus === status
-                  ? "bg-primary/20 text-primary border border-primary/30"
-                  : "bg-surface-elevated text-muted hover:text-foreground border border-border"
+                  ? "bg-primary/20 text-primary border border-primary/30 shadow-sm"
+                  : "bg-surface-elevated text-muted hover:text-foreground hover:border-white/20 border border-border"
               }`}
             >
               {status === "ALL" ? "All Applications" : status.replace(/_/g, " ")}
@@ -160,7 +162,7 @@ export default function ApplicationsPage() {
           </Link>
         </Card>
       ) : viewMode === "kanban" ? (
-        /* KANBAN BOARD */
+        /* KANBAN BOARD (Rule 23) */
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-start">
           {kanbanColumns.map((col) => {
             const colApps = filteredApps.filter((a) => {
@@ -192,8 +194,13 @@ export default function ApplicationsPage() {
                 <div className="space-y-3 flex-1 overflow-y-auto">
                   {colApps.map((app) => (
                     <Link key={app.id} href={`/dashboard/applications/${app.id}`}>
-                      <Card className="p-3.5 border-white/10 bg-surface-card hover:border-primary/50 transition-all hover:-translate-y-0.5 cursor-pointer shadow-sm group">
-                        <div className="flex items-start justify-between gap-2 mb-1.5">
+                      <Card className="p-3.5 border-white/10 bg-surface-card hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] cursor-pointer shadow-sm group relative">
+                        {/* Drag Handle Indicator appears on hover */}
+                        <div className="absolute top-2.5 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-muted hover:text-foreground">
+                          <GripVertical className="h-4 w-4" />
+                        </div>
+
+                        <div className="flex items-start justify-between gap-2 mb-1.5 pr-5">
                           <span className="text-[11px] font-bold text-muted uppercase tracking-wider">
                             {app.job?.company}
                           </span>
@@ -215,7 +222,7 @@ export default function ApplicationsPage() {
 
                         <div className="pt-3 mt-3 border-t border-border/50 flex items-center justify-between text-[10px] text-muted">
                           <span>{new Date(app.updatedAt).toLocaleDateString()}</span>
-                          <span className="text-primary font-semibold flex items-center gap-1">
+                          <span className="text-primary font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                             <span>Review</span>
                             <ArrowRight className="h-3 w-3" />
                           </span>
@@ -235,7 +242,7 @@ export default function ApplicationsPage() {
           })}
         </div>
       ) : (
-        /* LIST VIEW */
+        /* LIST VIEW (Rule 14 & 15) */
         <Card className="border-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
@@ -251,16 +258,31 @@ export default function ApplicationsPage() {
               </thead>
               <tbody className="divide-y divide-border/50">
                 {filteredApps.map((app) => (
-                  <tr key={app.id} className="hover:bg-white/5 transition-colors">
+                  <tr
+                    key={app.id}
+                    className="table-row-interactive group hover:bg-white/[0.04] transition-colors"
+                  >
                     <td className="p-4 font-semibold text-white">
-                      <div>{app.job?.title}</div>
+                      <div className="group-hover:text-primary transition-colors">{app.job?.title}</div>
                       <div className="text-muted text-[11px] font-normal">{app.job?.company}</div>
                     </td>
                     <td className="p-4">
                       <span className="font-bold text-accent">{app.matchScore || 85}%</span>
                     </td>
                     <td className="p-4">
-                      <Badge variant="outline">{app.status.replace(/_/g, " ")}</Badge>
+                      <Badge
+                        variant={
+                          app.status === "SUBMITTED"
+                            ? "primary"
+                            : app.status === "INTERVIEW" || app.status === "OFFER"
+                            ? "accent"
+                            : app.status === "READY_FOR_REVIEW" || app.status === "PREPARING"
+                            ? "warning"
+                            : "outline"
+                        }
+                      >
+                        {app.status.replace(/_/g, " ")}
+                      </Badge>
                     </td>
                     <td className="p-4 text-muted">
                       {app.mode.replace(/_/g, " ")}
@@ -270,8 +292,13 @@ export default function ApplicationsPage() {
                     </td>
                     <td className="p-4 text-right">
                       <Link href={`/dashboard/applications/${app.id}`}>
-                        <Button variant="ghost" size="sm">
-                          View Details
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="opacity-80 group-hover:opacity-100 group-hover:bg-primary/10 group-hover:text-primary transition-all gap-1"
+                        >
+                          <Eye className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
+                          <span>View Details</span>
                         </Button>
                       </Link>
                     </td>

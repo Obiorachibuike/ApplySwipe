@@ -9,12 +9,12 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           {/* Brand Col */}
           <div className="col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow">
-                <Sparkles className="h-4 w-4 text-white" />
+            <Link href="/" className="flex items-center gap-2.5 group inline-flex">
+              <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]">
+                <Sparkles className="h-4 w-4 text-white transition-transform group-hover:rotate-12" />
               </div>
-              <span className="text-lg font-bold text-white tracking-tight">
-                Apply<span className="text-primary">Swipe</span>
+              <span className="text-lg font-bold text-white tracking-tight transition-colors group-hover:brightness-110">
+                Apply<span className="text-primary group-hover:text-indigo-400">Swipe</span>
               </span>
             </Link>
             <p className="text-xs text-muted max-w-sm leading-relaxed">
@@ -30,11 +30,11 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">Product</h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/dashboard/discover" className="hover:text-foreground transition-colors">Swipe Discover</Link></li>
-              <li><Link href="#matching" className="hover:text-foreground transition-colors">AI Job Matching</Link></li>
-              <li><Link href="#tailoring" className="hover:text-foreground transition-colors">Resume Tailoring</Link></li>
-              <li><Link href="/dashboard/applications" className="hover:text-foreground transition-colors">Application Tracker</Link></li>
-              <li><Link href="/dashboard/autopilot" className="hover:text-foreground transition-colors">Autopilot Engine</Link></li>
+              <li><Link href="/dashboard/discover" className="link-animated-underline">Swipe Discover</Link></li>
+              <li><Link href="#matching" className="link-animated-underline">AI Job Matching</Link></li>
+              <li><Link href="#tailoring" className="link-animated-underline">Resume Tailoring</Link></li>
+              <li><Link href="/dashboard/applications" className="link-animated-underline">Application Tracker</Link></li>
+              <li><Link href="/dashboard/autopilot" className="link-animated-underline">Autopilot Engine</Link></li>
             </ul>
           </div>
 
@@ -42,11 +42,11 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">Resources</h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="#how-it-works" className="hover:text-foreground transition-colors">How It Works</Link></li>
-              <li><Link href="#pricing" className="hover:text-foreground transition-colors">Pricing</Link></li>
-              <li><Link href="#faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
-              <li><Link href="/login" className="hover:text-foreground transition-colors">Candidate Sign In</Link></li>
-              <li><Link href="/admin" className="hover:text-foreground transition-colors">Admin Console</Link></li>
+              <li><Link href="#how-it-works" className="link-animated-underline">How It Works</Link></li>
+              <li><Link href="#pricing" className="link-animated-underline">Pricing</Link></li>
+              <li><Link href="#faq" className="link-animated-underline">FAQ</Link></li>
+              <li><Link href="/login" className="link-animated-underline">Candidate Sign In</Link></li>
+              <li><Link href="/admin" className="link-animated-underline">Admin Console</Link></li>
             </ul>
           </div>
 
@@ -54,20 +54,22 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">Privacy & Trust</h4>
             <ul className="space-y-2 text-xs">
-              <li><span className="hover:text-foreground cursor-pointer">Strict Data Privacy</span></li>
-              <li><span className="hover:text-foreground cursor-pointer">No AI Model Training</span></li>
-              <li><span className="hover:text-foreground cursor-pointer">ATS Compliance</span></li>
-              <li><span className="hover:text-foreground cursor-pointer">Terms of Service</span></li>
+              <li><span className="hover:text-foreground cursor-pointer transition-colors">Strict Data Privacy</span></li>
+              <li><span className="hover:text-foreground cursor-pointer transition-colors">No AI Model Training</span></li>
+              <li><span className="hover:text-foreground cursor-pointer transition-colors">ATS Compliance</span></li>
+              <li><span className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</span></li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p>© {new Date().getFullYear()} ApplySwipe Inc. All rights reserved.</p>
+        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <p>© 2026 ApplySwipe. All rights reserved. Zero hallucinations policy enforced.</p>
           <div className="flex items-center gap-4 text-muted">
-            <span className="flex items-center gap-1">
-              Crafted for modern engineers & job seekers
-            </span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">Security</span>
+            <span>•</span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">Terms</span>
+            <span>•</span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">Privacy</span>
           </div>
         </div>
       </div>

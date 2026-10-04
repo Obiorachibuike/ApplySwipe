@@ -159,7 +159,9 @@ export default function ResumesPage() {
           {resumes.map((resume) => (
             <Card
               key={resume.id}
-              className={`p-6 border-white/10 bg-surface-card flex flex-col justify-between hover:border-primary/40 transition-all ${
+              interactive
+              ai={resume.isDefault}
+              className={`p-6 border-white/10 bg-surface-card flex flex-col justify-between ${
                 resume.isDefault ? "border-primary/40 shadow-glow" : ""
               }`}
             >
@@ -176,7 +178,7 @@ export default function ResumesPage() {
                   ) : (
                     <button
                       onClick={() => handleSetDefault(resume.id)}
-                      className="text-[11px] text-muted hover:text-white"
+                      className="text-[11px] text-muted hover:text-white hover:underline transition-colors"
                     >
                       Make Default
                     </button>

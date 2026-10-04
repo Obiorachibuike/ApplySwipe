@@ -16,7 +16,6 @@ export function Header() {
     };
     window.addEventListener("scroll", handleScroll);
 
-    // Check login state
     fetch("/api/auth/me")
       .then((res) => res.json())
       .then((data) => setUser(data.user))
@@ -29,39 +28,39 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border py-3"
+          ? "bg-background/85 backdrop-blur-md border-b border-border py-3 shadow-md"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo: scale(1.05) on hover with subtle glow */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-transform duration-300 group-hover:scale-105">
-            <Sparkles className="h-5 w-5 text-white" />
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-glow transition-all duration-200 group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(99,102,241,0.45)]">
+            <Sparkles className="h-5 w-5 text-white transition-transform duration-200 group-hover:rotate-12" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-white flex items-center">
-            Apply<span className="text-primary">Swipe</span>
+          <span className="text-xl font-bold tracking-tight text-white transition-colors duration-200 group-hover:brightness-110 flex items-center">
+            Apply<span className="text-primary transition-colors group-hover:text-indigo-400">Swipe</span>
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
-          <Link href="#how-it-works" className="hover:text-foreground transition-colors">
+        {/* Desktop Navigation Links with subtle animated underline */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <Link href="#how-it-works" className="link-animated-underline">
             How It Works
           </Link>
-          <Link href="#matching" className="hover:text-foreground transition-colors">
+          <Link href="#matching" className="link-animated-underline">
             AI Matching
           </Link>
-          <Link href="#tailoring" className="hover:text-foreground transition-colors">
+          <Link href="#tailoring" className="link-animated-underline">
             Resume Tailoring
           </Link>
-          <Link href="#autopilot" className="hover:text-foreground transition-colors">
+          <Link href="#autopilot" className="link-animated-underline">
             Autopilot
           </Link>
-          <Link href="#pricing" className="hover:text-foreground transition-colors">
+          <Link href="#pricing" className="link-animated-underline">
             Pricing
           </Link>
-          <Link href="#faq" className="hover:text-foreground transition-colors">
+          <Link href="#faq" className="link-animated-underline">
             FAQ
           </Link>
         </nav>
@@ -70,7 +69,7 @@ export function Header() {
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <Link href="/dashboard/discover">
-              <Button size="sm" variant="primary" className="gap-2">
+              <Button size="sm" variant="primary" className="gap-2 shadow-glow">
                 <span>Dashboard</span>
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -83,7 +82,7 @@ export function Header() {
                 </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm" variant="primary" className="gap-2">
+                <Button size="sm" variant="primary" className="gap-2 shadow-glow">
                   <span>Start Applying</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
@@ -95,7 +94,7 @@ export function Header() {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-muted hover:text-foreground rounded-lg"
+          className="md:hidden p-2 text-muted hover:text-foreground hover:scale-105 active:scale-95 transition-all rounded-lg"
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -103,7 +102,7 @@ export function Header() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-border bg-surface-card p-4 space-y-3">
+        <div className="md:hidden border-b border-border bg-surface-card p-4 space-y-3 animate-in fade-in slide-in-from-top-2">
           <Link
             href="#how-it-works"
             onClick={() => setMobileMenuOpen(false)}

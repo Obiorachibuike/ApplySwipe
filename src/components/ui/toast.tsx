@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, AlertCircle, Info, X } from "lucide-react";
 import clsx from "clsx";
 
@@ -59,37 +60,43 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     <ToastContext.Provider value={{ toast, success, error, info }}>
       {children}
       <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none">
-        {toasts.map((t) => (
-          <div
-            key={t.id}
-            className={clsx(
-              "pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-xl backdrop-blur-md transition-all duration-300 animate-in fade-in slide-in-from-bottom-5",
-              t.type === "success" && "bg-surface-card/95 border-accent/40 text-foreground",
-              t.type === "error" && "bg-surface-card/95 border-danger/40 text-foreground",
-              t.type === "info" && "bg-surface-card/95 border-primary/40 text-foreground"
-            )}
-          >
-            {t.type === "success" && (
-              <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            )}
-            {t.type === "error" && (
-              <AlertCircle className="h-5 w-5 text-danger shrink-0 mt-0.5" />
-            )}
-            {t.type === "info" && (
-              <Info className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            )}
-            <div className="flex-1">
-              <h4 className="text-sm font-semibold">{t.title}</h4>
-              {t.message && <p className="text-xs text-muted mt-0.5">{t.message}</p>}
-            </div>
-            <button
-              onClick={() => removeToast(t.id)}
-              className="text-muted hover:text-foreground transition-colors"
+        <AnimatePresence>
+          {toasts.map((t) => (
+            <motion.div
+              key={t.id}
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className={clsx(
+                "pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-xl backdrop-blur-md transition-all",
+                t.type === "success" && "bg-surface-card/95 border-accent/40 text-foreground",
+                t.type === "error" && "bg-surface-card/95 border-danger/40 text-foreground",
+                t.type === "info" && "bg-surface-card/95 border-primary/40 text-foreground"
+              )}
             >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
-        ))}
+              {t.type === "success" && (
+                <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+              )}
+              {t.type === "error" && (
+                <AlertCircle className="h-5 w-5 text-danger shrink-0 mt-0.5" />
+              )}
+              {t.type === "info" && (
+                <Info className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+              )}
+              <div className="flex-1 min-w-0">
+                <h4 className="text-sm font-semibold">{t.title}</h4>
+                {t.message && <p className="text-xs text-muted mt-0.5 line-clamp-2">{t.message}</p>}
+              </div>
+              <button
+                onClick={() => removeToast(t.id)}
+                className="text-muted hover:text-foreground hover:scale-110 active:scale-95 transition-transform"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </ToastContext.Provider>
   );

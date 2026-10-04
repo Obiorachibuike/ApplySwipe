@@ -1254,6 +1254,30 @@
       "id": "857fe4a2-7292-4da7-997f-c337982bc2ff",
       "createdAt": "2026-10-01T22:09:00.147Z",
       "updatedAt": "2026-10-01T22:09:00.147Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-linear-01",
+      "interactionType": "APPLIED",
+      "metadata": {
+        "status": "READY_FOR_REVIEW",
+        "matchScore": 98
+      },
+      "id": "d5362df5-a886-4295-b86f-f91ca3f16814",
+      "createdAt": "2026-10-04T08:08:29.027Z",
+      "updatedAt": "2026-10-04T08:08:29.027Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "jobId": "job-linear-01",
+      "interactionType": "APPLIED",
+      "metadata": {
+        "status": "READY_FOR_REVIEW",
+        "matchScore": 98
+      },
+      "id": "b2d33d49-6453-4ecc-8b4b-2759c119033d",
+      "createdAt": "2026-10-04T08:10:30.814Z",
+      "updatedAt": "2026-10-04T08:10:30.814Z"
     }
   ],
   "savedJobs": [
@@ -1288,7 +1312,7 @@
       "submittedAt": null,
       "interviewDate": "2026-10-06T21:00:00.000Z",
       "createdAt": "2026-09-28T21:51:58.944Z",
-      "updatedAt": "2026-10-01T22:08:53.042Z"
+      "updatedAt": "2026-10-04T08:10:30.799Z"
     },
     {
       "id": "app-vercel-02",
@@ -1784,6 +1808,66 @@
       "id": "dedb434b-34ab-451f-95ae-340e127be5f3",
       "createdAt": "2026-10-01T22:09:00.142Z",
       "updatedAt": "2026-10-01T22:09:00.142Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Why are you interested in joining Linear?",
+      "answer": "I admire Linear's engineering focus and commitment to product quality. The Senior Full Stack Engineer role aligns directly with my background in React, Next.js, TypeScript. I am excited to apply my experience in building high-performance architectures to solve Linear's hardest technical challenges.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "e69c4a11-4d40-41cb-b7e4-fb4dd55d9638",
+      "createdAt": "2026-10-04T08:08:29.016Z",
+      "updatedAt": "2026-10-04T08:08:29.016Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Describe your relevant experience with React and TypeScript.",
+      "answer": "I have 6 years of professional experience using React at an advanced level. I have leveraged it at TechVanguard Inc. to build core production features with clean architectural patterns, comprehensive tests, and high availability.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "cb8bdee2-1d82-427d-b404-7c4f4afe899e",
+      "createdAt": "2026-10-04T08:08:29.018Z",
+      "updatedAt": "2026-10-04T08:08:29.018Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "What is your target compensation and availability?",
+      "answer": "My target base compensation for this role is in the $160,000+ range, but I am open to discussing total compensation including equity and performance incentives based on the full scope of responsibilities.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "d6c93ad2-6f8b-46dc-8a55-d06fe1cb4438",
+      "createdAt": "2026-10-04T08:08:29.019Z",
+      "updatedAt": "2026-10-04T08:08:29.019Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Why are you interested in joining Linear?",
+      "answer": "I admire Linear's engineering focus and commitment to product quality. The Senior Full Stack Engineer role aligns directly with my background in React, Next.js, TypeScript. I am excited to apply my experience in building high-performance architectures to solve Linear's hardest technical challenges.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "f3a73240-6233-4992-bad8-812aac9e8827",
+      "createdAt": "2026-10-04T08:10:30.804Z",
+      "updatedAt": "2026-10-04T08:10:30.804Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "Describe your relevant experience with React and TypeScript.",
+      "answer": "I have 6 years of professional experience using React at an advanced level. I have leveraged it at TechVanguard Inc. to build core production features with clean architectural patterns, comprehensive tests, and high availability.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "a45b2fc5-d377-4b37-8147-f2ccef7efe8a",
+      "createdAt": "2026-10-04T08:10:30.805Z",
+      "updatedAt": "2026-10-04T08:10:30.805Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "question": "What is your target compensation and availability?",
+      "answer": "My target base compensation for this role is in the $160,000+ range, but I am open to discussing total compensation including equity and performance incentives based on the full scope of responsibilities.",
+      "isAiGenerated": true,
+      "isEdited": false,
+      "id": "03e1d7a1-92d4-4444-8b7a-51550b868654",
+      "createdAt": "2026-10-04T08:10:30.808Z",
+      "updatedAt": "2026-10-04T08:10:30.808Z"
     }
   ],
   "applicationDocuments": [
@@ -2006,6 +2090,46 @@
       "id": "d564e86d-3aa3-42a1-8850-fa9037182adf",
       "createdAt": "2026-10-01T22:09:00.137Z",
       "updatedAt": "2026-10-01T22:09:00.137Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "TAILORED_RESUME",
+      "title": "Alex Chen - Linear Tailored Resume",
+      "content": "# ALEX CHEN\n**Senior Full Stack Engineer** | San Francisco, CA, United States | alex@applyswipe.io | +1 (555) 234-5678\n\n### PROFESSIONAL SUMMARY\nSenior Full Stack Engineer with verified background building modern, scalable web solutions. Proven track record across React, TypeScript, Node.js, PostgreSQL directly applied to solve high-impact product goals at Linear. Grounded in rigorous engineering, clean code architecture, and iterative delivery.\n\n### CORE COMPETENCIES\nReact • TypeScript • Node.js • PostgreSQL • Tailwind CSS • GraphQL • Next.js • Python • Docker • FastAPI • AWS • LangChain\n\n### PROFESSIONAL EXPERIENCE\n\n**TechVanguard Inc.** — *Senior Full Stack Engineer* (2022 – Present)\n*Spearheaded core web architecture for customer-facing SaaS product serving 250,000 monthly active users.*\n- Architected Next.js App Router migration reducing LCP load times by 42%\n- Designed and implemented high-throughput REST & GraphQL microservices handling 12,000 req/sec\n- Integrated OpenAI function calling to automate 35% of manual support triage workflows\n- Mentored a distributed team of 5 junior and mid-level software engineers\n*Technologies: React, Next.js, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Docker, AWS*\n\n**NextGen Labs** — *Full Stack Software Engineer* (2019 – 2022)\n*Built collaborative developer productivity tools and scalable real-time dashboards.*\n- Implemented real-time WebSocket state synchronization supporting 5,000 concurrent canvas editors\n- Built automated CI/CD pipeline using GitHub Actions and Docker reducing deployment time from 40m to 8m\n- Created custom UI component library adopting accessible WAI-ARIA standards\n*Technologies: TypeScript, React, Node.js, Redis, PostgreSQL, Docker, Jest*\n\n### EDUCATION\n**University of California, Berkeley** — Bachelor of Science in Computer Science (2015 – 2019)\n\n### SELECTED PROJECTS\n**JobPulse**: Autonomous real-time developer job market analytics scraper and visualization platform. (Next.js, TypeScript, Python, FastAPI, PostgreSQL, Tailwind CSS)\n- Scrapes and indexes over 50,000 tech postings daily with automated deduplication\n- Built responsive interactive charts using Recharts and Tailwind CSS\n**PromptCraft Engine**: Developer testing playground for comparing LLM prompts, token consumption, and latency across providers. (React, Node.js, LangChain, OpenAI API, Tailwind CSS)\n- Supports side-by-side evaluation of Claude, GPT-4, and Gemini with cost breakdowns\n- Earned 1,200+ GitHub stars from the open-source community\n",
+      "fileUrl": null,
+      "id": "80819679-8317-4863-826e-08385ec41e09",
+      "createdAt": "2026-10-04T08:08:29.013Z",
+      "updatedAt": "2026-10-04T08:08:29.013Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "COVER_LETTER",
+      "title": "Cover Letter - Linear",
+      "content": "Dear Linear Hiring Team,\n\nI am writing to express my strong enthusiasm for the Senior Full Stack Engineer position at Linear. Having followed Linear's growth and product impact, I am drawn to your dedication to engineering excellence and user-centric craftsmanship.\n\nWith extensive hands-on experience in React, Next.js, TypeScript, Node.js, I have consistently focused on building scalable, performant systems. At TechVanguard Inc., I spearheaded key engineering initiatives, including Architected Next.js App Router migration reducing LCP load times by 42%. My approach balances rapid iteration with robust system design, ensuring both immediate delivery and long-term maintainability.\n\nYour posting for Senior Full Stack Engineer emphasizes React, TypeScript, Node.js, which directly aligns with the technical challenges I excel at solving. I am eager to contribute my experience to Linear's roadmap and help scale your next generation of features.\n\nThank you for your time and consideration. I look forward to the possibility of discussing how my background aligns with your team's objectives.\n\nWarm regards,\n\nAlex Chen\nalex@applyswipe.io\n+1 (555) 234-5678",
+      "fileUrl": null,
+      "id": "90853bc2-f56d-4f35-944b-47bc3bb1ab1f",
+      "createdAt": "2026-10-04T08:08:29.015Z",
+      "updatedAt": "2026-10-04T08:08:29.015Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "TAILORED_RESUME",
+      "title": "Alex Chen - Linear Tailored Resume",
+      "content": "# ALEX CHEN\n**Senior Full Stack Engineer** | San Francisco, CA, United States | alex@applyswipe.io | +1 (555) 234-5678\n\n### PROFESSIONAL SUMMARY\nSenior Full Stack Engineer with verified background building modern, scalable web solutions. Proven track record across React, TypeScript, Node.js, PostgreSQL directly applied to solve high-impact product goals at Linear. Grounded in rigorous engineering, clean code architecture, and iterative delivery.\n\n### CORE COMPETENCIES\nReact • TypeScript • Node.js • PostgreSQL • Tailwind CSS • GraphQL • Next.js • Python • Docker • FastAPI • AWS • LangChain\n\n### PROFESSIONAL EXPERIENCE\n\n**TechVanguard Inc.** — *Senior Full Stack Engineer* (2022 – Present)\n*Spearheaded core web architecture for customer-facing SaaS product serving 250,000 monthly active users.*\n- Architected Next.js App Router migration reducing LCP load times by 42%\n- Designed and implemented high-throughput REST & GraphQL microservices handling 12,000 req/sec\n- Integrated OpenAI function calling to automate 35% of manual support triage workflows\n- Mentored a distributed team of 5 junior and mid-level software engineers\n*Technologies: React, Next.js, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Docker, AWS*\n\n**NextGen Labs** — *Full Stack Software Engineer* (2019 – 2022)\n*Built collaborative developer productivity tools and scalable real-time dashboards.*\n- Implemented real-time WebSocket state synchronization supporting 5,000 concurrent canvas editors\n- Built automated CI/CD pipeline using GitHub Actions and Docker reducing deployment time from 40m to 8m\n- Created custom UI component library adopting accessible WAI-ARIA standards\n*Technologies: TypeScript, React, Node.js, Redis, PostgreSQL, Docker, Jest*\n\n### EDUCATION\n**University of California, Berkeley** — Bachelor of Science in Computer Science (2015 – 2019)\n\n### SELECTED PROJECTS\n**JobPulse**: Autonomous real-time developer job market analytics scraper and visualization platform. (Next.js, TypeScript, Python, FastAPI, PostgreSQL, Tailwind CSS)\n- Scrapes and indexes over 50,000 tech postings daily with automated deduplication\n- Built responsive interactive charts using Recharts and Tailwind CSS\n**PromptCraft Engine**: Developer testing playground for comparing LLM prompts, token consumption, and latency across providers. (React, Node.js, LangChain, OpenAI API, Tailwind CSS)\n- Supports side-by-side evaluation of Claude, GPT-4, and Gemini with cost breakdowns\n- Earned 1,200+ GitHub stars from the open-source community\n",
+      "fileUrl": null,
+      "id": "9896db5c-2654-484d-9c43-9512ed4f19c0",
+      "createdAt": "2026-10-04T08:10:30.800Z",
+      "updatedAt": "2026-10-04T08:10:30.800Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "type": "COVER_LETTER",
+      "title": "Cover Letter - Linear",
+      "content": "Dear Linear Hiring Team,\n\nI am writing to express my strong enthusiasm for the Senior Full Stack Engineer position at Linear. Having followed Linear's growth and product impact, I am drawn to your dedication to engineering excellence and user-centric craftsmanship.\n\nWith extensive hands-on experience in React, Next.js, TypeScript, Node.js, I have consistently focused on building scalable, performant systems. At TechVanguard Inc., I spearheaded key engineering initiatives, including Architected Next.js App Router migration reducing LCP load times by 42%. My approach balances rapid iteration with robust system design, ensuring both immediate delivery and long-term maintainability.\n\nYour posting for Senior Full Stack Engineer emphasizes React, TypeScript, Node.js, which directly aligns with the technical challenges I excel at solving. I am eager to contribute my experience to Linear's roadmap and help scale your next generation of features.\n\nThank you for your time and consideration. I look forward to the possibility of discussing how my background aligns with your team's objectives.\n\nWarm regards,\n\nAlex Chen\nalex@applyswipe.io\n+1 (555) 234-5678",
+      "fileUrl": null,
+      "id": "74556536-f6e7-4aff-86db-fedf8cabbf61",
+      "createdAt": "2026-10-04T08:10:30.802Z",
+      "updatedAt": "2026-10-04T08:10:30.802Z"
     }
   ],
   "applicationEvents": [
@@ -2203,6 +2327,38 @@
       "id": "b4d7f113-f07a-4fe2-b421-7c0e056e993b",
       "createdAt": "2026-10-01T22:09:00.144Z",
       "updatedAt": "2026-10-01T22:09:00.144Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "PREPARING",
+      "notes": "AI compiled tailored resume, customized cover letter, and preliminary answers.",
+      "id": "19e966b8-aad2-4620-a83f-dee4ab744edb",
+      "createdAt": "2026-10-04T08:08:29.023Z",
+      "updatedAt": "2026-10-04T08:08:29.023Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "READY_FOR_REVIEW",
+      "notes": "Application materials assembled. Awaiting user review before external submission.",
+      "id": "905bda67-0d3f-4a32-9ad6-8841676079d5",
+      "createdAt": "2026-10-04T08:08:29.024Z",
+      "updatedAt": "2026-10-04T08:08:29.024Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "PREPARING",
+      "notes": "AI compiled tailored resume, customized cover letter, and preliminary answers.",
+      "id": "612aa09e-4939-4a95-aa1b-76e7f23aa773",
+      "createdAt": "2026-10-04T08:10:30.810Z",
+      "updatedAt": "2026-10-04T08:10:30.810Z"
+    },
+    {
+      "applicationId": "app-linear-01",
+      "eventType": "READY_FOR_REVIEW",
+      "notes": "Application materials assembled. Awaiting user review before external submission.",
+      "id": "1e658d25-8e96-4593-bcbb-f10f5d62ae10",
+      "createdAt": "2026-10-04T08:10:30.811Z",
+      "updatedAt": "2026-10-04T08:10:30.811Z"
     }
   ],
   "userPreferences": [
@@ -2408,6 +2564,26 @@
       "id": "af7fedce-a44e-46a5-a548-c86e303230c7",
       "createdAt": "2026-10-01T22:09:00.150Z",
       "updatedAt": "2026-10-01T22:09:00.150Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "title": "Application Ready for Review ✨",
+      "message": "Tailored materials for Senior Full Stack Engineer at Linear are ready. Review before submitting.",
+      "type": "NEEDS_REVIEW",
+      "link": "/dashboard/applications/app-linear-01",
+      "id": "2a33f7ff-0db2-47da-9e24-c688ec8d7fcf",
+      "createdAt": "2026-10-04T08:08:29.026Z",
+      "updatedAt": "2026-10-04T08:08:29.026Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "title": "Application Ready for Review ✨",
+      "message": "Tailored materials for Senior Full Stack Engineer at Linear are ready. Review before submitting.",
+      "type": "NEEDS_REVIEW",
+      "link": "/dashboard/applications/app-linear-01",
+      "id": "f8577131-05df-47e0-93ec-03f110089a78",
+      "createdAt": "2026-10-04T08:10:30.813Z",
+      "updatedAt": "2026-10-04T08:10:30.813Z"
     }
   ],
   "subscriptions": [
@@ -3286,6 +3462,150 @@
       "id": "fdd77f96-7981-445b-a6de-4bf63715095d",
       "createdAt": "2026-10-01T22:09:00.133Z",
       "updatedAt": "2026-10-01T22:09:00.133Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "MATCH_SCORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-match-v1",
+      "inputTokens": 420,
+      "outputTokens": 180,
+      "estimatedCost": 0.0024,
+      "id": "2189bce3-a0c8-4401-a01d-6405477ea5e5",
+      "createdAt": "2026-10-04T08:08:28.947Z",
+      "updatedAt": "2026-10-04T08:08:28.947Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "RESUME_TAILORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-tailor-v1",
+      "inputTokens": 850,
+      "outputTokens": 450,
+      "estimatedCost": 0.0078,
+      "id": "f650f4a5-3611-49ce-9b3f-14115ff7cf58",
+      "createdAt": "2026-10-04T08:08:28.949Z",
+      "updatedAt": "2026-10-04T08:08:28.949Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "COVER_LETTER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-writer-v1",
+      "inputTokens": 620,
+      "outputTokens": 260,
+      "estimatedCost": 0.0042,
+      "id": "286e1216-3b51-42d3-9290-23667fbd67c0",
+      "createdAt": "2026-10-04T08:08:28.950Z",
+      "updatedAt": "2026-10-04T08:08:28.950Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "5dd2aef9-aa63-4c57-a932-0b5538a2072f",
+      "createdAt": "2026-10-04T08:08:28.951Z",
+      "updatedAt": "2026-10-04T08:08:28.951Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "546b1c77-2c38-4cac-aed5-5d50d7c1e41e",
+      "createdAt": "2026-10-04T08:08:28.952Z",
+      "updatedAt": "2026-10-04T08:08:28.952Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "39a89d27-e167-43b6-9b02-75ad0f571f74",
+      "createdAt": "2026-10-04T08:08:29.010Z",
+      "updatedAt": "2026-10-04T08:08:29.010Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "MATCH_SCORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-match-v1",
+      "inputTokens": 420,
+      "outputTokens": 180,
+      "estimatedCost": 0.0024,
+      "id": "7a9e4ac2-708e-46eb-9f50-48d78dfb781d",
+      "createdAt": "2026-10-04T08:10:30.774Z",
+      "updatedAt": "2026-10-04T08:10:30.774Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "RESUME_TAILORING",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-tailor-v1",
+      "inputTokens": 850,
+      "outputTokens": 450,
+      "estimatedCost": 0.0078,
+      "id": "f61e6c95-2ae1-430e-8ea0-3c34ec6ed22a",
+      "createdAt": "2026-10-04T08:10:30.777Z",
+      "updatedAt": "2026-10-04T08:10:30.777Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "COVER_LETTER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-writer-v1",
+      "inputTokens": 620,
+      "outputTokens": 260,
+      "estimatedCost": 0.0042,
+      "id": "7c45f82a-a02d-4e1f-9376-9cbf360d9aa7",
+      "createdAt": "2026-10-04T08:10:30.779Z",
+      "updatedAt": "2026-10-04T08:10:30.779Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "21b95d99-5a61-42d8-8036-735bc8a6c0bb",
+      "createdAt": "2026-10-04T08:10:30.780Z",
+      "updatedAt": "2026-10-04T08:10:30.780Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "15e01b0b-1994-4ece-8c77-27f1cdedb0c9",
+      "createdAt": "2026-10-04T08:10:30.782Z",
+      "updatedAt": "2026-10-04T08:10:30.782Z"
+    },
+    {
+      "userId": "usr-alex-chen-001",
+      "operation": "APPLICATION_ANSWER",
+      "provider": "LOCAL_ENGINE",
+      "model": "applyswipe-qa-v1",
+      "inputTokens": 350,
+      "outputTokens": 120,
+      "estimatedCost": 0.0018,
+      "id": "1939b038-b81d-40a1-b69b-290ec2d7701e",
+      "createdAt": "2026-10-04T08:10:30.797Z",
+      "updatedAt": "2026-10-04T08:10:30.797Z"
     }
   ],
   "auditLogs": []
