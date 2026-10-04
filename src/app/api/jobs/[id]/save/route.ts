@@ -1,39 +1,30 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/auth/jwt";
 import db from "@/lib/db";
+import { toggleSavedJob } from "@/jobs/services/application-service";
+import type { Job } from "@/types";
 
+export const dynamic = "force-dynamic";
+
+/** POST /api/jobs/:id/save - toggles the bookmark for a job (idempotent). */
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
     const user = await requireAuth();
-    const jobId = params.id;
 
-    // Check if already saved
-    const existing = await db.savedJob.findFirst({
-      where: { userId: user.id, jobId },
-    });
-
-    if (existing) {
-      await db.savedJob.delete({ where: { id: existing.id } });
-      return NextResponse.json({ success: true, isSaved: false, message: "Job removed from saved" });
+    const job = (await db.job.findUnique({ where: { id: params.id } })) as Job | null;
+    if (!job) {
+      return NextResponse.json({ error: "Job not found" }, { status: 404 });
     }
 
-    await db.savedJob.create({
-      data: {
-        userId: user.id,
-        jobId,
-      },
-    });
+    const { isSaved } = await toggleSavedJob(user.id, job);
 
-    await db.jobInteraction.create({
-      data: {
-        userId: user.id,
-        jobId,
-        interactionType: "SAVED",
-      },
+    return NextResponse.json({
+      success: true,
+      isSaved,
+      message: isSaved ? "Job saved successfully" : "Job removed from saved",
     });
-
-    return NextResponse.json({ success: true, isSaved: true, message: "Job saved successfully" });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Unauthorized" }, { status: 401 });
+    const status = error?.message === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: error?.message || "Failed to save job" }, { status });
   }
 }

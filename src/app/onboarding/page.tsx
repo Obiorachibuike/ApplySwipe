@@ -846,7 +846,7 @@ export default function OnboardingPage() {
                     Your AI Career Profile is ready!
                   </h2>
                   <p className="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
-                    You've indexed <span className="text-white font-semibold">{skills.length} skills</span>,{" "}
+                    You&apos;ve indexed <span className="text-white font-semibold">{skills.length} skills</span>,{" "}
                     <span className="text-white font-semibold">{experiences.length} experience records</span>, and set your preferences. You are primed to start swiping.
                   </p>
 

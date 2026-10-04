@@ -53,7 +53,8 @@ describe("Job Matching Engine", () => {
 
   const highMatchJob: Job = {
     id: "j1",
-    source: "feed",
+    provider: "GREENHOUSE",
+    source: "Greenhouse",
     title: "Senior Full Stack Engineer",
     company: "Linear",
     description: "Looking for React, TypeScript, and Node.js engineer.",
@@ -62,7 +63,9 @@ describe("Job Matching Engine", () => {
     employmentType: "Full-time",
     salaryCurrency: "USD",
     skills: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    applicationUrl: "https://linear.app",
+    sourceUrl: "https://boards.greenhouse.io/linear/jobs/4091",
+    applicationUrl: "https://boards.greenhouse.io/linear/jobs/4091",
+    workplaceType: "REMOTE",
     applicationType: "API_SUPPORTED",
     atsProvider: "GREENHOUSE",
     isReported: false,
@@ -74,7 +77,8 @@ describe("Job Matching Engine", () => {
 
   const lowMatchJob: Job = {
     id: "j2",
-    source: "feed",
+    provider: "LEGACY",
+    source: "Permitted Feed",
     title: "Embedded C++ Firmware Engineer",
     company: "Hardware Inc",
     description: "Requires RTOS, C++, and FPGA design.",
@@ -83,7 +87,9 @@ describe("Job Matching Engine", () => {
     employmentType: "Full-time",
     salaryCurrency: "USD",
     skills: ["C++", "RTOS", "FPGA", "VHDL"],
-    applicationUrl: "https://hardware.inc",
+    sourceUrl: "https://hardware.inc/jobs/2",
+    applicationUrl: "https://hardware.inc/jobs/2",
+    workplaceType: "ONSITE",
     applicationType: "MANUAL_REQUIRED",
     atsProvider: "MANUAL",
     isReported: false,
