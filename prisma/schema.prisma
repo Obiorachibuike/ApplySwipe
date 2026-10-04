@@ -1,0 +1,586 @@
+// Prisma schema for ApplySwipe
+// Production PostgreSQL schema with full support for all models, relations, and indexes
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum InteractionType {
+  VIEWED
+  PASSED
+  SAVED
+  APPLIED
+}
+
+enum ApplicationStatus {
+  SAVED
+  PREPARING
+  READY_FOR_REVIEW
+  SUBMITTING
+  SUBMITTED
+  INTERVIEW
+  OFFER
+  REJECTED
+  WITHDRAWN
+}
+
+enum ApplicationMode {
+  MANUAL
+  REVIEW_EVERYTHING
+  SMART_APPLY
+  AUTOPILOT
+}
+
+enum AutomationCapability {
+  API_SUPPORTED
+  FORM_SUPPORTED
+  MANUAL_REQUIRED
+  USER_CONFIRMATION_REQUIRED
+}
+
+enum AtsProvider {
+  GREENHOUSE
+  LEVER
+  WORKDAY
+  CUSTOM_API
+  MANUAL
+}
+
+enum DocumentType {
+  TAILORED_RESUME
+  COVER_LETTER
+  PORTFOLIO
+  OTHER
+}
+
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum NotificationType {
+  JOB_MATCH
+  APPLICATION_SUBMITTED
+  NEEDS_REVIEW
+  INTERVIEW
+  AUTOPILOT_SUMMARY
+  SYSTEM
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+}
+
+enum PaymentProvider {
+  STRIPE
+  PAYSTACK
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum AIProvider {
+  OPENAI
+  GEMINI
+  LOCAL_ENGINE
+}
+
+enum AIOperation {
+  JOB_ANALYSIS
+  MATCH_SCORING
+  RESUME_TAILORING
+  COVER_LETTER
+  APPLICATION_ANSWER
+  VALIDATION
+}
+
+model User {
+  id                String             @id @default(uuid())
+  email             String             @unique
+  passwordHash      String
+  name              String
+  role              Role               @default(USER)
+  isVerified        Boolean            @default(false)
+  emailVerifiedAt   DateTime?
+  resetToken        String?
+  resetTokenExpires DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  profile           Profile?
+  resumes           Resume[]
+  interactions      JobInteraction[]
+  savedJobs         SavedJob[]
+  applications      Application[]
+  preferences       UserPreference?
+  autopilotSetting  AutopilotSetting?
+  notifications     Notification[]
+  subscriptions     Subscription[]
+  payments          Payment[]
+  aiUsages          AIUsage[]
+  auditLogs         AuditLog[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model Profile {
+  id                       String         @id @default(uuid())
+  userId                   String         @unique
+  user                     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  headline                 String?
+  bio                      String?
+  phone                    String?
+  country                  String?
+  city                     String?
+  targetRoles              Json?          // Array of target role strings
+  experienceLevel          String?        // Entry, Mid, Senior, Lead, Executive
+  preferredIndustries      Json?          // Array of industries
+  preferredEmploymentTypes Json?          // Full-time, Contract, etc.
+  remotePreference         String?        // Remote, Hybrid, On-site, Any
+  minSalary                Int?
+  salaryCurrency           String         @default("USD")
+  onboardingCompleted      Boolean        @default(false)
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
+
+  skills                   Skill[]
+  experiences              Experience[]
+  educations               Education[]
+  projects                 Project[]
+  certifications           Certification[]
+
+  @@index([userId])
+}
+
+model Skill {
+  id              String      @id @default(uuid())
+  profileId       String
+  profile         Profile     @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  name            String
+  category        String?     // Frontend, Backend, Cloud, ML, etc.
+  yearsExperience Int?        @default(1)
+  level           SkillLevel  @default(INTERMEDIATE)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([profileId])
+  @@index([name])
+}
+
+model Experience {
+  id           String    @id @default(uuid())
+  profileId    String
+  profile      Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  company      String
+  role         String
+  location     String?
+  isCurrent    Boolean   @default(false)
+  startDate    DateTime
+  endDate      DateTime?
+  description  String
+  achievements Json?     // Array of bullet achievements
+  technologies Json?     // Array of technologies used
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([profileId])
+  @@index([company])
+}
+
+model Education {
+  id          String   @id @default(uuid())
+  profileId   String
+  profile     Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  institution String
+  degree      String
+  field       String
+  startYear   Int
+  endYear     Int?
+  gpa         String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([profileId])
+}
+
+model Project {
+  id           String   @id @default(uuid())
+  profileId    String
+  profile      Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  name         String
+  description  String
+  technologies Json?    // Array of strings
+  url          String?
+  githubUrl    String?
+  highlights   Json?    // Array of impact bullets
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([profileId])
+}
+
+model Certification {
+  id            String    @id @default(uuid())
+  profileId     String
+  profile       Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  name          String
+  issuer        String
+  issueDate     DateTime?
+  expiryDate    DateTime?
+  credentialId  String?
+  credentialUrl String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([profileId])
+}
+
+model Resume {
+  id          String          @id @default(uuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  fileUrl     String?
+  rawText     String?
+  parsedData  Json?
+  isDefault   Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  versions    ResumeVersion[]
+
+  @@index([userId])
+}
+
+model ResumeVersion {
+  id                   String   @id @default(uuid())
+  resumeId             String
+  resume               Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  jobId                String?
+  job                  Job?     @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  versionType          String   @default("MASTER") // MASTER, TAILORED
+  title                String
+  targetRole           String?
+  summary              String
+  skills               Json     // Array of ordered tailored skills
+  experienceHighlights Json     // Array of tailored bullet points
+  fullContent          String   // Formatted resume markdown/text
+  matchScore           Int?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([resumeId])
+  @@index([jobId])
+}
+
+model Job {
+  id                   String                @id @default(uuid())
+  externalId           String?               @unique
+  source               String                @default("applyswipe-feed")
+  title                String
+  company              String
+  companyLogo          String?
+  description          String
+  location             String
+  remote               Boolean               @default(false)
+  employmentType       String                @default("Full-time") // Full-time, Part-time, Contract, Internship
+  experienceLevel      String?               @default("Mid-Senior")
+  salaryMin            Int?
+  salaryMax            Int?
+  salaryCurrency       String                @default("USD")
+  skills               Json                  // Array of required/preferred skill strings
+  applicationUrl       String
+  applicationType      AutomationCapability  @default(MANUAL_REQUIRED)
+  atsProvider          AtsProvider           @default(MANUAL)
+  isReported           Boolean               @default(false)
+  isActive             Boolean               @default(true)
+  postedAt             DateTime              @default(now())
+  expiresAt            DateTime?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+
+  interactions         JobInteraction[]
+  savedJobs            SavedJob[]
+  applications         Application[]
+  resumeVersions       ResumeVersion[]
+
+  @@index([title])
+  @@index([company])
+  @@index([location])
+  @@index([remote])
+  @@index([employmentType])
+  @@index([postedAt])
+  @@index([source])
+  @@index([externalId])
+  @@index([isActive])
+}
+
+model JobSource {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  type       String    // API, ATS, FEED, RSS
+  url        String?
+  isActive   Boolean   @default(true)
+  lastSyncAt DateTime?
+  jobCount   Int       @default(0)
+  config     Json?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([name])
+  @@index([isActive])
+}
+
+model JobInteraction {
+  id              String          @id @default(uuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId           String
+  job             Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  interactionType InteractionType
+  metadata        Json?
+  createdAt       DateTime        @default(now())
+
+  @@unique([userId, jobId, interactionType])
+  @@index([userId])
+  @@index([jobId])
+  @@index([interactionType])
+}
+
+model SavedJob {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, jobId])
+  @@index([userId])
+  @@index([jobId])
+}
+
+model Application {
+  id                    String                @id @default(uuid())
+  userId                String
+  user                  User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId                 String
+  job                   Job                   @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  status                ApplicationStatus     @default(PREPARING)
+  mode                  ApplicationMode       @default(REVIEW_EVERYTHING)
+  submissionCapability  AutomationCapability  @default(MANUAL_REQUIRED)
+  matchScore            Int?
+  matchExplanation      String?
+  submissionMethod      String?               // API, FORM, MANUAL_HANDOFF
+  externalApplicationId String?
+  notes                 String?
+  submittedAt           DateTime?
+  interviewDate         DateTime?
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+
+  answers               ApplicationAnswer[]
+  documents             ApplicationDocument[]
+  events                ApplicationEvent[]
+
+  @@unique([userId, jobId])
+  @@index([userId])
+  @@index([jobId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ApplicationAnswer {
+  id            String      @id @default(uuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  question      String
+  answer        String
+  isAiGenerated Boolean     @default(true)
+  isEdited      Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([applicationId])
+}
+
+model ApplicationDocument {
+  id            String       @id @default(uuid())
+  applicationId String
+  application   Application  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  type          DocumentType @default(TAILORED_RESUME)
+  title         String
+  content       String       // Full text / Markdown of document
+  fileUrl       String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([applicationId])
+  @@index([type])
+}
+
+model ApplicationEvent {
+  id            String      @id @default(uuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  eventType     String      // DISCOVERED, VIEWED, SAVED, PREPARING, GENERATED_MATERIALS, READY_FOR_REVIEW, SUBMITTED, INTERVIEW_SCHEDULED, REJECTED, OFFER_RECEIVED
+  notes         String?
+  metadata      Json?
+  createdAt     DateTime    @default(now())
+
+  @@index([applicationId])
+  @@index([eventType])
+}
+
+model UserPreference {
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetRoles        Json?    // Array of role strings
+  experienceLevel    String?
+  minSalary          Int?
+  salaryCurrency     String   @default("USD")
+  remoteOnly         Boolean  @default(false)
+  preferredLocations Json?    // Array of country/city strings
+  employmentTypes    Json?    // Array of types
+  excludedCompanies  Json?    // Array of company strings to skip
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model AutopilotSetting {
+  id                String          @id @default(uuid())
+  userId            String          @unique
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isEnabled         Boolean         @default(false)
+  minMatchScore     Int             @default(80)
+  dailyLimit        Int             @default(10)
+  applicationsToday Int             @default(0)
+  allowedRoles      Json?           // Array of target roles
+  allowedLocations  Json?           // Array of locations or ["Remote"]
+  minSalary         Int?            @default(0)
+  employmentTypes   Json?           // Array of types
+  excludedCompanies Json?           // Array of company names
+  mode              ApplicationMode @default(REVIEW_EVERYTHING) // SMART_APPLY or REVIEW_EVERYTHING
+  lastRunAt         DateTime?
+  scannedCount      Int             @default(0)
+  matchedCount      Int             @default(0)
+  preparedCount     Int             @default(0)
+  submittedCount    Int             @default(0)
+  needsReviewCount  Int             @default(0)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([userId])
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      NotificationType @default(JOB_MATCH)
+  isRead    Boolean          @default(false)
+  link      String?
+  createdAt DateTime         @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model Subscription {
+  id                   String             @id @default(uuid())
+  userId               String
+  user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan                 SubscriptionPlan   @default(FREE)
+  status               SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@index([userId])
+}
+
+model Payment {
+  id        String          @id @default(uuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Int             // In cents
+  currency  String          @default("USD")
+  status    PaymentStatus   @default(PENDING)
+  provider  PaymentProvider @default(STRIPE)
+  reference String          @unique
+  metadata  Json?
+  createdAt DateTime        @default(now())
+
+  @@index([userId])
+  @@index([reference])
+}
+
+model AIUsage {
+  id             String      @id @default(uuid())
+  userId         String
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  operation      AIOperation
+  provider       AIProvider  @default(LOCAL_ENGINE)
+  model          String      @default("gpt-4o")
+  inputTokens    Int         @default(0)
+  outputTokens   Int         @default(0)
+  estimatedCost  Float       @default(0.0)
+  createdAt      DateTime    @default(now())
+
+  @@index([userId])
+  @@index([operation])
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
