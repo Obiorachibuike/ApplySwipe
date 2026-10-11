@@ -10,7 +10,17 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "prisma:seed": "node prisma/seed.js",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "jobs:sync": "tsx scripts/jobs-sync.ts",
+    "jobs:sync:adzuna": "tsx scripts/jobs-sync.ts --provider=ADZUNA",
+    "jobs:sync:greenhouse": "tsx scripts/jobs-sync.ts --provider=GREENHOUSE",
+    "jobs:sync:lever": "tsx scripts/jobs-sync.ts --provider=LEVER",
+    "jobs:sync:dry": "tsx scripts/jobs-sync.ts --dry-run",
+    "jobs:expire": "tsx scripts/jobs-expire.ts",
+    "jobs:match": "tsx scripts/jobs-match.ts",
+    "jobs:backfill": "tsx scripts/backfill-jobs.ts",
+    "jobs:seed-sources": "tsx scripts/seed-job-sources.ts",
+    "workers": "tsx scripts/workers.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -37,9 +47,12 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.25",
     "postcss": "^8.4.49",
     "prisma": "^5.22.0",
     "tailwindcss": "^3.4.15",
+    "tsx": "^4.23.15",
     "typescript": "^5.6.3",
     "vitest": "^2.1.5"
   }

@@ -8,7 +8,7 @@
 [![Zero Hallucinations](https://img.shields.io/badge/Grounded%20AI-Zero%20Hallucinations-emerald.svg)]()
 
 > **The modern AI-powered job application platform.**  
-> Create your verified career profile once. Discover roles through Tinder-style swiping. Let grounded AI tailor your resume, draft personalized cover letters, and prepare/submit applications through legal ATS API integrations.
+> Create your verified career profile once. Discover roles through Tinder-style swiping. Let grounded AI tailor your resume, draft personalized cover letters, and prepare applications for official employer career pages — with honest, never-faked submission status.
 
 ---
 
@@ -21,7 +21,7 @@
 5. [Folder Structure](#folder-structure)
 6. [Database Schema & Models](#database-schema--models)
 7. [AI Engine & Anti-Hallucination Guarantees](#ai-engine--anti-hallucination-guarantees)
-8. [Job-Source Adapter Architecture](#job-source-adapter-architecture)
+8. [Job Aggregation & Multi-Source Ingestion](#job-aggregation--multi-source-ingestion)
 9. [Application Automation & Legal Limitations](#application-automation--legal-limitations)
 10. [Environment Variables](#environment-variables)
 11. [Local Development Setup](#local-development-setup)
@@ -47,7 +47,7 @@ Job-Specific Tailored Resume (Grounded, No Hallucinations)
            ↓
 Personalized Cover Letter & Answer Assistant
            ↓
-Application Automation (ATS API / Form Handoff)
+Materials Prepared + Official Application Handoff
            ↓
 Full Lifecycle Kanban Tracker
 ```
@@ -56,8 +56,20 @@ Full Lifecycle Kanban Tracker
 
 ## 2. Key Features
 
+- **Multi-Source Job Aggregation:**
+  - Adzuna + Greenhouse + Lever adapters behind one `JobProvider` interface, with a
+    database-driven company list (no hard-coded employers).
+  - Normalization (HTML, location, salary, employment type, seniority, skills), two-level
+    deduplication and per-provider freshness so the feed never shows stale or duplicate jobs.
+  - Background workers with locking, retry/backoff, provider health monitoring and a
+    sync history visible in the admin console.
+
 - **Tinder-Style Swiping Experience (`/dashboard/discover`):**
-  - Smooth physics-based Framer Motion card stack.
+  - Smooth physics-based Framer Motion card stack with keyboard shortcuts (← pass, → apply, ↑ save).
+  - Cursor-paginated feed, hard filters (remote, salary, employment type, provider) and a
+    transparent match breakdown (skills 35 / experience 20 / location 15 / employment 10 /
+    salary 10 / seniority 10) with matched & missing skills — no invented scores.
+  - Source transparency: provider label plus the employer's official application link.
   - Mobile touch drag gestures: Swipe Left = Pass, Swipe Right = Apply, Swipe Up = Save.
   - Desktop keyboard ergonomic shortcuts: `←` Pass, `→` Apply, `↑` Save.
   - Dynamic AI Match percentage badge, salary brackets, and transparent "Why You Match" breakdowns.
@@ -79,14 +91,17 @@ Full Lifecycle Kanban Tracker
   - Supports inline editing, copying, and markdown download.
 
 - **Full Lifecycle Application Kanban Tracker (`/dashboard/applications`):**
-  - Status lanes: `READY_FOR_REVIEW`, `SUBMITTED`, `INTERVIEW`, `OFFER`, `REJECTED`.
+  - Status lanes: `READY` / `READY_FOR_REVIEW` (materials prepared) → `APPLIED`
+    (you confirmed the employer submission) → `INTERVIEW`, `OFFER`, `REJECTED`.
   - Detailed timeline tracking (`Discovered` → `Viewed` → `Materials Prepared` → `Submitted` → `Interview`).
   - Strict distinction: Never pretends an application was submitted when it was only prepared.
 
 - **Autonomous AI Autopilot (`/dashboard/autopilot`):**
   - Target roles, minimum AI match score (e.g. 85%+), workplace preference, minimum salary threshold, daily application limits (e.g. 10/day), and company blocklists.
-  - Two operational modes: **Review Everything** (requires confirmation) vs **Smart Apply** (submits high matches via official API).
-  - Telemetry: Displays jobs scanned, matched, prepared, submitted, and queued for review.
+  - Two operational modes: **Review Everything** (always waits for the candidate) vs
+    **Smart Apply** (prepares materials for high-match roles and queues them for one-click
+    handoff to the employer's official application page). Neither mode fabricates a submission.
+  - Telemetry: Displays jobs scanned, matched, prepared and queued for review.
 
 - **10-Step Multi-Step Onboarding (`/onboarding`):**
   - Step 1: Basic Information
@@ -109,7 +124,7 @@ Full Lifecycle Kanban Tracker
 
 ## 3. Architecture Overview
 
-ApplySwipe follows a modular full-stack architecture built with Next.js App Router and TypeScript, with a dedicated Python FastAPI microservice for ATS integrations and advanced automation:
+ApplySwipe follows a modular full-stack architecture built with Next.js App Router and TypeScript, with an optional Python FastAPI microservice (resume parsing + ATS capability checks). Job aggregation runs in background workers, never inside a user request:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -125,7 +140,7 @@ ApplySwipe follows a modular full-stack architecture built with Next.js App Rout
 ┌──────────────────────────────┐ ┌─────────────────────────────┐
 │  Service & Storage Layers    │ │   AI Abstraction Layer      │
 │  ├── Application Agent       │ │   ├── OpenAI GPT-4o         │
-│  ├── Job Source Adapters     │ │   ├── Google Gemini 1.5     │
+│  ├── Job/Feed Services       │ │   ├── Google Gemini 1.5     │
 │  ├── Autopilot Engine        │ │   └── Intelligent Engine    │
 │  ├── S3 / Local Storage      │ │       (Zero API keys req.)  │
 │  ├── Resend / SMTP Email     │ │   ├── Dedicated Prompts     │
@@ -135,8 +150,9 @@ ApplySwipe follows a modular full-stack architecture built with Next.js App Rout
                ▼                               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  Data Layer & Background Automation Service                 │
-│  ├── Prisma ORM / PostgreSQL Schema (23 Normalized Models)  │
+│  ├── Prisma ORM / PostgreSQL Schema (27 Normalized Models)  │
 │  ├── Atomic Persistent JSON/SQL Store                       │
+│  ├── Workers: sync · expiration · matching (locks + health) │
 │  └── Python FastAPI Microservice (python-service/main.py)   │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -188,25 +204,41 @@ ApplySwipe/
 │   │   ├── db.ts                 # Prisma-compatible persistent repository
 │   │   ├── auth/                 # JWT session, cookie handling, password hashing
 │   │   ├── ai/                   # Provider abstraction, prompts, anti-hallucination validator
-│   │   ├── jobs/                 # ATS adapters (Greenhouse, Lever, Feeds)
-│   │   ├── applications/         # Application automation agent
+│   │   ├── jobs/                 # Legacy job helpers (superseded by src/jobs)
+│   │   ├── rate-limit.ts         # Token-bucket limiter for feed/search
+│   │   ├── logger.ts             # JSON logger with secret redaction
+│   │   ├── applications/         # Application preparation agent
 │   │   ├── storage/              # Storage abstraction (Local + S3)
 │   │   ├── email/                # Email abstraction (Resend + SMTP + Console)
 │   │   ├── payments/             # Payments abstraction (Stripe + Paystack)
-│   │   └── queue/                # Background job queue worker
+│   │   └── queue/                # In-process background queue
+│   ├── jobs/                     # Multi-source job aggregation
+│   │   ├── providers/            # JobProvider interface + Adzuna/Greenhouse/Lever adapters
+│   │   ├── ingestion/            # normalize, deduplicate, freshness, provider-state, ingest, expire
+│   │   ├── matching/             # skills dictionary, weighted scoring, ranking, AI re-rank
+│   │   └── services/             # job/feed/application/provider services
+│   ├── workers/                  # job-sync, job-expiration, job-matching, scheduler
 │   ├── services/
 │   │   └── autopilot/            # Autopilot execution engine
 │   └── types/                    # Shared TypeScript interfaces & enums
+├── scripts/
+│   ├── workers.ts                # Standalone scheduler process (npm run workers)
+│   ├── jobs-sync.ts              # CLI sync (--provider, --dry-run, --max-sources, ...)
+│   ├── jobs-expire.ts            # CLI freshness sweep
+│   ├── jobs-match.ts             # CLI matching/enrichment worker
+│   ├── backfill-jobs.ts          # Idempotent data upgrade for pre-ingestion rows
+│   └── seed-job-sources.ts       # Demo Greenhouse/Lever boards
 └── tests/
-    ├── unit/                     # Matcher & anti-hallucination tests
-    └── integration/              # E2E pipeline & application agent tests
+    ├── setup/                    # Test DB copy + offline env (no provider keys needed)
+    ├── unit/                     # Adapters, normalization, dedupe, freshness, scoring, security
+    └── integration/              # Feed, ingestion pipeline, application agent
 ```
 
 ---
 
 ## 6. Database Schema & Models
 
-The Prisma schema (`prisma/schema.prisma`) defines 23 normalized models:
+The Prisma schema (`prisma/schema.prisma`) defines 27 normalized models (PostgreSQL):
 
 | Model | Purpose |
 |---|---|
@@ -219,11 +251,14 @@ The Prisma schema (`prisma/schema.prisma`) defines 23 normalized models:
 | `Certification` | Professional credentials (AWS, GCP, etc.) |
 | `Resume` | Master resume records and raw text |
 | `ResumeVersion` | Job-specific tailored resume variants with target role and score |
-| `Job` | Aggregated positions with salary, skills, ATS type, and remote flag |
-| `JobSource` | Connected ATS providers (Greenhouse, Lever, Feeds) |
+| `Job` | Canonical aggregated position: provider, normalized location/salary/employment/seniority, skills, fingerprint, `sources[]`, freshness (`firstSeenAt`/`lastSeenAt`/`seenCount`), `isActive` |
+| `JobSource` | Configured company source per provider (Greenhouse board token, Lever slug, Adzuna profile) + sync state |
+| `ProviderState` | Per-provider health: status, lock, last sync/success/error, consecutive failures, cadence |
+| `ProviderSyncRun` | Sync history with per-run statistics and error messages |
+| `JobMatchScore` | Cached deterministic/AI match scores per user + job |
 | `JobInteraction` | User engagement tracking (`VIEWED`, `PASSED`, `SAVED`, `APPLIED`) |
 | `SavedJob` | Bookmarked job postings with candidate notes |
-| `Application` | Tracked application instance with status, mode, and method |
+| `Application` | Tracked application (status, mode, `submissionMethod`, `appliedAt`, match explanation) |
 | `ApplicationAnswer` | AI-generated answers to employer questions |
 | `ApplicationDocument` | Tailored resumes, cover letters, and supporting assets |
 | `ApplicationEvent` | Comprehensive audit timeline events for each application |
@@ -251,53 +286,193 @@ The Prisma schema (`prisma/schema.prisma`) defines 23 normalized models:
 
 ---
 
-## 8. Job-Source Adapter Architecture
+## 8. Job Aggregation & Multi-Source Ingestion
 
-ApplySwipe uses a pluggable adapter system defined by `JobSourceAdapter`:
+ApplySwipe aggregates jobs from official, documented APIs into **one canonical
+`Job` table** that the whole product reads from. Providers are pluggable through
+a single interface (`src/jobs/providers/types.ts`):
+
 ```typescript
-interface JobSourceAdapter {
-  name: string;
-  type: "API" | "ATS" | "FEED" | "RSS";
-  fetchJobs(params?: JobSourceParams): Promise<Partial<Job>[]>;
+interface JobProvider {
+  name: ProviderName;                 // "ADZUNA" | "GREENHOUSE" | "LEVER"
+  label: string;                      // shown to users ("Adzuna", "Company career page")
+  requiresSource: boolean;            // Greenhouse/Lever need a configured company
+  supportsSearch: boolean;            // Adzuna searches, ATS boards list
+  search(params, context): Promise<NormalizedJob[]>;
+  getJob(externalId, context): Promise<NormalizedJob | null>;
 }
 ```
 
-Pre-built adapters:
-1. `GreenhouseAtsAdapter`: Connects to official Greenhouse board endpoints.
-2. `LeverAtsAdapter`: Ingests from official Lever postings APIs.
-3. `PermittedFeedAdapter`: Polls permitted developer job feeds.
+Shipped providers:
+
+| Provider | Auth | Source configuration | Notes |
+| --- | --- | --- | --- |
+| **Adzuna** | `ADZUNA_APP_ID` + `ADZUNA_APP_KEY` (server-side only) | optional search profiles (`ADZUNA_DEFAULT_QUERY`) | aggregated listings; salaries flagged when *predicted*; always `MANUAL_REQUIRED` |
+| **Greenhouse** | none (public board API) | one `JobSource` row per company + board token | official employer postings |
+| **Lever** | none (public postings API) | one `JobSource` row per company + slug | official employer postings |
+
+Only these three providers exist. Companies are **never hard-coded**: Greenhouse
+board tokens and Lever slugs live in the database (`JobSource`) and are managed
+from the admin console (`/admin` → Job Sources) or `POST /api/admin/sources`.
+
+### Ingestion pipeline
+
+```
+provider.search() ─► normalize ─► dedupe (L1/L2) ─► upsert ─► freshness sweep ─► provider health
+```
+
+1. **Normalize** (`src/jobs/ingestion/normalize.ts`) – HTML cleanup (`<script>`
+   bodies dropped, block tags become newlines, escaped markup decoded), location
+   + workplace type (remote/hybrid/on-site), salary (range, currency, interval,
+   annualized, predicted flag), employment type, seniority, and deterministic
+   skill extraction from a curated dictionary. Validation rejects payloads
+   without a title, safe URLs or a usable description.
+2. **Deduplicate** (`deduplicate.ts`) –
+   - **Level 1**: same `provider + externalId` → update in place (swipes, saved
+     jobs, applications and documents stay attached).
+   - **Level 2**: same fingerprint (`company + normalized title + normalized
+     location + application domain`, aggregator hosts ignored) → merge into the
+     canonical row and attach the extra provider as an alternative source.
+     Duplicates are never shown in the feed.
+3. **Freshness** (`freshness.ts`) – every sync refreshes `lastSeenAt`, and a job
+   that stops being returned is deactivated (`isActive = false`) after its
+   provider window; records are **never deleted**, so application history
+   survives. A job that reappears is reactivated automatically.
+
+| Provider | Freshness window | Sync interval |
+| --- | --- | --- |
+| Adzuna | 48 h (`JOB_FRESHNESS_ADZUNA_HOURS`) | every 2 h (`JOB_SYNC_INTERVAL_ADZUNA_MIN`) |
+| Greenhouse | 72 h (`JOB_FRESHNESS_GREENHOUSE_HOURS`) | every 6 h |
+| Lever | 72 h (`JOB_FRESHNESS_LEVER_HOURS`) | every 6 h |
+
+### Workers & scheduling
+
+| Worker | Cadence | Entry point |
+| --- | --- | --- |
+| Job sync | 15 min tick, per-provider due check | `runScheduledJobSync()` / `POST /api/cron/jobs/sync` |
+| Job expiration | 12 h | `runJobExpiration()` / `POST /api/cron/jobs/expire` |
+| Matching + AI enrichment | 6 h | `runJobMatching()` / `POST /api/cron/jobs/match` |
+
+Runs are protected by a per-provider lock (`JOB_SYNC_LOCK_TTL_MS`), every
+provider failure is recorded on the provider health state, and one broken
+provider never blocks the others. Three ways to run them:
+
+- **In-process scheduler** (default): `src/instrumentation.ts` starts the
+  scheduler once per process – `JOBS_SCHEDULER_ENABLED=false` to disable.
+- **Dedicated process**: `npm run workers` (recommended for containers/cron-less hosts).
+- **External cron / platform scheduler**: `POST /api/cron/jobs/{sync|expire|match}`
+  with `Authorization: Bearer $CRON_SECRET`.
+
+### API surface
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/jobs/feed` | Personalized swipe feed (auth, cursor pagination, hard filters, match scores, diversity cap) |
+| `GET /api/jobs/search` | Search the local normalized database (`q`, location, provider, employment, salary, remote) |
+| `GET /api/jobs/:id` | Job detail + deterministic match breakdown |
+| `POST /api/jobs/:id/swipe` | `{ action: "LIKE" \| "PASS" \| "SUPER_LIKE" }` – idempotent, 409 on duplicates/inactive |
+| `POST /api/jobs/:id/apply` | Prepare an application (materials only – see §9) |
+| `POST /api/jobs/:id/save` · `/pass` | Quick actions used by the swipe UI |
+| `POST /api/applications/:id/apply-confirmation` | The user confirms they applied on the employer site → status `APPLIED` |
+| `GET/PATCH /api/admin/providers`, `POST /api/admin/providers/sync` | Provider health, enable/disable, "sync now" |
+| `GET /api/admin/sync-runs` | Sync history with per-run statistics and errors |
+| `GET/POST/PATCH /api/admin/sources` | Company source CRUD (board token / slug validation, duplicate detection) |
+| `GET/PATCH/POST /api/admin/jobs` | Job directory, deactivate/report, manual insert |
+| `POST /api/cron/jobs/:task` | Scheduler entry points (`sync`, `expire`, `match`) |
+
+### CLI
+
+```bash
+npm run jobs:seed-sources                 # demo Greenhouse/Lever boards (Linear, Figma, Mistral, Netflix)
+npm run jobs:backfill                     # idempotent backfill for pre-upgrade rows (provider, fingerprint, searchText, health rows)
+npm run jobs:sync                         # all providers
+npm run jobs:sync:adzuna                  # one provider
+npm run jobs:sync:dry                     # fetch + normalize, never write
+npm run jobs:expire                       # freshness sweep
+npm run jobs:match -- --user alex@applyswipe.io
+npm run workers                           # standalone scheduler process
+```
 
 ---
 
 ## 9. Application Automation & Legal Limitations
 
 ApplySwipe is engineered for ethical, legally compliant application management:
-- **No CAPTCHA Bypasses:** The application agent never circumvents CAPTCHA, MFA, cloud security protections, or terms of service.
-- **Status Truthfulness (Rule 40):** An application is only marked `SUBMITTED` when verified via official ATS API confirmation. If an employer uses an external custom form, ApplySwipe marks the state `READY_FOR_REVIEW` and generates materials for seamless candidate handoff.
+
+- **No CAPTCHA bypasses, no MFA circumvention, no ToS violations.** The
+  application agent only prepares materials; it never drives a browser through
+  an employer's protected flow.
+- **Status truthfulness (Rule 40).** ApplySwipe only reports what actually
+  happened:
+  - Preparing materials → `PREPARING` / `READY` / `READY_FOR_REVIEW`.
+  - The agent **never** sets `SUBMITTED`, never invents an
+    `externalApplicationId`, and always returns
+    `requiresManualHandoff: true`.
+  - The one path to `APPLIED` is the candidate confirming their own submission
+    on the employer's site: `POST /api/applications/:id/apply-confirmation`
+    (recorded with `submissionMethod: "USER_CONFIRMED_EXTERNAL"`, `appliedAt` and
+    an audit event + notification).
+- **Official application pages only.** `resolveOfficialApplicationUrl()` prefers
+  a non-aggregator source reference, then the job's own application URL, and
+  falls back to the source URL. Aggregator redirects (Adzuna/Indeed/LinkedIn/
+  Glassdoor) are never presented as the employer's page, and every outbound URL
+  is validated (`https`/`http` only) before it reaches the UI.
+- **Transparency in the UI.** Cards show the provider label ("Adzuna", "Company
+  career page"), the official link and the match breakdown, so the candidate
+  always knows where an application is going and how the score was computed.
 
 ---
 
 ## 10. Environment Variables
 
-Copy `.env.example` to `.env`:
+Copy `.env.example` to `.env`. Only the first block is required for local
+development – every job-provider value is optional.
 
 ```env
+# Core
 DATABASE_URL="postgresql://user:password@localhost:5432/applyswipe"
 AUTH_SECRET="applyswipe-super-secret-jwt-key-change-in-production"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
+APPLYSWIPE_DB_FILE="data/applyswipe.json"   # JSON store used by dev/test
 
-# Optional AI Providers
-OPENAI_API_KEY=""
-GEMINI_API_KEY=""
+# Job providers (server-side only)
+ADZUNA_APP_ID=""  ADZUNA_APP_KEY=""  ADZUNA_COUNTRY="gb"
+ADZUNA_DEFAULT_QUERY="software engineer"  ADZUNA_MAX_PAGES_PER_SYNC="2"
+JOBS_HTTP_TIMEOUT_MS="12000"  JOBS_HTTP_RETRIES="2"
 
-# Storage & Email
-S3_BUCKET="applyswipe-documents"
-RESEND_API_KEY=""
+# Freshness / cadence (defaults shown)
+JOB_FRESHNESS_ADZUNA_HOURS="48"
+JOB_FRESHNESS_GREENHOUSE_HOURS="72"
+JOB_FRESHNESS_LEVER_HOURS="72"
+JOB_SYNC_INTERVAL_ADZUNA_MIN="120"
+JOB_SYNC_INTERVAL_GREENHOUSE_MIN="360"
+JOB_SYNC_INTERVAL_LEVER_MIN="360"
+JOB_FEED_HORIZON_DAYS="45"
 
-# Payments
-STRIPE_SECRET_KEY=""
-PAYSTACK_SECRET_KEY=""
+# Matching
+MATCH_WEIGHTS_JSON='{"skills":35,"experience":20,"location":15,"employment":10,"salary":10,"seniority":10}'
+JOB_AI_RERANK_ENABLED="true"  JOB_AI_RERANK_TOP="20"
+
+# Rate limiting
+RATE_LIMIT_FEED_BURST="30"  RATE_LIMIT_FEED_PER_MINUTE="60"
+
+# Workers / cron
+JOBS_SCHEDULER_ENABLED="true"
+CRON_SECRET=""                     # required in production for /api/cron/jobs/*
+JOBS_ALLOW_UNPROTECTED_CRON="false"
+
+# Optional AI providers (the grounded local engine is the default)
+OPENAI_API_KEY=""  GEMINI_API_KEY=""
+
+# Storage / email / payments
+S3_BUCKET="applyswipe-documents"  RESEND_API_KEY=""
+STRIPE_SECRET_KEY=""  PAYSTACK_SECRET_KEY=""
 ```
+
+Secrets are read in server modules only: provider API keys never appear in API
+responses, client bundles or logs (the logger redacts `*_KEY`, `*_SECRET`,
+`*_TOKEN`, `*_PASSWORD`). The admin console shows the *names* of missing
+environment variables, never their values.
 
 ---
 
@@ -316,44 +491,121 @@ Seeds 20 realistic tech jobs across Linear, Vercel, Stripe, Supabase, Datadog, A
 - **Demo Candidate:** `alex@applyswipe.io` / `password123`
 - **System Admin:** `admin@applyswipe.io` / `admin123`
 
-### 3. Start Development Server
+### 3. Configure job sources & ingest
+
+```bash
+# Optional: add demo Greenhouse/Lever boards (companies are DB rows, not code)
+npm run jobs:seed-sources
+
+# Upgrade existing local data to the multi-source model (idempotent)
+npm run jobs:backfill
+
+# Verify provider connectivity without writing anything
+npm run jobs:sync:dry
+
+# Real syncs
+npm run jobs:sync:greenhouse
+npm run jobs:sync:lever
+npm run jobs:sync:adzuna           # needs ADZUNA_APP_ID / ADZUNA_APP_KEY
+```
+
+### 4. Start Development Server
 ```bash
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+The in-process scheduler is enabled by default, so jobs keep refreshing while
+`npm run dev` is running. To run the scheduler separately instead:
+`npm run workers` (and set `JOBS_SCHEDULER_ENABLED="false"` in `.env`).
+
 ---
 
 ## 12. Testing
 
-Run the Vitest test suite:
 ```bash
-npm test
+npm test          # vitest run
+npm run typecheck # tsc --noEmit
+npm run lint      # next lint
 ```
-Tests cover:
-- Match scoring calculation & missing skill detection
-- Anti-hallucination resume validator against unverified claims
-- End-to-end application agent state transitions and document generation
+
+The suite is fully offline: provider HTTP calls are mocked and the integration
+tests run against a throwaway copy of the JSON store
+(`tests/setup/global-setup.ts` → `data/applyswipe.test.json`), so PostgreSQL and
+provider credentials are not required.
+
+| Area | Files | What is verified |
+| --- | --- | --- |
+| Provider adapters | `tests/unit/providers/{adzuna,greenhouse,lever}.test.ts` | response mapping, missing-field payloads, credential handling, 404/429/5xx mapping, retries + backoff |
+| Normalization | `tests/unit/normalize.test.ts` | HTML/entity cleanup, remote/hybrid/on-site detection, salary parsing + annualization (no invented ranges), employment/seniority, unsafe URL rejection |
+| Deduplication | `tests/unit/deduplicate.test.ts` | level-1 identity, fingerprint stability, aggregator-domain handling, inactive/merged exclusions, source-ref merging (cap 10) |
+| Freshness | `tests/unit/freshness.test.ts` | per-provider windows, env overrides, `EXPIRED` vs `NOT_SEEN`, feed horizon, scheduler due checks |
+| Matching | `tests/unit/matcher.test.ts`, `tests/unit/scoring.test.ts` | 35/20/15/10/10/10 weights + overrides, strong/weak scoring, hard-filter reasons, recommendation bands, company diversity cap |
+| Feed & swipes | `tests/integration/feed.test.ts` | ranking metadata, `rawData` never serialized, exclusions (passed/liked/saved/applied), cursor pagination (no repeats, stale cursor restart), idempotent swipes, 409 on duplicates/inactive |
+| Ingestion pipeline | `tests/integration/ingest.test.ts`, `tests/integration/pipeline.test.ts` | L1 update in place, L2 merge, deactivation without deletion, provider health + sync-run history, provider lock release, failure isolation, Adzuna credentials in-request only |
+| Security | `tests/unit/security.test.ts` | URL scheme validation, official-URL resolution, no provider secrets in output, token-bucket rate limiter |
+| Applications | `tests/integration/workflow.test.ts`, `tests/unit/validator.test.ts` | materials generation, `READY_FOR_REVIEW` truthfulness (never `SUBMITTED`/`APPLIED`), anti-hallucination resume validator |
 
 ---
 
 ## 13. Production Build & Deployment
 
-Run type checking and production build:
 ```bash
-npm run typecheck
 npm run build
-npm start
+npm run start
 ```
+
+### Requirements
+
+1. **PostgreSQL** – set `DATABASE_URL` and apply the migrations:
+   ```bash
+   npx prisma migrate deploy
+   ```
+   The ingestion upgrade adds provider columns, the level-2 dedupe fingerprint,
+   `salaryIsPredicted`, `ProviderState`/`ProviderSyncRun` tables and the
+   supporting indexes (`20261004000000_job_ingestion_enums`,
+   `20261004000100_job_ingestion_upgrade`). The development/test JSON store is
+   an adapter over the same models, so no migration is needed for local runs.
+2. **Secrets** – `AUTH_SECRET` and (for external cron) `CRON_SECRET`. Adzuna needs
+   `ADZUNA_APP_ID`/`ADZUNA_APP_KEY`; Greenhouse/Lever boards are public.
+3. **A scheduler** – pick exactly one:
+   - in-process: leave `JOBS_SCHEDULER_ENABLED="true"` (single instance only),
+   - dedicated: `npm run workers` (set `JOBS_SCHEDULER_ENABLED="false"`),
+   - platform cron: `POST /api/cron/jobs/{sync|expire|match}` with
+     `Authorization: Bearer $CRON_SECRET` every 15 min / 12 h / 6 h.
+   The cron endpoints return **503** in production when `CRON_SECRET` is unset,
+   so an unprotected deployment cannot be triggered by strangers.
+4. **Node 18+** (developed on Node 22) and a host that can reach
+   `api.adzuna.com`, `boards-api.greenhouse.io` and `api.lever.co`.
+
+### Operational notes
+
+- Adding a company is a data operation: `POST /api/admin/sources` with
+  `{ provider: "GREENHOUSE", companyName, boardToken }` (or `LEVER` + slug).
+  Nobody edits code to track a new employer.
+- Provider health, sync history and "sync now" live in the admin console
+  (`/admin` → Providers), backed by `ProviderState` / `ProviderSyncRun`.
+- Feed performance: `/api/jobs/feed` never calls a provider or an LLM. It reads
+  the local database (indexed on `provider`, `isActive`, `postedAt`,
+  `fingerprint`, `canonicalJobId`), scores with a pure function, and AI
+  re-ranking only ever touches the top `JOB_AI_RERANK_TOP` slice with a
+  12-hour cache.
+- Jobs are deactivated, never deleted, so applications and swipe history remain
+  intact.
 
 ---
 
 ## 14. Security & Privacy Sovereignty
 
-- **HTTP-Only Session Cookies:** Protected with HMAC-SHA256 tokens and secure expiration flags.
-- **Password Protection:** Salted Bcrypt hashing with cost factor 10.
-- **Strict User Privacy:** Candidate resumes and career records are never shared with external model trainers.
-- **GDPR / CCPA Ready:** Full JSON export and immediate account deletion supported via Settings.
+- **HTTP-only session cookies:** HMAC-SHA256 (Jose) tokens with secure expiration flags; `requireAuth()` on every user endpoint and `requireAdmin()` on the whole `/api/admin/*` surface.
+- **Server-only secrets:** provider API keys (Adzuna) and LLM keys are read in server modules. `/api/admin/providers` returns configuration *state* and the names of missing env vars, never values. The JSON logger redacts `*_KEY`, `*_SECRET`, `*_TOKEN`, `*_PASSWORD`.
+- **Sanitized provider HTML:** descriptions are converted to plain text (`<script>`/`<style>` bodies dropped, entities decoded, length capped) before storage and before serialization. Nothing from a provider is ever rendered with `dangerouslySetInnerHTML`.
+- **Validated outbound URLs:** a job only keeps `http(s)` URLs; `javascript:`, `data:` and malformed values are rejected at ingest time and re-checked on serialization. The UI opens official employer pages in a new tab with `noopener,noreferrer`.
+- **Rate limiting:** token-bucket limiter on the feed and search endpoints (`RATE_LIMIT_FEED_*`, `RATE_LIMIT_SEARCH_*`) with `429` + `Retry-After` and `x-ratelimit-*` headers.
+- **Protected cron surface:** `/api/cron/jobs/*` requires `Authorization: Bearer $CRON_SECRET` and returns `503` in production when the secret is unset (`JOBS_ALLOW_UNPROTECTED_CRON` is a local-development escape hatch only).
+- **Provider isolation & idempotency:** per-provider locks, bounded retries with backoff, tolerated `429`s, and failures confined to one provider/source. Duplicate protection is enforced in the database layer (L1 + L2) so retries can never create duplicate jobs, and swipes are idempotent (`409` for duplicate/inactive listings).
+- **Data sovereignty:** all aggregation data lives in your own PostgreSQL database (or the local JSON store for development). Nothing is proxied through ApplySwipe: the browser talks to your deployment and the browser opens the employer page directly.
+- **Honest failure modes:** when a provider is misconfigured or down, the feed keeps serving the jobs already in the database, the provider is flagged in the admin console, and the failed sync is recorded — user-facing features never silently degrade into fabricated data.
 
 ---
 

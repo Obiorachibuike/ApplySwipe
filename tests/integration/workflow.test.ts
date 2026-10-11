@@ -13,7 +13,9 @@ describe("ApplySwipe E2E Integration Pipeline", () => {
     // Run application agent in REVIEW_EVERYTHING mode
     const result = await ApplicationAgent.processApplication(user!.id, job!, "REVIEW_EVERYTHING");
     expect(result.status).toBe("READY_FOR_REVIEW");
-    expect(result.requiresManualHandoff).toBe(false);
+    // ApplySwipe prepares materials; it never claims a submission it did not perform.
+    expect(result.requiresManualHandoff).toBe(true);
+    expect(result.externalId).toBeUndefined();
 
     // Verify documents exist
     const app = await db.application.findFirst({
@@ -26,7 +28,10 @@ describe("ApplySwipe E2E Integration Pipeline", () => {
     expect(app!.answers.length).toBeGreaterThanOrEqual(2);
     expect(app!.events.length).toBeGreaterThanOrEqual(1);
 
-    // Verify status distinction: Never claims submitted when only prepared
+    // Verify status distinction: never claims submitted when only prepared
     expect(app!.status).not.toBe("SUBMITTED");
+    expect(app!.status).not.toBe("APPLIED");
+    expect(app!.submissionMethod).toBe("USER_CONFIRMED_EXTERNAL");
+    expect(app!.appliedAt ?? null).toBeNull();
   });
 });

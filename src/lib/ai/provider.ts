@@ -1,6 +1,7 @@
 import db from "@/lib/db";
 import { PROMPTS } from "./prompts";
 import { Profile, Job, MatchAnalysis } from "@/types";
+import { scoreJob } from "@/jobs/matching/score";
 
 export interface AIResponse<T = string> {
   result: T;
@@ -46,102 +47,33 @@ export class AIService {
     job: Job,
     userId?: string
   ): Promise<AIResponse<MatchAnalysis>> {
-    const candidateSkills = (profile.skills || []).map((s) => s.name.toLowerCase());
-    const jobSkills = (job.skills || []).map((s) => s.toLowerCase());
+    // Stage 1 of the matching pipeline is deterministic and shared with the feed
+    // ranking (`src/jobs/matching/score.ts`) so a job scores identically
+    // everywhere. Weights: skills 35 / experience 20 / location 15 /
+    // employment 10 / salary 10 / seniority 10 (configurable via MATCH_WEIGHTS_JSON).
+    // No provider/LLM call happens here; stage 2 (AI re-ranking) only re-orders
+    // the top slice and adds reasons - see src/jobs/matching/ai-rerank.ts.
+    const match = scoreJob(profile, job);
 
-    // Skills match calculation
-    const matchingSkillNames: string[] = [];
-    const missingSkillNames: string[] = [];
-
-    jobSkills.forEach((jobSkill) => {
-      const match = candidateSkills.some(
-        (cs) => cs === jobSkill || cs.includes(jobSkill) || jobSkill.includes(cs)
-      );
-      if (match) {
-        // find original casing
-        const original = job.skills.find((s) => s.toLowerCase() === jobSkill) || jobSkill;
-        matchingSkillNames.push(original);
-      } else {
-        const original = job.skills.find((s) => s.toLowerCase() === jobSkill) || jobSkill;
-        missingSkillNames.push(original);
-      }
-    });
-
-    const skillsScore =
-      jobSkills.length > 0
-        ? Math.min(100, Math.round((matchingSkillNames.length / jobSkills.length) * 100))
-        : 85;
-
-    // Experience match calculation
-    const totalExperienceYears = (profile.experiences || []).reduce((acc, exp) => {
-      const start = new Date(exp.startDate).getTime();
-      const end = exp.endDate ? new Date(exp.endDate).getTime() : Date.now();
-      const years = Math.max(0.5, (end - start) / (1000 * 60 * 60 * 24 * 365));
-      return acc + years;
-    }, 0);
-
-    const requiresSenior =
-      (job.experienceLevel || "").toLowerCase().includes("senior") ||
-      (job.experienceLevel || "").toLowerCase().includes("staff") ||
-      job.title.toLowerCase().includes("senior");
-
-    let experienceScore = 80;
-    if (requiresSenior) {
-      experienceScore = totalExperienceYears >= 5 ? 95 : totalExperienceYears >= 3 ? 80 : 65;
-    } else {
-      experienceScore = totalExperienceYears >= 2 ? 90 : 75;
-    }
-
-    // Education match calculation
-    const hasDegree = (profile.educations || []).length > 0;
-    const educationScore = hasDegree ? 95 : 80;
-
-    // Location / Remote match
-    const prefersRemote =
-      (profile.remotePreference || "").toLowerCase().includes("remote") ||
-      (profile.targetRoles || []).length > 0;
-    let locationScore = 85;
-    if (job.remote) {
-      locationScore = prefersRemote ? 100 : 90;
-    } else {
-      locationScore = 70;
-    }
-
-    // Weighted overall match
-    const overallScore = Math.round(
-      skillsScore * 0.45 +
-        experienceScore * 0.3 +
-        locationScore * 0.15 +
-        educationScore * 0.1
-    );
-
-    const concerns: string[] = [];
-    if (missingSkillNames.length > 0) {
-      concerns.push(
-        `Job lists requirements not explicitly on your profile: ${missingSkillNames.slice(0, 3).join(", ")}`
-      );
-    }
-    if (!job.remote && prefersRemote) {
-      concerns.push(`Position is located in ${job.location} and is not marked fully remote.`);
-    }
-
-    const explanation =
-      overallScore >= 85
-        ? `High alignment with your target roles and experience. Your core proficiencies in ${matchingSkillNames.slice(0, 3).join(", ")} directly match the requirements for ${job.title} at ${job.company}.`
-        : overallScore >= 70
-        ? `Solid alignment for ${job.title}. You possess critical strengths in ${matchingSkillNames.slice(0, 3).join(", ")}, with potential upside in ${missingSkillNames.slice(0, 2).join(", ") || "domain specialization"}.`
-        : `Moderate alignment. While your foundational background offers transferable strengths, the role emphasizes ${missingSkillNames.join(", ")}.`;
+    // Education stays informational: it is intentionally not part of the
+    // weighted model above, but the field is kept for older consumers.
+    const educationScore = (profile.educations || []).length > 0 ? 95 : 80;
 
     const matchAnalysis: MatchAnalysis = {
-      overallMatch: overallScore,
-      skillsMatch: skillsScore,
-      experienceMatch: experienceScore,
+      overallMatch: match.score,
+      skillsMatch: match.breakdown.skills,
+      experienceMatch: match.breakdown.experience,
       educationMatch: educationScore,
-      locationMatch: locationScore,
-      explanation,
-      matchingSkills: matchingSkillNames,
-      missingSkills: missingSkillNames,
-      concerns,
+      locationMatch: match.breakdown.location,
+      employmentMatch: match.breakdown.employment,
+      salaryMatch: match.breakdown.salary,
+      seniorityMatch: match.breakdown.seniority,
+      explanation: match.reason,
+      matchingSkills: match.matchedSkills,
+      missingSkills: match.missingSkills,
+      concerns: match.concerns,
+      breakdown: { ...match.breakdown },
+      recommendation: match.recommendation,
     };
 
     const inTokens = 420;

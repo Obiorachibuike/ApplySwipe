@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth/jwt";
 import db from "@/lib/db";
+import { duplicateStats, jobCounts } from "@/jobs/services/job-service";
+import { providerHealthReport } from "@/jobs/ingestion/provider-state";
 
 export async function GET() {
   try {
@@ -40,6 +42,17 @@ export async function GET() {
           aiEngine: "HEALTHY",
           queueWorker: "RUNNING",
           automationAdapter: "READY",
+          jobScheduler:
+            process.env.JOBS_SCHEDULER_ENABLED === "false" ? "DISABLED" : "RUNNING",
+          providers: (await providerHealthReport()).map((provider) => ({
+            provider: provider.provider,
+            status: provider.status,
+            lastSyncAt: provider.lastSyncAt,
+          })),
+        },
+        jobPlatform: {
+          ...(await jobCounts()),
+          duplicates: await duplicateStats(),
         },
       },
     });

@@ -385,7 +385,7 @@ export default function LandingPage() {
               AI Tailoring Grounded in Truth
             </h2>
             <p className="mt-3 text-base text-muted">
-              We never fabricate jobs, degrees, or metrics. We reorganize and emphasize your real achievements to match each employer's specific technical lexicon.
+              We never fabricate jobs, degrees, or metrics. We reorganize and emphasize your real achievements to match each employer&apos;s specific technical lexicon.
             </p>
           </div>
 
@@ -577,7 +577,7 @@ export default function LandingPage() {
               </div>
 
               <div className="p-3.5 rounded-xl bg-surface-elevated border border-border space-y-2 text-xs">
-                <span className="font-semibold text-foreground block">Today's Autonomous Activity:</span>
+                <span className="font-semibold text-foreground block">Today&apos;s Autonomous Activity:</span>
                 <div className="flex justify-between text-muted">
                   <span>Jobs scanned</span>
                   <span className="font-bold text-foreground">42</span>

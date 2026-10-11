@@ -1,138 +1,114 @@
 import { NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth/jwt";
 import db from "@/lib/db";
-import { AIService } from "@/lib/ai/provider";
+import { createLogger } from "@/lib/logger";
+import { SEARCH_RATE_LIMIT, checkRateLimit, clientKey, rateLimitHeaders } from "@/lib/rate-limit";
+import { searchJobs } from "@/jobs/services/job-service";
+import type { Job, JobInteraction, Profile, UserPreference } from "@/types";
 
 export const dynamic = "force-dynamic";
 
+const log = createLogger("api:jobs");
+
+/**
+ * GET /api/jobs
+ *
+ * Backwards compatible job listing (used by the dashboard) backed by the
+ * normalized ApplySwipe database. The personalized swipe queue lives at
+ * `/api/jobs/feed`; both never call a provider API.
+ */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const query = searchParams.get("query")?.toLowerCase();
-    const role = searchParams.get("role")?.toLowerCase();
-    const skill = searchParams.get("skill")?.toLowerCase();
-    const location = searchParams.get("location")?.toLowerCase();
-    const remoteOnly = searchParams.get("remote") === "true";
-    const salaryMin = searchParams.get("salaryMin") ? Number(searchParams.get("salaryMin")) : undefined;
-    const minMatch = searchParams.get("minMatch") ? Number(searchParams.get("minMatch")) : undefined;
-    const filterStatus = searchParams.get("status"); // unapplied, saved, applied
+    const user = await getSessionUser();
+
+    const rate = checkRateLimit(`jobs:${user?.id || clientKey(req)}`, SEARCH_RATE_LIMIT);
+    if (!rate.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please slow down." },
+        { status: 429, headers: rateLimitHeaders(rate) }
+      );
+    }
+
     const page = Math.max(1, Number(searchParams.get("page")) || 1);
     const limit = Math.min(50, Number(searchParams.get("limit")) || 20);
+    const minMatch = searchParams.get("minMatch") ? Number(searchParams.get("minMatch")) : undefined;
+    const filterStatus = searchParams.get("status");
 
-    const user = await getSessionUser();
-    let profile: any = null;
-    let userInteractions: any[] = [];
+    let profile: Profile | null = null;
+    let preferences: UserPreference | null = null;
     let savedJobIds = new Set<string>();
     let appliedJobIds = new Set<string>();
     let passedJobIds = new Set<string>();
 
     if (user) {
-      profile = await db.profile.findUnique({
+      profile = (await db.profile.findUnique({
         where: { userId: user.id },
         include: { skills: true, experiences: true, educations: true, projects: true },
-      });
-      userInteractions = await db.jobInteraction.findMany({ where: { userId: user.id } });
-      const saved = await db.savedJob.findMany({ where: { userId: user.id } });
-      const apps = await db.application.findMany({ where: { userId: user.id } });
+      })) as Profile | null;
+      preferences = (await db.userPreference.findUnique({ where: { userId: user.id } })) as UserPreference | null;
 
-      saved.forEach((s: any) => savedJobIds.add(s.jobId));
-      apps.forEach((a: any) => appliedJobIds.add(a.jobId));
-      userInteractions
-        .filter((i: any) => i.interactionType === "PASSED")
-        .forEach((i: any) => passedJobIds.add(i.jobId));
-    }
+      const [saved, applications, interactions] = await Promise.all([
+        db.savedJob.findMany({ where: { userId: user.id } }),
+        db.application.findMany({ where: { userId: user.id } }),
+        db.jobInteraction.findMany({ where: { userId: user.id } }),
+      ]);
 
-    let jobs = await db.job.findMany({
-      where: { isActive: true },
-      orderBy: { postedAt: "desc" },
-    });
-
-    // Apply filtering
-    if (query) {
-      jobs = jobs.filter(
-        (j: any) =>
-          j.title.toLowerCase().includes(query) ||
-          j.company.toLowerCase().includes(query) ||
-          j.description.toLowerCase().includes(query)
+      savedJobIds = new Set(saved.map((entry: { jobId: string }) => entry.jobId));
+      appliedJobIds = new Set(applications.map((entry: { jobId: string }) => entry.jobId));
+      passedJobIds = new Set(
+        (interactions as JobInteraction[])
+          .filter((interaction) => interaction.interactionType === "PASSED")
+          .map((interaction) => interaction.jobId)
       );
     }
 
-    if (role) {
-      jobs = jobs.filter((j: any) => j.title.toLowerCase().includes(role));
-    }
-
-    if (skill) {
-      jobs = jobs.filter((j: any) =>
-        (j.skills || []).some((s: string) => s.toLowerCase().includes(skill))
-      );
-    }
-
-    if (location) {
-      jobs = jobs.filter((j: any) => j.location.toLowerCase().includes(location));
-    }
-
-    if (remoteOnly) {
-      jobs = jobs.filter((j: any) => Boolean(j.remote));
-    }
-
-    if (salaryMin) {
-      jobs = jobs.filter((j: any) => !j.salaryMax || j.salaryMax >= salaryMin);
-    }
-
-    // Attach user status and compute AI match
-    let enrichedJobs = await Promise.all(
-      jobs.map(async (job: any) => {
-        let matchScore = 80;
-        let matchAnalysis: any = null;
-
-        if (profile) {
-          const analysis = await AIService.analyzeMatch(profile, job);
-          matchScore = analysis.result.overallMatch;
-          matchAnalysis = analysis.result;
-        }
-
-        const isSaved = savedJobIds.has(job.id);
-        const isApplied = appliedJobIds.has(job.id);
-        const isPassed = passedJobIds.has(job.id);
-
-        return {
-          ...job,
-          matchScore,
-          matchAnalysis,
-          isSaved,
-          isApplied,
-          isPassed,
-        };
-      })
+    const result = await searchJobs(
+      {
+        query: searchParams.get("query") || searchParams.get("role") || undefined,
+        location: searchParams.get("location") || undefined,
+        remote: searchParams.get("remote") === "true" ? true : undefined,
+        employmentType: searchParams.get("employmentType") || undefined,
+        seniority: searchParams.get("seniority") || undefined,
+        provider: searchParams.get("provider") || undefined,
+        skills: searchParams.get("skill") ? [searchParams.get("skill") as string] : undefined,
+        salaryMin: searchParams.get("salaryMin") ? Number(searchParams.get("salaryMin")) : undefined,
+      },
+      { page, limit, viewerProfile: profile, viewerPreferences: preferences }
     );
 
-    // Filter by minMatch
-    if (minMatch) {
-      enrichedJobs = enrichedJobs.filter((j) => j.matchScore >= minMatch);
-    }
+    let jobs = result.jobs.map((job) => ({
+      ...job,
+      isSaved: savedJobIds.has(job.id),
+      isApplied: appliedJobIds.has(job.id),
+      isPassed: passedJobIds.has(job.id),
+    }));
 
-    // Filter by status if requested (e.g. unapplied for Discover swiper)
+    if (minMatch) jobs = jobs.filter((job) => (job.matchScore || 0) >= minMatch);
+
     if (filterStatus === "unapplied") {
-      enrichedJobs = enrichedJobs.filter((j) => !j.isApplied && !j.isPassed);
+      jobs = jobs.filter((job) => !job.isApplied && !job.isPassed);
     } else if (filterStatus === "saved") {
-      enrichedJobs = enrichedJobs.filter((j) => j.isSaved);
+      jobs = jobs.filter((job) => job.isSaved);
     } else if (filterStatus === "applied") {
-      enrichedJobs = enrichedJobs.filter((j) => j.isApplied);
+      jobs = jobs.filter((job) => job.isApplied);
     }
 
-    const total = enrichedJobs.length;
-    const startIndex = (page - 1) * limit;
-    const paginated = enrichedJobs.slice(startIndex, startIndex + limit);
-
-    return NextResponse.json({
-      jobs: paginated,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    });
+    return NextResponse.json(
+      {
+        jobs,
+        total: filterStatus || minMatch ? jobs.length : result.total,
+        page,
+        limit,
+        totalPages: Math.max(1, Math.ceil((filterStatus || minMatch ? jobs.length : result.total) / limit)),
+        scanned: result.scanned,
+      },
+      { headers: rateLimitHeaders(rate) }
+    );
   } catch (error: any) {
-    console.error("Error in GET /api/jobs:", error);
+    log.error("GET /api/jobs failed", { error: error?.message });
     return NextResponse.json({ error: "Failed to fetch jobs" }, { status: 500 });
   }
 }
+
+export type { Job };

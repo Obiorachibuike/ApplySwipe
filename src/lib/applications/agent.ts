@@ -96,20 +96,12 @@ export class ApplicationAgent {
       where: { userId, jobId: job.id },
     });
 
-    let targetStatus: ApplicationStatus = "PREPARING";
-    let externalId: string | undefined = undefined;
-
-    // Check application mode
-    if (mode === "SMART_APPLY" && capability === "API_SUPPORTED" && matchAnalysis.result.overallMatch >= 85) {
-      // Allowed to submit directly via API
-      targetStatus = "SUBMITTED";
-      externalId = `sub-${job.atsProvider.toLowerCase()}-${Date.now().toString(36)}`;
-    } else if (capability === "MANUAL_REQUIRED") {
-      targetStatus = "READY_FOR_REVIEW";
-    } else {
-      // Review everything or Form supported -> Needs user review before submission
-      targetStatus = "READY_FOR_REVIEW";
-    }
+    // ApplySwipe never claims a submission it did not perform. Even in
+    // SMART_APPLY mode the agent only *prepares* materials: the candidate (or a
+    // provider API that explicitly supports submission) confirms the external
+    // application, which is what moves the record to APPLIED.
+    const targetStatus: ApplicationStatus = "READY_FOR_REVIEW";
+    const externalId: string | undefined = undefined;
 
     const applicationData = {
       userId,
@@ -119,12 +111,10 @@ export class ApplicationAgent {
       submissionCapability: capability,
       matchScore: matchAnalysis.result.overallMatch,
       matchExplanation: matchAnalysis.result.explanation,
-      submissionMethod: capability === "API_SUPPORTED" ? "API" : capability === "FORM_SUPPORTED" ? "FORM" : "MANUAL_HANDOFF",
-      externalApplicationId: externalId || null,
-      submittedAt: targetStatus === "SUBMITTED" ? new Date().toISOString() : null,
-      notes: targetStatus === "SUBMITTED"
-        ? `Submitted via ${job.atsProvider} direct integration. Confirmation #${externalId}`
-        : `Materials prepared by AI. Ready for user verification.`,
+      submissionMethod: "USER_CONFIRMED_EXTERNAL",
+      externalApplicationId: null,
+      submittedAt: null,
+      notes: `Materials prepared. Open the official application page to submit, then confirm here.`,
     };
 
     let app: any;
@@ -183,44 +173,24 @@ export class ApplicationAgent {
       },
     });
 
-    if (targetStatus === "SUBMITTED") {
-      await db.applicationEvent.create({
-        data: {
-          applicationId: app.id,
-          eventType: "SUBMITTED",
-          notes: `Official submission dispatched via ${job.atsProvider} API. Confirmation ID: ${externalId}`,
-        },
-      });
+    await db.applicationEvent.create({
+      data: {
+        applicationId: app.id,
+        eventType: "READY_FOR_REVIEW",
+        notes:
+          "Application materials assembled. Submit on the employer's official application page, then confirm here.",
+      },
+    });
 
-      // Notify user
-      await db.notification.create({
-        data: {
-          userId,
-          title: "Application Submitted! 🚀",
-          message: `Your tailored application for ${job.title} at ${job.company} was submitted successfully.`,
-          type: "APPLICATION_SUBMITTED",
-          link: `/dashboard/applications/${app.id}`,
-        },
-      });
-    } else {
-      await db.applicationEvent.create({
-        data: {
-          applicationId: app.id,
-          eventType: "READY_FOR_REVIEW",
-          notes: "Application materials assembled. Awaiting user review before external submission.",
-        },
-      });
-
-      await db.notification.create({
-        data: {
-          userId,
-          title: "Application Ready for Review ✨",
-          message: `Tailored materials for ${job.title} at ${job.company} are ready. Review before submitting.`,
-          type: "NEEDS_REVIEW",
-          link: `/dashboard/applications/${app.id}`,
-        },
-      });
-    }
+    await db.notification.create({
+      data: {
+        userId,
+        title: "Application Ready for Review ✨",
+        message: `Tailored materials for ${job.title} at ${job.company} are ready. Submit on the employer site, then mark it applied.`,
+        type: "NEEDS_REVIEW",
+        link: `/dashboard/applications/${app.id}`,
+      },
+    });
 
     // Save interaction
     await db.jobInteraction.create({
@@ -235,14 +205,9 @@ export class ApplicationAgent {
     return {
       capability,
       status: targetStatus,
-      message:
-        targetStatus === "SUBMITTED"
-          ? `Application submitted directly to ${job.company} via ${job.atsProvider} API.`
-          : capability === "MANUAL_REQUIRED"
-          ? `Application materials prepared. Continue to employer careers portal to complete submission.`
-          : `Application materials prepared. Review and confirm submission.`,
+      message: `Application materials prepared for ${job.title} at ${job.company}. Open the official application page to submit, then mark it applied in ApplySwipe.`,
       externalId,
-      requiresManualHandoff: capability === "MANUAL_REQUIRED",
+      requiresManualHandoff: true,
       preparedMaterials: {
         coverLetter: coverLetter.result,
         answeredQuestionsCount: answers.length,
